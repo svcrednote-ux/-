@@ -14,7 +14,6 @@
     --gold:#d4af37;
     --gold-light:#f3d878;
     --ink:#241442;
-    
     --text-soft:#6b5c85;
     --paper:#faf8fc;
     --card:#ffffff;
@@ -162,7 +161,7 @@
   .card-tools .edit-btn{background:#fff;color:var(--purple);box-shadow:0 2px 6px rgba(0,0,0,0.15);}
   .card-tools .del-btn{background:#e0405c;color:#fff;}
 
-  /* ===== Admin Modal (Mobile Optimized) ===== */
+  /* ===== Admin Modal ===== */
   .hidden{display:none !important;}
   .admin-overlay{
     position:fixed;inset:0;background:rgba(36,20,66,0.65);
@@ -400,10 +399,10 @@
 <script>
 const ADMIN_PASSWORD = "dbt2569";
 
-// ===== Google Sheets backend =====
-// 1. Deploy the provided Apps Script as a Web App (Execute as: Me, Who has access: Anyone).
-// 2. Paste the deployment URL below.
+// ===== Google Sheets Web App URL =====
+// นำ URL ที่ได้จากการ Deploy Apps Script ในขั้นตอนที่ 1 มาวางแทนที่ด้านล่างนี้
 const SHEET_API_URL = "https://script.google.com/macros/s/AKfycbwMUNAs8SkYtEaxQauTKJnMztljqtHvD-nm4Hu9tt3rqu3FyM-FARMRmEZwrPV_1Ezd9g/exec";
+
 const SECTIONS = {
   calendar: {
     key: "dbt_site:calendar", grid: "calendarGrid", label: "ปฏิทินกิจกรรม",
@@ -555,13 +554,13 @@ function toast(msg){
   setTimeout(()=>t.classList.remove("show"), 1800);
 }
 
-// ===== Load all sections from Google Sheets in one request =====
+// ===== โหลดข้อมูลจาก Google Sheets =====
 async function loadAllData(){
   Object.keys(SECTIONS).forEach(type => { state[type] = SECTIONS[type].seed.slice(); });
   renderAllPublic();
 
-  if(!SHEET_API_URL || SHEET_API_URL.indexOf("PASTE_YOUR") === 0){
-    console.warn("ยังไม่ได้ตั้งค่า SHEET_API_URL — กำลังใช้ข้อมูลตัวอย่างเริ่มต้น");
+  if(!SHEET_API_URL){
+    console.warn("ยังไม่ได้ตั้งค่า SHEET_API_URL — กำลังใช้ข้อมูลตัวอย่าง");
     return;
   }
   try{
@@ -573,29 +572,31 @@ async function loadAllData(){
       const raw = data[cfg.key];
       if(raw){
         try{ state[type] = JSON.parse(raw); }
-        catch(e){ /* keep seed data if parsing fails */ }
+        catch(e){ /* คงใช้ข้อมูลตัวอย่างหากถอดรหัสล้มเหลว */ }
       }
     });
     renderAllPublic();
   }catch(e){
-    console.error("โหลดข้อมูลจาก Google Sheets ไม่สำเร็จ", e);
-    toast("โหลดข้อมูลจาก Google Sheets ไม่สำเร็จ กำลังแสดงข้อมูลตัวอย่าง");
+    console.error("โหลดข้อมูลไม่สำเร็จ", e);
   }
 }
 
-// ===== Save one section's data back to Google Sheets =====
+// ===== บันทึกข้อมูลกลับไปยัง Google Sheets =====
 async function saveSection(type){
   const cfg = SECTIONS[type];
-  if(!SHEET_API_URL || SHEET_API_URL.indexOf("PASTE_YOUR") === 0){
-    toast("ยังไม่ได้เชื่อมต่อ Google Sheets (ตั้งค่า SHEET_API_URL ก่อน)");
+  if(!SHEET_API_URL){
+    toast("ยังไม่ได้ใส่ URL ของ Google Sheets");
     return;
   }
   try{
+    // ใช้ no-cors และ text/plain เพื่อหลีกเลี่ยงปัญหา CORS บนเบราว์เซอร์
     await fetch(SHEET_API_URL, {
       method: "POST",
+      mode: "no-cors",
       headers: {"Content-Type": "text/plain;charset=utf-8"},
       body: JSON.stringify({ key: cfg.key, value: JSON.stringify(state[type]) })
     });
+    toast("บันทึกข้อมูลเรียบร้อยแล้ว");
   }catch(e){
     console.error("บันทึกไม่สำเร็จ", e);
     alert("บันทึกไม่สำเร็จ กรุณาตรวจสอบการเชื่อมต่ออินเทอร์เน็ต");
@@ -620,177 +621,186 @@ function renderPublic(type){
     grid.innerHTML = `<div class="empty-note">ยังไม่มีรายการ — คลิกปุ่ม ⚙️ ด้านล่างขวาเพื่อเพิ่มเนื้อหา</div>`;
     return;
   }
-  grid.innerHTML = items.map(item => {
-    const wrapClass = cfg.wrapClass || "";
-    return `<div class="${wrapClass}">${renderCardTools(type, item.id)}${cfg.render(item)}</div>`;
-  }).join("");
+  grid.innerHTML = items.map(item => `
+    <div class="${cfg.wrapClass}">
+      ${isAdmin ? renderCardTools(type, item.id) : ""}
+      ${cfg.render(item)}
+    </div>
+  `).join('');
 }
 
 function renderAllPublic(){
-  Object.keys(SECTIONS).forEach(type => renderPublic(type));
+  Object.keys(SECTIONS).forEach(renderPublic);
 }
 
-function openDash(){
+// ===== Admin Handlers =====
+function openDashboard(){
   document.getElementById("dashOverlay").classList.remove("hidden");
-  switchTab(activeTab);
+  renderAdminTab(activeTab);
 }
-function closeDash(){ document.getElementById("dashOverlay").classList.add("hidden"); }
-
-function switchTab(type){
-  activeTab = type; editingId = null;
-  document.querySelectorAll(".admin-tab").forEach(b => b.classList.toggle("active", b.dataset.type === type));
-  renderDashBody();
+function closeDashboard(){
+  document.getElementById("dashOverlay").classList.add("hidden");
+  editingId = null;
 }
 
-function renderDashBody(){
-  const cfg = SECTIONS[activeTab];
-  const items = state[activeTab] || [];
+function renderAdminTab(type){
+  activeTab = type;
+  document.querySelectorAll(".admin-tab").forEach(btn => {
+    btn.classList.toggle("active", btn.dataset.type === type);
+  });
+  
+  const cfg = SECTIONS[type];
   const body = document.getElementById("dashBody");
-  const editingItem = editingId ? items.find(i => i.id === editingId) : null;
+  const items = state[type] || [];
 
-  const formFields = cfg.fields.map(f => {
-    const val = editingItem ? (editingItem[f.name] || "") : "";
-    if(f.area){
-      return `<div class="field"><label>${f.label}</label><textarea id="field_${f.name}" placeholder="${f.placeholder || ''}">${esc(val)}</textarea></div>`;
-    }
-    return `<div class="field"><label>${f.label}</label><input type="text" id="field_${f.name}" value="${esc(val)}" placeholder="${f.placeholder || ''}"></div>`;
-  }).join("");
+  let html = `
+    <form id="adminForm" onsubmit="handleFormSubmit(event)" style="background:#faf8fc;padding:12px;border-radius:10px;margin-bottom:16px;border:1px solid var(--line);">
+      <h4 style="font-size:13px;margin-bottom:10px;color:var(--purple);">${editingId ? '✏️ แก้ไขรายการ' : '➕ เพิ่มรายการใหม่'} (${cfg.label})</h4>
+  `;
 
-  const listRows = items.length === 0 ? `<p style="font-size:12px;color:var(--text-soft);text-align:center;padding:10px;">ยังไม่มีข้อมูล</p>` :
-    items.map(item => {
-      const primaryText = item.title || item.name || item.label || "รายการ";
-      const secondaryText = item.date || item.month || item.category || item.role || "";
-      return `
+  cfg.fields.forEach(f => {
+    html += `
+      <div class="field">
+        <label>${f.label}</label>
+        ${f.area ? `<textarea id="field_${f.name}" placeholder="${f.placeholder||''}"></textarea>` 
+                 : `<input type="text" id="field_${f.name}" placeholder="${f.placeholder||''}">`}
+      </div>
+    `;
+  });
+
+  html += `
+      <div class="form-actions">
+        <button type="submit" class="btn-save">${editingId ? 'อัปเดต' : 'เพิ่มรายการ'}</button>
+        ${editingId ? `<button type="button" class="btn-cancel" onclick="cancelEdit()">ยกเลิก</button>` : ''}
+      </div>
+    </form>
+    <h4 style="font-size:13px;margin-bottom:8px;">รายการทั้งหมด (${items.length})</h4>
+    <div class="admin-items-list">
+  `;
+
+  if(items.length === 0){
+    html += `<div style="text-align:center;padding:15px;color:var(--text-soft);font-size:12px;">ไม่มีข้อมูล</div>`;
+  } else {
+    items.forEach(item => {
+      const title = item.title || item.name || item.label || 'รายการ';
+      const sub = item.date || item.month || item.role || item.category || item.badge || '';
+      html += `
         <div class="admin-list-item">
           <div class="info">
-            <b>${esc(primaryText)}</b>
-            <span>${esc(secondaryText)}</span>
+            <b>${esc(title)}</b>
+            <span>${esc(sub)}</span>
           </div>
           <div class="row-actions">
-            <button class="edit-btn" onclick="editItem('${activeTab}','${item.id}')">แก้ไข</button>
-            <button class="del-btn" onclick="deleteItem('${activeTab}','${item.id}')">ลบ</button>
+            <button class="edit-btn" onclick="editItem('${type}','${item.id}')">แก้ไข</button>
+            <button class="del-btn" onclick="deleteItemDirect('${type}','${item.id}')">ลบ</button>
           </div>
         </div>
       `;
-    }).join("");
+    });
+  }
 
-  body.innerHTML = `
-    <div style="background:var(--paper);padding:12px;border-radius:10px;margin-bottom:14px;border:1px solid var(--line);">
-      <h4 style="font-size:13px;color:var(--purple-deep);margin-bottom:8px;">${editingItem ? "✏️ แก้ไขรายการ" : "➕ เพิ่มรายการใหม่"}</h4>
-      <form id="dashForm" onsubmit="handleFormSubmit(event)">
-        ${formFields}
-        <div class="form-actions">
-          <button type="submit" class="btn-save">${editingItem ? "บันทึกการแก้ไข" : "เพิ่มข้อมูล"}</button>
-          ${editingItem ? `<button type="button" class="btn-cancel" onclick="cancelEdit()">ยกเลิก</button>` : ""}
-        </div>
-      </form>
-    </div>
-    <h4 style="font-size:13px;color:var(--purple-deep);margin-bottom:8px;">รายการทั้งหมดใน ${cfg.label}</h4>
-    <div>${listRows}</div>
-  `;
+  html += `</div>`;
+  body.innerHTML = html;
+
+  if(editingId){
+    const item = items.find(i => i.id === editingId);
+    if(item){
+      cfg.fields.forEach(f => {
+        const el = document.getElementById(`field_${f.name}`);
+        if(el) el.value = item[f.name] || '';
+      });
+    }
+  }
 }
 
 function handleFormSubmit(e){
   e.preventDefault();
   const cfg = SECTIONS[activeTab];
-  const newItem = editingId ? {...(state[activeTab].find(i=>i.id===editingId))} : {id: uid()};
-  
+  const newItem = { id: editingId || uid() };
+
   cfg.fields.forEach(f => {
     const el = document.getElementById(`field_${f.name}`);
     if(el) newItem[f.name] = el.value.trim();
   });
 
-  if(!state[activeTab]) state[activeTab] = [];
   if(editingId){
-    const idx = state[activeTab].findIndex(i => i.id === editingId);
-    if(idx !== -1) state[activeTab][idx] = newItem;
+    const index = state[activeTab].findIndex(i => i.id === editingId);
+    if(index !== -1) state[activeTab][index] = newItem;
   } else {
     state[activeTab].unshift(newItem);
   }
 
-  saveSection(activeTab);
-  renderPublic(activeTab);
   editingId = null;
-  renderDashBody();
-  toast("บันทึกข้อมูลเรียบร้อยแล้ว");
+  renderPublic(activeTab);
+  renderAdminTab(activeTab);
+  saveSection(activeTab);
 }
 
-window.editItem = function(type, id){
+function editItem(type, id){
   activeTab = type;
   editingId = id;
-  openDash();
+  openDashboard();
 }
 
-window.deleteItemDirect = function(type, id){
-  if(!confirm("ต้องการลบรายการนี้ใช่หรือไม่?")) return;
-  state[type] = (state[type] || []).filter(i => i.id !== id);
-  saveSection(type);
-  renderPublic(type);
-  toast("ลบรายการเรียบร้อยแล้ว");
-}
-
-window.deleteItem = function(type, id){
-  if(!confirm("ต้องการลบรายการนี้ใช่หรือไม่?")) return;
-  state[type] = (state[type] || []).filter(i => i.id !== id);
-  saveSection(type);
-  renderPublic(type);
-  renderDashBody();
-  toast("ลบรายการเรียบร้อยแล้ว");
-}
-
-window.cancelEdit = function(){
+function cancelEdit(){
   editingId = null;
-  renderDashBody();
+  renderAdminTab(activeTab);
 }
 
-// Event Listeners
-document.getElementById("menuToggleBtn").addEventListener("click", () => {
-  document.getElementById("navLinksList").classList.toggle("open");
-});
+function deleteItemDirect(type, id){
+  if(confirm("คุณต้องการลบรายการนี้ใช่หรือไม่?")){
+    state[type] = state[type].filter(i => i.id !== id);
+    renderPublic(type);
+    if(!document.getElementById("dashOverlay").classList.contains("hidden")){
+      renderAdminTab(type);
+    }
+    saveSection(type);
+  }
+}
 
-document.querySelectorAll(".nav-link-item").forEach(link => {
-  link.addEventListener("click", () => {
-    document.getElementById("navLinksList").classList.remove("open");
+// ===== Initial Listeners =====
+document.addEventListener("DOMContentLoaded", () => {
+  loadAllData();
+
+  // Mobile Menu Toggle
+  const toggleBtn = document.getElementById("menuToggleBtn");
+  const navList = document.getElementById("navLinksList");
+  toggleBtn.addEventListener("click", () => navList.classList.toggle("open"));
+  document.querySelectorAll(".nav-link-item").forEach(a => {
+    a.addEventListener("click", () => navList.classList.remove("open"));
+  });
+
+  // Login Modal
+  const loginOverlay = document.getElementById("loginOverlay");
+  document.getElementById("adminEntryBtn").addEventListener("click", () => loginOverlay.classList.remove("hidden"));
+  document.getElementById("closeLogin").addEventListener("click", () => loginOverlay.classList.add("hidden"));
+  
+  document.getElementById("pwSubmit").addEventListener("click", () => {
+    const pw = document.getElementById("pwInput").value;
+    if(pw === ADMIN_PASSWORD){
+      isAdmin = true;
+      loginOverlay.classList.add("hidden");
+      document.getElementById("openDashboardFab").classList.remove("hidden");
+      document.querySelectorAll(".admin-live").forEach(el => el.classList.add("show-admin-tools"));
+      renderAllPublic();
+      toast("เข้าสู่ระบบแอดมินสำเร็จ");
+    } else {
+      document.getElementById("loginError").textContent = "รหัสผ่านไม่ถูกต้อง";
+    }
+  });
+
+  // Dashboard Modal
+  document.getElementById("openDashboardFab").addEventListener("click", openDashboard);
+  document.getElementById("closeDash").addEventListener("click", closeDashboard);
+
+  // Dashboard Tabs Switch
+  document.querySelectorAll(".admin-tab").forEach(tab => {
+    tab.addEventListener("click", (e) => {
+      editingId = null;
+      renderAdminTab(e.target.dataset.type);
+    });
   });
 });
-
-document.getElementById("adminEntryBtn").addEventListener("click", () => {
-  if(isAdmin){
-    document.querySelectorAll(".admin-live").forEach(el => el.classList.toggle("show-admin-tools"));
-    toast(document.querySelectorAll(".admin-live")[0].classList.contains("show-admin-tools") ? "เปิดโหมดจัดการบนหน้าเว็บ" : "ปิดโหมดจัดการบนหน้าเว็บ");
-  } else {
-    document.getElementById("loginOverlay").classList.remove("hidden");
-    document.getElementById("pwInput").value = "";
-    document.getElementById("loginError").textContent = "";
-  }
-});
-
-document.getElementById("closeLogin").addEventListener("click", () => {
-  document.getElementById("loginOverlay").classList.add("hidden");
-});
-
-document.getElementById("pwSubmit").addEventListener("click", () => {
-  const pw = document.getElementById("pwInput").value;
-  if(pw === ADMIN_PASSWORD){
-    isAdmin = true;
-    document.getElementById("loginOverlay").classList.add("hidden");
-    document.getElementById("openDashboardFab").classList.remove("hidden");
-    document.querySelectorAll(".admin-live").forEach(el => el.classList.add("show-admin-tools"));
-    toast("เข้าสู่ระบบแอดมินสำเร็จ!");
-  } else {
-    document.getElementById("loginError").textContent = "รหัสผ่านไม่ถูกต้อง";
-  }
-});
-
-document.getElementById("openDashboardFab").addEventListener("click", openDash);
-document.getElementById("closeDash").addEventListener("click", closeDash);
-
-document.querySelectorAll(".admin-tab").forEach(tab => {
-  tab.addEventListener("click", () => switchTab(tab.dataset.type));
-});
-
-// เริ่มต้นโหลดข้อมูลทั้งหมดจาก Google Sheets
-loadAllData();
 </script>
 </body>
 </html>
