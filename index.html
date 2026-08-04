@@ -399,6 +399,11 @@
 <script>
 const ADMIN_PASSWORD = "dbt2569";
 
+// ===== Google Sheets backend =====
+// 1. Deploy the provided Apps Script as a Web App (Execute as: Me, Who has access: Anyone).
+// 2. Paste the deployment URL below.
+const SHEET_API_URL = "https://script.google.com/macros/s/AKfycbxsXL8v-PPO0cVWTCOp5apO59DCO2dTvd6w_hwniExQAlSRJsv9rvDjOSOLhHfvHD_mLQ/exec";
+
 const SECTIONS = {
   calendar: {
     key: "dbt_site:calendar", grid: "calendarGrid", label: "ปฏิทินกิจกรรม",
@@ -550,22 +555,50 @@ function toast(msg){
   setTimeout(()=>t.classList.remove("show"), 1800);
 }
 
-function loadSection(type){
-  const cfg = SECTIONS[type];
+// ===== Load all sections from Google Sheets in one request =====
+async function loadAllData(){
+  Object.keys(SECTIONS).forEach(type => { state[type] = SECTIONS[type].seed.slice(); });
+  renderAllPublic();
+
+  if(!SHEET_API_URL || SHEET_API_URL.indexOf("PASTE_YOUR") === 0){
+    console.warn("ยังไม่ได้ตั้งค่า SHEET_API_URL — กำลังใช้ข้อมูลตัวอย่างเริ่มต้น");
+    return;
+  }
   try{
-    const raw = localStorage.getItem(cfg.key);
-    state[type] = raw ? JSON.parse(raw) : cfg.seed.slice();
+    const res = await fetch(SHEET_API_URL);
+    if(!res.ok) throw new Error("HTTP " + res.status);
+    const data = await res.json();
+    Object.keys(SECTIONS).forEach(type => {
+      const cfg = SECTIONS[type];
+      const raw = data[cfg.key];
+      if(raw){
+        try{ state[type] = JSON.parse(raw); }
+        catch(e){ /* keep seed data if parsing fails */ }
+      }
+    });
+    renderAllPublic();
   }catch(e){
-    state[type] = cfg.seed.slice();
+    console.error("โหลดข้อมูลจาก Google Sheets ไม่สำเร็จ", e);
+    toast("โหลดข้อมูลจาก Google Sheets ไม่สำเร็จ กำลังแสดงข้อมูลตัวอย่าง");
   }
 }
-function saveSection(type){
+
+// ===== Save one section's data back to Google Sheets =====
+async function saveSection(type){
   const cfg = SECTIONS[type];
+  if(!SHEET_API_URL || SHEET_API_URL.indexOf("PASTE_YOUR") === 0){
+    toast("ยังไม่ได้เชื่อมต่อ Google Sheets (ตั้งค่า SHEET_API_URL ก่อน)");
+    return;
+  }
   try{
-    localStorage.setItem(cfg.key, JSON.stringify(state[type]));
+    await fetch(SHEET_API_URL, {
+      method: "POST",
+      headers: {"Content-Type": "text/plain;charset=utf-8"},
+      body: JSON.stringify({ key: cfg.key, value: JSON.stringify(state[type]) })
+    });
   }catch(e){
     console.error("บันทึกไม่สำเร็จ", e);
-    alert("บันทึกไม่สำเร็จ อาจเป็นเพราะข้อมูลมีขนาดใหญ่เกินไป");
+    alert("บันทึกไม่สำเร็จ กรุณาตรวจสอบการเชื่อมต่ออินเทอร์เน็ต");
   }
 }
 
@@ -594,10 +627,7 @@ function renderPublic(type){
 }
 
 function renderAllPublic(){
-  Object.keys(SECTIONS).forEach(type => {
-    loadSection(type);
-    renderPublic(type);
-  });
+  Object.keys(SECTIONS).forEach(type => renderPublic(type));
 }
 
 function openDash(){
@@ -759,8 +789,8 @@ document.querySelectorAll(".admin-tab").forEach(tab => {
   tab.addEventListener("click", () => switchTab(tab.dataset.type));
 });
 
-// เริ่มต้นโหลดข้อมูลทั้งหมด
-renderAllPublic();
+// เริ่มต้นโหลดข้อมูลทั้งหมดจาก Google Sheets
+loadAllData();
 </script>
 </body>
 </html>
