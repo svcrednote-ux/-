@@ -518,11 +518,12 @@ const DEFAULT_DATA = {
     { name:"ใบขออนุญาตออกนอกวิทยาลัย", url:"" },
     { name:"ใบลา", url:"" }
   ],
-  settings: { sheetUrl:"" }
+  settings: { password:"dbt2569" }
 };
 
-const STORAGE_KEY = "dbt-site-data";
-const PASS_KEY = "dbt-admin-pass";
+/* ลิงก์ Google Apps Script Web App ที่ใช้เป็นฐานข้อมูลจริงของเว็บนี้
+   (แก้ตรงนี้ถ้าย้ายไปใช้ Google Sheet ชุดใหม่ แล้วต้อง deploy ใหม่ทุกครั้งที่แก้โค้ด Apps Script) */
+const SHEET_API_URL = "https://script.google.com/macros/s/AKfycbxo8MbYmpg20nyjvmaa1_1Y-wZ0GvvGSubVmGpKAmWkjUBQQ9U-2wJRJNy6zRblvWGd/exec";
 const DEFAULT_PASSWORD = "dbt2569";
 
 let data = JSON.parse(JSON.stringify(DEFAULT_DATA));
@@ -541,56 +542,52 @@ const whyIcons = [
 const staffAccents = ["#6636ab","#a479df","#d8ac52","#8a5cd6","#c79a3e","#7d4fc4"];
 
 /* =========================================================
-   Storage helpers
+   Storage helpers — ข้อมูลจริงทั้งหมดเก็บอยู่ใน Google Sheet
+   ผ่าน Apps Script (SHEET_API_URL) เพื่อให้ใช้งานได้บนโฮสต์
+   ภายนอกอย่าง GitHub Pages ด้วย (ไม่พึ่งพา window.storage)
    ========================================================= */
 async function loadData(){
   try{
-    const res = await window.storage.get(STORAGE_KEY, true);
-    if(res && res.value){
-      const loaded = JSON.parse(res.value);
-      data = Object.assign(JSON.parse(JSON.stringify(DEFAULT_DATA)), loaded);
+    const res = await fetch(SHEET_API_URL, { method:"GET" });
+    const text = await res.text();
+    const loaded = text ? JSON.parse(text) : {};
+    if(loaded && typeof loaded === "object" && Object.keys(loaded).length){
+      data = deepMerge(JSON.parse(JSON.stringify(DEFAULT_DATA)), loaded);
     }
   }catch(err){
-    console.log("ยังไม่มีข้อมูลบันทึกไว้ ใช้ค่าเริ่มต้น");
+    console.log("โหลดข้อมูลจาก Google Sheet ไม่สำเร็จ ใช้ข้อมูลเริ่มต้นชั่วคราว", err);
+    showToast("โหลดข้อมูลจาก Google Sheet ไม่สำเร็จ กำลังแสดงข้อมูลเริ่มต้นไปก่อน");
   }
   renderAll();
 }
 
+function deepMerge(base, extra){
+  if(Array.isArray(extra)) return extra;
+  if(extra && typeof extra === "object"){
+    const out = Object.assign({}, base);
+    Object.keys(extra).forEach(k => { out[k] = deepMerge(base ? base[k] : undefined, extra[k]); });
+    return out;
+  }
+  return extra === undefined ? base : extra;
+}
+
 async function persistData(){
   try{
-    await window.storage.set(STORAGE_KEY, JSON.stringify(data), true);
-    return true;
+    const res = await fetch(SHEET_API_URL, {
+      method:"POST",
+      headers:{ "Content-Type":"text/plain;charset=utf-8" },
+      body: JSON.stringify({ timestamp:new Date().toISOString(), data })
+    });
+    const json = await res.json().catch(()=>null);
+    return !!(json && json.status === "ok");
   }catch(err){
     console.error("บันทึกข้อมูลไม่สำเร็จ", err);
     return false;
   }
 }
 
-async function getPassword(){
-  try{
-    const res = await window.storage.get(PASS_KEY, true);
-    if(res && res.value) return res.value;
-  }catch(err){}
-  return DEFAULT_PASSWORD;
-}
-
-async function setPassword(newPass){
-  await window.storage.set(PASS_KEY, newPass, true);
-}
-
-async function syncToSheet(){
-  const url = (data.settings && data.settings.sheetUrl || "").trim();
-  if(!url) return;
-  try{
-    await fetch(url, {
-      method:"POST",
-      headers:{ "Content-Type":"text/plain;charset=utf-8" },
-      body: JSON.stringify({ timestamp:new Date().toISOString(), data })
-    });
-    showToast("บันทึกสำรองไปยัง Google Sheet แล้ว");
-  }catch(err){
-    showToast("บันทึกในเว็บสำเร็จ แต่ส่งไป Google Sheet ไม่สำเร็จ (ตรวจลิงก์ในตั้งค่า)");
-  }
+function getPassword(){
+  return (data.settings && data.settings.password) || DEFAULT_PASSWORD;
 }
 
 function showToast(msg){
@@ -723,8 +720,8 @@ document.getElementById("pwCancel").addEventListener("click", ()=> pwModal.class
 document.getElementById("pwConfirm").addEventListener("click", checkPassword);
 pwInput.addEventListener("keydown", e => { if(e.key === "Enter") checkPassword(); });
 
-async function checkPassword(){
-  const correct = await getPassword();
+function checkPassword(){
+  const correct = getPassword();
   if(pwInput.value === correct){
     isAdmin = true;
     pwModal.classList.remove("open");
@@ -829,48 +826,28 @@ function renderAdminBody(){
   }
   else if(adminActiveTab === "settings"){
     body.innerHTML = `
-      <h4>สำรองข้อมูลไปยัง Google Sheet</h4>
-      <div class="field"><label>ลิงก์ Web App ของ Google Apps Script</label><input data-bind="settings.sheetUrl" value="${escAttr(data.settings.sheetUrl)}" placeholder="https://script.google.com/macros/s/xxxx/exec"></div>
+      <h4>ฐานข้อมูล Google Sheet</h4>
       <div class="help-box">
-        ทุกครั้งที่กด "บันทึกการเปลี่ยนแปลง" ระบบจะส่งข้อมูลทั้งหมดไปเก็บสำรองไว้ที่ Google Sheet ของคุณ (เก็บเป็นแถวประวัติ ไม่ทับของเก่า) วิธีตั้งค่า:
-        <ol style="margin:8px 0 0 18px;">
-          <li>เปิด Google Sheet ที่ต้องการใช้เก็บข้อมูลสำรอง</li>
-          <li>ไปที่เมนู ส่วนขยาย (Extensions) → Apps Script</li>
-          <li>ลบโค้ดเดิม แล้ววางโค้ดนี้แทน:</li>
-        </ol>
-        <pre>function doPost(e) {
-  var sh = SpreadsheetApp.getActiveSpreadsheet()
-    .getSheetByName('Backup')
-    || SpreadsheetApp.getActiveSpreadsheet().insertSheet('Backup');
-  var body = JSON.parse(e.postData.contents);
-  sh.appendRow([body.timestamp, JSON.stringify(body.data)]);
-  return ContentService.createTextOutput(
-    JSON.stringify({status:'ok'})
-  ).setMimeType(ContentService.MimeType.JSON);
-}</pre>
-        <ol start="4" style="margin:8px 0 0 18px;">
-          <li>กด Deploy → New deployment → เลือกประเภท "Web app"</li>
-          <li>Execute as: <b>Me</b>, Who has access: <b>Anyone</b></li>
-          <li>กด Deploy แล้วคัดลอกลิงก์ Web App มาวางในช่องด้านบน</li>
-        </ol>
-        ทุกครั้งที่แก้ไขเว็บและกดบันทึกในภายหลัง (เช่นเปลี่ยนโค้ด) ให้ Deploy ใหม่แบบ "New deployment" อีกครั้ง ลิงก์เดิมจะยังใช้ได้เรื่อย ๆ
+        เว็บนี้เก็บข้อมูลทั้งหมด (ครู, ข่าว, หลักสูตร ฯลฯ) ไว้จริงบน Google Sheet ที่เชื่อมไว้แล้ว ทุกครั้งที่กด "บันทึกการเปลี่ยนแปลง" ข้อมูลปัจจุบันจะถูกเขียนทับลงชีต "Data" และเก็บสำเนาไว้ในชีต "History" ด้วย เวลาใครก็ตามเปิดเว็บนี้ (ไม่ว่าจะเปิดจากเครื่องไหน) จะดึงข้อมูลล่าสุดจาก Sheet มาแสดงให้อัตโนมัติ<br><br>
+        ลิงก์ Web App ที่เชื่อมอยู่ตอนนี้ถูกฝังไว้ในโค้ดของเว็บแล้ว (ไม่ต้องมาวางในหน้านี้อีก) ถ้าต้องการเปลี่ยนไปใช้ Google Sheet ชุดใหม่ ต้องแก้ค่า <code>SHEET_API_URL</code> ในไฟล์ dbt-site.html โดยตรง แล้วอัปโหลดไฟล์ใหม่ทับของเดิม
       </div>
       <h4>เปลี่ยนรหัสผ่านแอดมิน</h4>
       <div class="field"><label>รหัสผ่านปัจจุบัน</label><input type="password" id="curPassInput" placeholder="รหัสผ่านปัจจุบัน"></div>
       <div class="field"><label>รหัสผ่านใหม่</label><input type="password" id="newPassInput" placeholder="รหัสผ่านใหม่"></div>
       <button class="add-entry-btn" id="changePassBtn" type="button">เปลี่ยนรหัสผ่าน</button>
       <div class="help-box">
-        ข้อควรทราบ: รหัสผ่านนี้ป้องกันคนทั่วไปกดแก้ไขเล่น ๆ ได้ในระดับหนึ่ง แต่เนื่องจากเว็บนี้เป็นหน้าเว็บฝั่งเบราว์เซอร์ทั้งหมด จึงไม่เหมาะกับการเก็บข้อมูลที่ต้องการความปลอดภัยสูงมาก (เช่น ข้อมูลการเงิน) หากต้องใช้งานจริงจังในระยะยาว แนะนำให้ปรึกษาเพิ่มเติมเรื่องการทำระบบหลังบ้านที่ปลอดภัยกว่านี้
+        รหัสผ่านใหม่จะถูกบันทึกลง Google Sheet ทันทีที่กดปุ่มนี้ (ไม่ต้องกด "บันทึกการเปลี่ยนแปลง" ซ้ำ) ข้อควรทราบ: รหัสผ่านนี้ป้องกันคนทั่วไปกดแก้ไขเล่น ๆ ได้ในระดับหนึ่ง แต่เนื่องจากเว็บนี้เป็นหน้าเว็บฝั่งเบราว์เซอร์ทั้งหมด จึงไม่เหมาะกับการเก็บข้อมูลที่ต้องการความปลอดภัยสูงมาก หากต้องใช้งานจริงจังในระยะยาว แนะนำให้ปรึกษาเพิ่มเติมเรื่องการทำระบบหลังบ้านที่ปลอดภัยกว่านี้
       </div>`;
     setTimeout(()=>{
       document.getElementById("changePassBtn").addEventListener("click", async ()=>{
         const cur = document.getElementById("curPassInput").value;
         const nw = document.getElementById("newPassInput").value;
-        const correct = await getPassword();
+        const correct = getPassword();
         if(cur !== correct){ showToast("รหัสผ่านปัจจุบันไม่ถูกต้อง"); return; }
         if(!nw || nw.length < 4){ showToast("รหัสผ่านใหม่ควรยาวอย่างน้อย 4 ตัวอักษร"); return; }
-        await setPassword(nw);
-        showToast("เปลี่ยนรหัสผ่านเรียบร้อยแล้ว");
+        data.settings.password = nw;
+        const ok = await persistData();
+        showToast(ok ? "เปลี่ยนรหัสผ่านเรียบร้อยแล้ว" : "เปลี่ยนรหัสผ่านไม่สำเร็จ ลองอีกครั้งค่ะ");
         document.getElementById("curPassInput").value = "";
         document.getElementById("newPassInput").value = "";
       });
@@ -922,11 +899,10 @@ document.getElementById("adminSaveBtn").addEventListener("click", async () => {
   const ok = await persistData();
   renderAll();
   if(ok){
-    statusEl.textContent = "บันทึกลงเว็บไซต์เรียบร้อยแล้ว ✓";
+    statusEl.textContent = "บันทึกลง Google Sheet เรียบร้อยแล้ว ✓";
     showToast("บันทึกการเปลี่ยนแปลงเรียบร้อยแล้ว");
-    await syncToSheet();
   }else{
-    statusEl.textContent = "บันทึกไม่สำเร็จ ลองอีกครั้งค่ะ";
+    statusEl.textContent = "บันทึกไม่สำเร็จ ตรวจการเชื่อมต่ออินเทอร์เน็ตแล้วลองอีกครั้งค่ะ";
   }
   setTimeout(()=> statusEl.textContent = "", 4000);
 });
