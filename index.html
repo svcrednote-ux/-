@@ -1,806 +1,271 @@
 <!DOCTYPE html>
 <html lang="th">
 <head>
+
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>สาขาเทคโนโลยีธุรกิจดิจิทัล | DBT</title>
-<link href="https://fonts.googleapis.com/css2?family=Kanit:wght@300;400;500;600;700;800&family=Prompt:wght@300;400;500;600;700&display=swap" rel="stylesheet">
-<style>
-  :root{
-    --purple-deep:#2f0f5c;
-    --purple:#4a1680;
-    --purple-mid:#5e21a0;
-    --purple-light:#7b3fc4;
-    --gold:#d4af37;
-    --gold-light:#f3d878;
-    --ink:#241442;
-    --text-soft:#6b5c85;
-    --paper:#faf8fc;
-    --card:#ffffff;
-    --line:#ece4f7;
-  }
-  *{box-sizing:border-box;margin:0;padding:0;}
-  html{scroll-behavior:smooth;}
-  body{font-family:'Prompt','Kanit',sans-serif;background:var(--paper);color:var(--ink);line-height:1.65;overflow-x:hidden;}
-  a{color:inherit;}
-  ::-webkit-scrollbar{width:6px;}
-  ::-webkit-scrollbar-thumb{background:var(--purple-light);border-radius:10px;}
 
-  /* ===== Nav ===== */
-  .navbar{
-    display:flex;align-items:center;justify-content:space-between;
-    padding:12px 16px;
-    background:linear-gradient(90deg,var(--purple-deep),var(--purple));
-    position:sticky;top:0;z-index:200;
-    box-shadow:0 2px 14px rgba(47,15,92,0.25);
-  }
-  .brand{display:flex;align-items:center;gap:8px;}
-  .brand .mark{font-family:'Kanit',sans-serif;font-weight:800;font-size:20px;color:#fff;letter-spacing:1px;}
-  .brand .tagline{display:flex;flex-direction:column;line-height:1.1;font-size:8.5px;font-weight:600;color:var(--gold-light);letter-spacing:.5px;}
-  
-  .nav-links{display:flex;gap:14px;list-style:none;}
-  .nav-links li a{text-decoration:none;color:#fff;font-size:12.5px;font-weight:500;position:relative;padding-bottom:2px;}
-  .nav-links li a::after{content:"";position:absolute;left:0;bottom:0;width:0%;height:2px;background:var(--gold);transition:width .25s ease;}
-  .nav-links li a:hover::after{width:100%;}
-  
-  .nav-right-tools {display:flex;align-items:center;gap:8px;}
-  .admin-entry{
-    width:34px;height:34px;border-radius:50%;
-    background:rgba(255,255,255,0.12);
-    border:1px solid rgba(255,255,255,0.25);
-    display:flex;align-items:center;justify-content:center;
-    color:var(--gold-light);font-size:14px;cursor:pointer;
-  }
-  .menu-toggle{
-    display:none;background:none;border:none;color:#fff;font-size:22px;cursor:pointer;
-  }
+<title>DBT | Digital Business Technology</title>
 
-  /* ===== Hero ===== */
-  .hero{position:relative;overflow:hidden;background:#fff;padding-bottom:0;}
-  .hero-ribbons{position:absolute;inset:0;z-index:0;pointer-events:none;}
-  .hero-inner{
-    position:relative;z-index:2;
-    max-width:1180px;margin:0 auto;
-    display:flex;align-items:center;justify-content:space-between;
-    padding:40px 16px;gap:20px;
-  }
-  .hero-title{font-family:'Kanit',sans-serif;font-weight:700;font-size:30px;line-height:1.3;color:var(--purple);}
-  .hero-title .line2{color:var(--ink);display:block;}
-  .hero-sub{margin-top:8px;font-size:12.5px;font-weight:600;letter-spacing:1.5px;color:var(--gold);}
-  .hero-desc{margin-top:12px;font-size:12.5px;color:var(--text-soft);max-width:420px;}
-  .hero-actions{margin-top:18px;display:flex;gap:10px;flex-wrap:wrap;}
-  .btn-primary{background:var(--purple);color:#fff;font-weight:600;font-size:12.5px;padding:10px 18px;border-radius:8px;text-decoration:none;box-shadow:0 6px 16px rgba(74,22,128,0.2);}
-  .btn-ghost{border:1.5px solid var(--gold);color:var(--purple);font-weight:600;font-size:12.5px;padding:10px 18px;border-radius:8px;text-decoration:none;}
-  .hero-photo{position:relative;flex-shrink:0;width:180px;height:180px;}
-  .hero-photo .ring{position:absolute;inset:-6px;border-radius:50%;background:conic-gradient(from 180deg,var(--gold-light),var(--gold),var(--gold-light),var(--gold),var(--gold-light));}
-  .hero-photo img{position:relative;width:100%;height:100%;object-fit:cover;border-radius:50%;border:4px solid #fff;display:block;}
+<link rel="stylesheet" href="css/style.css">
 
-  /* ===== Section banner ===== */
-  .section-banner{background:linear-gradient(90deg,var(--purple-deep),var(--purple-mid));text-align:center;padding:14px 16px;}
-  .section-banner h2{font-family:'Kanit',sans-serif;color:#fff;font-size:16px;font-weight:600;letter-spacing:1px;}
+<link href="https://fonts.googleapis.com/css2?family=Prompt:wght@300;400;500;600;700&display=swap" rel="stylesheet">
 
-  .section-container{max-width:1180px;margin:0 auto;padding:35px 16px;}
-  .section-container.tight{padding-top:24px;}
-  .bg-alt{background:#fff;border-top:1px solid var(--line);border-bottom:1px solid var(--line);}
-  .section-title-plain{font-family:'Kanit',sans-serif;font-size:20px;font-weight:700;color:var(--purple-deep);padding-bottom:5px;border-bottom:3px solid var(--gold);display:inline-block;margin-bottom:20px;}
-
-  .empty-note{grid-column:1/-1;text-align:center;padding:24px;color:var(--text-soft);font-size:12.5px;border:1px dashed var(--line);border-radius:12px;}
-
-  /* ===== Component Grids ===== */
-  .calendar-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(260px,1fr));gap:14px;}
-  .calendar-card{
-    background:#fff;border-radius:12px;padding:14px;
-    display:flex;gap:12px;
-    box-shadow:0 4px 16px rgba(47,15,92,0.06);
-    border:1px solid var(--line);
-    position:relative;
-  }
-  .cal-date{
-    background:linear-gradient(135deg, var(--purple), var(--purple-deep));
-    color:#fff;min-width:58px;height:58px;border-radius:10px;
-    display:flex;flex-direction:column;align-items:center;justify-content:center;
-    flex-shrink:0;box-shadow:0 4px 10px rgba(74,22,128,0.2);
-  }
-  .cal-day{font-family:'Kanit',sans-serif;font-size:18px;font-weight:700;line-height:1;}
-  .cal-month{font-size:9.5px;font-weight:500;color:var(--gold-light);margin-top:2px;}
-  .cal-info{flex:1;min-width:0;}
-  .cal-info h3{font-size:14px;color:var(--ink);margin-bottom:3px;font-weight:600;word-break:break-word;}
-  .cal-info p{font-size:11.5px;color:var(--text-soft);margin-bottom:2px;word-break:break-word;}
-
-  .news-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(230px,1fr));gap:14px;}
-  .news-card{background:var(--card);border-radius:12px;overflow:hidden;box-shadow:0 4px 16px rgba(47,15,92,0.06);border:1px solid var(--line);position:relative;}
-  .news-card .body{padding:14px;}
-  .news-card .date{font-size:10.5px;color:var(--gold);font-weight:700;margin-bottom:4px;display:block;}
-  .news-card h3{font-size:14px;font-weight:600;color:var(--ink);margin-bottom:5px;}
-  .news-card p{font-size:11.5px;color:var(--text-soft);}
-
-  .course-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(250px,1fr));gap:16px;}
-  .course-card{background:#fff;padding:18px;border-radius:12px;border-top:4px solid var(--purple);box-shadow:0 4px 12px rgba(0,0,0,0.04);position:relative;}
-  .course-card h3{font-size:15px;color:var(--purple-deep);margin-bottom:6px;}
-  .course-card p{font-size:12px;color:#555;margin-bottom:10px;}
-  .tags{display:flex;flex-wrap:wrap;gap:5px;}
-  .tag{background:#f2e9fb;color:var(--purple);font-size:10.5px;padding:3px 7px;border-radius:20px;font-weight:500;}
-
-  .portfolio-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(240px,1fr));gap:14px;}
-  .portfolio-card{position:relative;border-radius:12px;overflow:hidden;height:180px;}
-  .portfolio-card img{width:100%;height:100%;object-fit:cover;}
-  .portfolio-overlay{position:absolute;inset:0;background:linear-gradient(to top,rgba(47,15,92,0.9),transparent 65%);display:flex;flex-direction:column;justify-content:flex-end;padding:14px;color:#fff;}
-  .portfolio-overlay .cat{font-size:10.5px;color:var(--gold-light);letter-spacing:1px;margin-bottom:2px;}
-  .portfolio-overlay h4{font-size:14px;}
-
-  .faculty-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(160px,1fr));gap:16px;}
-  .faculty-card{text-align:center;position:relative;background:#fff;padding:16px 12px;border-radius:12px;border:1px solid var(--line);box-shadow:0 4px 12px rgba(0,0,0,0.03);}
-  .faculty-photo{position:relative;width:96px;height:96px;margin:0 auto 10px;}
-  .faculty-photo .ring{position:absolute;inset:-4px;border-radius:50%;background:conic-gradient(from 180deg,var(--gold-light),var(--gold),var(--gold-light),var(--gold),var(--gold-light));}
-  .faculty-photo img{position:relative;width:100%;height:100%;object-fit:cover;border-radius:50%;border:3px solid #fff;display:block;}
-  .faculty-card h4{font-size:13.5px;color:var(--ink);font-weight:600;margin-bottom:3px;}
-  .faculty-badge{display:inline-block;background:linear-gradient(90deg,var(--gold),var(--gold-light));color:var(--purple-deep);font-size:10px;font-weight:600;padding:2px 8px;border-radius:20px;margin-bottom:6px;}
-  .faculty-contact{font-size:11px;color:var(--text-soft);display:flex;flex-direction:column;gap:2px;border-top:1px dashed var(--line);padding-top:6px;margin-top:4px;word-break:break-all;}
-
-  .dl-list{list-style:none;display:grid;grid-template-columns:repeat(auto-fit,minmax(250px,1fr));gap:10px;}
-  .dl-item{background:#fff;padding:12px 14px;border-radius:10px;display:flex;justify-content:space-between;align-items:center;border-left:4px solid var(--gold);box-shadow:0 2px 6px rgba(0,0,0,0.03);gap:8px;position:relative;}
-  .dl-item .label{font-size:12px;display:flex;align-items:center;gap:6px;min-width:0;word-break:break-word;}
-  .dl-badge{font-size:9.5px;font-weight:700;background:var(--purple);color:#fff;padding:2px 5px;border-radius:4px;flex-shrink:0;}
-  .dl-item a{text-decoration:none;color:var(--purple);font-weight:600;font-size:12px;white-space:nowrap;flex-shrink:0;}
-
-  /* ===== Footer ===== */
-  footer{background:var(--purple-deep);color:#fff;padding:35px 16px 16px;}
-  .footer-inner{max-width:1180px;margin:0 auto;display:grid;grid-template-columns:repeat(auto-fit,minmax(200px,1fr));gap:24px;padding-bottom:24px;border-bottom:1px solid rgba(255,255,255,0.1);}
-  .footer-col h4{color:var(--gold-light);font-size:15px;margin-bottom:10px;}
-  .footer-col p,.footer-col li{font-size:12px;color:#d7c9ee;margin-bottom:5px;list-style:none;}
-  .footer-col li a{text-decoration:none;color:#d7c9ee;}
-  .footer-bottom{text-align:center;padding-top:14px;font-size:11px;color:#a898c8;}
-
-  /* ===== Admin Card Tools ===== */
-  .admin-live .card-tools{display:none;position:absolute;top:6px;right:6px;gap:5px;z-index:5;}
-  .admin-live.show-admin-tools .card-tools{display:flex;}
-  .card-tools button{
-    width:24px;height:24px;border-radius:5px;border:none;cursor:pointer;
-    font-size:11px;display:flex;align-items:center;justify-content:center;
-  }
-  .card-tools .edit-btn{background:#fff;color:var(--purple);box-shadow:0 2px 6px rgba(0,0,0,0.15);}
-  .card-tools .del-btn{background:#e0405c;color:#fff;}
-
-  /* ===== Admin Modal ===== */
-  .hidden{display:none !important;}
-  .admin-overlay{
-    position:fixed;inset:0;background:rgba(36,20,66,0.65);
-    z-index:1000;display:flex;align-items:center;justify-content:center;padding:10px;
-  }
-  .admin-modal{
-    background:#fff;border-radius:14px;max-width:540px;width:100%;
-    max-height:92vh;display:flex;flex-direction:column;box-shadow:0 20px 60px rgba(0,0,0,0.35);
-  }
-  .admin-modal-head{
-    display:flex;justify-content:space-between;align-items:center;
-    padding:14px 16px;border-bottom:1px solid var(--line);
-    background:#fff;border-top-left-radius:14px;border-top-right-radius:14px;flex-shrink:0;
-  }
-  .admin-modal-head h3{font-family:'Kanit',sans-serif;font-size:15px;color:var(--purple-deep);}
-  .close-x{background:none;border:none;font-size:20px;cursor:pointer;color:var(--text-soft);padding:4px;}
-  
-  .admin-tabs{
-    display:flex;gap:2px;padding:0 12px;border-bottom:1px solid var(--line);
-    overflow-x:auto;flex-shrink:0;background:#faf8fc;
-  }
-  .admin-tab{
-    background:none;border:none;padding:10px 8px;font-size:11px;font-weight:600;
-    color:var(--text-soft);cursor:pointer;border-bottom:3px solid transparent;white-space:nowrap;
-  }
-  .admin-tab.active{color:var(--purple);border-bottom-color:var(--gold);}
-  
-  .admin-modal-body{padding:16px;overflow-y:auto;flex:1;}
-  
-  .field{margin-bottom:10px;}
-  .field label{display:block;font-size:11.5px;font-weight:600;color:var(--ink);margin-bottom:4px;}
-  .field input,.field textarea{
-    width:100%;padding:9px 10px;border:1px solid var(--line);border-radius:7px;
-    font-family:'Prompt',sans-serif;font-size:12.5px;background:var(--paper);
-  }
-  .field textarea{min-height:55px;resize:vertical;}
-  .form-actions{display:flex;gap:8px;margin-top:10px;}
-  .btn-save{background:var(--purple);color:#fff;border:none;padding:9px 16px;border-radius:7px;font-weight:600;font-size:12px;cursor:pointer;}
-  .btn-cancel{background:#eee;color:#555;border:none;padding:9px 16px;border-radius:7px;font-weight:600;font-size:12px;cursor:pointer;}
-  
-  .admin-list-item{
-    display:flex;justify-content:space-between;align-items:center;gap:8px;
-    padding:8px 10px;border:1px solid var(--line);border-radius:8px;margin-bottom:6px;background:#fff;
-  }
-  .admin-list-item .info{font-size:12px;min-width:0;}
-  .admin-list-item .info b{display:block;font-size:12.5px;word-break:break-word;}
-  .admin-list-item .info span{color:var(--text-soft);font-size:11px;word-break:break-word;}
-  .row-actions{display:flex;gap:5px;flex-shrink:0;}
-  .row-actions button{border:none;border-radius:5px;padding:5px 8px;font-size:11px;cursor:pointer;}
-  .row-actions .edit-btn{background:#f2e9fb;color:var(--purple);}
-  .row-actions .del-btn{background:#fde7ea;color:#c62c47;}
-  
-  .login-box{padding:20px 16px;text-align:center;}
-  .login-box p{font-size:11.5px;color:var(--text-soft);margin-bottom:12px;}
-  .status-msg{font-size:11px;color:#c62c47;margin-top:6px;min-height:14px;}
-  .save-toast{
-    position:fixed;bottom:20px;left:50%;transform:translateX(-50%);
-    background:var(--ink);color:#fff;padding:8px 16px;border-radius:30px;
-    font-size:12px;z-index:1200;opacity:0;transition:opacity .3s ease;pointer-events:none;
-  }
-  .save-toast.show{opacity:1;}
-  .admin-fab{
-    position:fixed;bottom:16px;right:16px;z-index:150;
-    background:var(--purple);color:#fff;border:none;border-radius:30px;
-    padding:10px 16px;font-size:12px;font-weight:600;cursor:pointer;
-    box-shadow:0 8px 24px rgba(74,22,128,0.35);display:flex;align-items:center;gap:6px;
-  }
-
-  /* ===== Media Queries ===== */
-  @media (max-width: 768px) {
-    .navbar { padding: 10px 14px; }
-    .menu-toggle { display: block; }
-    .nav-links {
-      display: none;
-      flex-direction: column;
-      position: absolute;
-      top: 100%; left: 0; right: 0;
-      background: var(--purple-deep);
-      padding: 14px 20px;
-      gap: 10px;
-      box-shadow: 0 10px 20px rgba(0,0,0,0.2);
-      border-top: 1px solid rgba(255,255,255,0.1);
-    }
-    .nav-links.open { display: flex; }
-    .hero-inner { flex-direction: column-reverse; text-align: center; padding: 30px 16px; gap: 16px; }
-    .hero-title { font-size: 26px; }
-    .hero-desc { margin: 10px auto 0; font-size: 12px; }
-    .hero-actions { justify-content: center; }
-    .hero-photo { width: 160px; height: 160px; margin: 0 auto; }
-    .section-container { padding: 30px 14px; }
-  }
-</style>
 </head>
+
 <body>
 
-  <nav class="navbar">
-    <div class="brand">
-      <span class="mark">DBT</span>
-      <span class="tagline">DIGITAL BUSINESS<br>TECHNOLOGY</span>
-    </div>
-    <button class="menu-toggle" id="menuToggleBtn">☰</button>
-    <ul class="nav-links" id="navLinksList">
-      <li><a href="#home" class="nav-link-item">หน้าแรก</a></li>
-      <li><a href="#calendar" class="nav-link-item">ปฏิทิน</a></li>
-      <li><a href="#courses" class="nav-link-item">หลักสูตร</a></li>
-      <li><a href="#news" class="nav-link-item">ข่าวสาร</a></li>
-      <li><a href="#faculty" class="nav-link-item">บุคลากร</a></li>
-      <li><a href="#works" class="nav-link-item">ผลงาน</a></li>
-      <li><a href="#download" class="nav-link-item">ดาวน์โหลด</a></li>
-      <li><a href="#contact" class="nav-link-item">ติดต่อเรา</a></li>
-    </ul>
-    <div class="nav-right-tools">
-      <div class="admin-entry" id="adminEntryBtn" title="สำหรับผู้ดูแลระบบ">🔒</div>
-    </div>
-  </nav>
 
-  <header class="hero" id="home">
-    <svg class="hero-ribbons" viewBox="0 0 1200 420" preserveAspectRatio="none" xmlns="http://www.w3.org/2000/svg">
-      <path d="M-50,60 C150,-20 300,140 550,60 C750,0 900,120 1250,20" stroke="#d4af37" stroke-width="8" fill="none" opacity="0.5"/>
-      <path d="M-50,110 C150,30 320,190 560,110 C760,50 920,170 1250,70" stroke="#4a1680" stroke-width="10" fill="none" opacity="0.15"/>
-      <path d="M900,420 C1000,320 1150,380 1250,300 L1250,420 Z" fill="#4a1680" opacity="0.08"/>
-    </svg>
-    <div class="hero-inner">
-      <div class="hero-text">
-        <h1 class="hero-title">สาขาเทคโนโลยี<span class="line2">ธุรกิจดิจิทัล</span></h1>
-        <p class="hero-sub">DIGITAL BUSINESS TECHNOLOGY</p>
-        <p class="hero-desc">หลักสูตรที่หลอมรวมธุรกิจเข้ากับเทคโนโลยี ผลิตนักปฏิบัติที่พร้อมทำงานจริงตั้งแต่วันแรก</p>
-        <div class="hero-actions">
-          <a href="#courses" class="btn-primary">ดูหลักสูตร</a>
-          <a href="#contact" class="btn-ghost">สมัครเรียน</a>
-        </div>
-      </div>
-      <div class="hero-photo">
-        <div class="ring"></div>
-        <img src="https://images.unsplash.com/photo-1523240795612-9a054b0db644?q=80&w=600&auto=format&fit=crop" alt="นักศึกษา">
-      </div>
-    </div>
-  </header>
+<header class="hero">
 
-  <section class="section-container admin-live" id="calendar">
-    <h2 class="section-title-plain">ปฏิทินกิจกรรมสาขา</h2>
-    <div class="calendar-grid" id="calendarGrid"></div>
-  </section>
+<div class="hero-text">
 
-  <div class="section-banner"><h2>ข่าวประชาสัมพันธ์</h2></div>
-  <section class="section-container tight admin-live" id="news">
-    <div class="news-grid" id="newsGrid"></div>
-  </section>
+<h1>DBT</h1>
 
-  <section class="bg-alt admin-live" id="courses">
-    <div class="section-container">
-      <h2 class="section-title-plain">หลักสูตรที่เปิดสอน</h2>
-      <div class="course-grid" id="coursesGrid"></div>
-    </div>
-  </section>
+<h2>Digital Business Technology</h2>
 
-  <section class="section-container admin-live" id="works">
-    <h2 class="section-title-plain">ผลงานนักศึกษา</h2>
-    <div class="portfolio-grid" id="worksGrid"></div>
-  </section>
+<p>
+สาขาเทคโนโลยีธุรกิจดิจิทัล
+</p>
 
-  <section class="bg-alt admin-live" id="faculty">
-    <div class="section-container">
-      <h2 class="section-title-plain">คณาจารย์ประจำสาขา</h2>
-      <div class="faculty-grid" id="staffGrid"></div>
-    </div>
-  </section>
 
-  <section class="section-container admin-live" id="download">
-    <h2 class="section-title-plain">ดาวน์โหลดเอกสาร</h2>
-    <ul class="dl-list" id="dlGrid"></ul>
-  </section>
+<a href="#about" class="btn">
+เข้าสู่เว็บไซต์
+</a>
 
-  <footer id="contact">
-    <div class="footer-inner">
-      <div class="footer-col">
-        <h4>สาขาเทคโนโลยีธุรกิจดิจิทัล (DBT)</h4>
-        <p>มุ่งมั่นผลิตบุคลากรคุณภาพ ด้านนวัตกรรม และเทคโนโลยีธุรกิจดิจิทัล เพื่อตอบสนองตลาดงานยุคใหม่</p>
-      </div>
-      <div class="footer-col">
-        <h4>ลิงก์ด่วน</h4>
-        <ul>
-          <li><a href="#home">หน้าแรก</a></li>
-          <li><a href="#calendar">ปฏิทินกิจกรรม</a></li>
-          <li><a href="#courses">หลักสูตร</a></li>
-          <li><a href="#news">ข่าวสาร</a></li>
-          <li><a href="#contact">ติดต่อสอบถาม</a></li>
-        </ul>
-      </div>
-      <div class="footer-col">
-        <h4>ติดต่อเรา</h4>
-        <p>📍 อาคารเรียนปฏิบัติการเทคโนโลยีสารสนเทศ ชั้น 3</p>
-        <p>📞 โทรศัพท์: 02-xxx-xxxx</p>
-        <p>✉️ อีเมล: dbt@institution.ac.th</p>
-        <p>🌐 Facebook: DBT Official</p>
-      </div>
-    </div>
-    <div class="footer-bottom"><p>&copy; 2026 Digital Business Technology Department. All Rights Reserved.</p></div>
-  </footer>
+</div>
 
-  <button class="admin-fab hidden" id="openDashboardFab">⚙️ จัดการเนื้อหา</button>
+</header>
 
-  <div class="admin-overlay hidden" id="loginOverlay">
-    <div class="admin-modal" style="max-width:320px; max-height:auto;">
-      <div class="admin-modal-head"><h3>เข้าสู่ระบบแอดมิน</h3><button class="close-x" id="closeLogin">✕</button></div>
-      <div class="login-box">
-        <p>กรอกรหัสผ่านสำหรับผู้ดูแลระบบ (รหัสผ่านเริ่มต้น: <b>dbt2569</b>)</p>
-        <div class="field"><input type="password" id="pwInput" placeholder="รหัสผ่าน"></div>
-        <button class="btn-save" style="width:100%" id="pwSubmit">เข้าสู่ระบบ</button>
-        <div class="status-msg" id="loginError"></div>
-      </div>
-    </div>
-  </div>
 
-  <div class="admin-overlay hidden" id="dashOverlay">
-    <div class="admin-modal">
-      <div class="admin-modal-head">
-        <h3>แผงจัดการเนื้อหา</h3>
-        <button class="close-x" id="closeDash">✕</button>
-      </div>
-      <div class="admin-tabs">
-        <button class="admin-tab" data-type="calendar">ปฏิทิน</button>
-        <button class="admin-tab" data-type="news">ข่าวสาร</button>
-        <button class="admin-tab" data-type="courses">หลักสูตร</button>
-        <button class="admin-tab" data-type="works">ผลงาน</button>
-        <button class="admin-tab" data-type="staff">บุคลากร</button>
-        <button class="admin-tab" data-type="downloads">ดาวน์โหลด</button>
-      </div>
-      <div class="admin-modal-body" id="dashBody"></div>
-    </div>
-  </div>
 
-  <div class="save-toast" id="saveToast">บันทึกเรียบร้อย</div>
+<nav>
 
-<script>
-const ADMIN_PASSWORD = "311051//";
+<ul>
 
-// ===== Google Sheets Web App URL =====
-// นำ URL ที่ได้จากการ Deploy Apps Script ในขั้นตอนที่ 1 มาวางแทนที่ด้านล่างนี้
-const SHEET_API_URL = "https://script.google.com/macros/s/AKfycbxZUmX_ohGvL5anWYAni5TbnJhhELQCVEI0kTt9d_pS2IR8zw7Hn0es7lWeJAWGvXkB/exec";
+<li><a href="index.html">หน้าแรก</a></li>
 
-const SECTIONS = {
-  calendar: {
-    key: "dbt_site:calendar", grid: "calendarGrid", label: "ปฏิทินกิจกรรม",
-    fields: [
-      {name:"day", label:"วันที่ (ตัวเลขวัน)", placeholder:"20"},
-      {name:"month", label:"เดือนและปี", placeholder:"พ.ค. 2026"},
-      {name:"title", label:"ชื่อกิจกรรม"},
-      {name:"location", label:"สถานที่และเวลา", placeholder:"📍 หอประชุม | เวลา 09.00 น."},
-      {name:"uniform", label:"การแต่งกาย", placeholder:"ชุดนักศึกษา / ชุดพละ"},
-      {name:"detail", label:"รายละเอียดเพิ่มเติม", area:true, placeholder:"รายละเอียดและกำหนดการต่างๆ เพิ่มเติม..."}
-    ],
-    seed: [
-      {id:"c1", day:"20", month:"พ.ค. 2026", title:"ปฐมนิเทศนักศึกษาใหม่ ประจำปีการศึกษา 2569", location:"📍 หอประชุมใหญ่ | เวลา 09.00 - 12.00 น.", uniform:"ชุดนักศึกษาพิธีการ", detail:"ขอให้นักศึกษาทุกคนมาพร้อมกัน ณ หอประชุมใหญ่ก่อนเวลา 30 นาที"},
-      {id:"c2", day:"10", month:"มิ.ย. 2026", title:"กิจกรรมอบรมพัฒนาทักษะ Digital Marketing", location:"📍 ห้องปฏิบัติการคอมพิวเตอร์ ชั้น 3 | เวลา 13.00 น.", uniform:"ชุดนักศึกษาปกติ", detail:"นำโน้ตบุ๊กส่วนตัวมาด้วยเพื่อใช้ในการอบรมปฏิบัติจริง"},
-      {id:"c3", day:"15", month:"ส.ค. 2026", title:"การแข่งขันประกวดโครงงานนวัตกรรมดิจิทัล", location:"📍 โถงอาคารเรียนรวม | เวลา 08.30 น.", uniform:"ชุดสุภาพ / ชุดทีม", detail:"ส่งรายชื่อทีมและโครงงานล่วงหน้าอย่างน้อย 1 สัปดาห์"}
-    ],
-    render: (item) => `
-      <div class="cal-date">
-        <span class="cal-day">${esc(item.day)}</span>
-        <span class="cal-month">${esc(item.month)}</span>
-      </div>
-      <div class="cal-info">
-        <h3>${esc(item.title)}</h3>
-        <p>${esc(item.location)}</p>
-        ${item.uniform ? `<p style="font-size:11px;color:var(--purple);font-weight:500;">👕 การแต่งกาย: ${esc(item.uniform)}</p>` : ""}
-        ${item.detail ? `<p style="font-size:11px;color:var(--text-soft);margin-top:2px;">📝 ${esc(item.detail)}</p>` : ""}
-      </div>`,
-    wrapClass: "calendar-card"
-  },
-  news: {
-    key: "dbt_site:news", grid: "newsGrid", label: "ข่าวประชาสัมพันธ์",
-    fields: [
-      {name:"date", label:"วันที่", placeholder:"15 ม.ค. 2026"},
-      {name:"title", label:"หัวข้อข่าว"},
-      {name:"desc", label:"รายละเอียดย่อ", area:true}
-    ],
-    seed: [
-      {id:"n1", date:"15 ม.ค. 2026", title:"รับสมัครนักศึกษาใหม่ 2569", desc:"เปิดรับสมัครนักศึกษาใหม่ โควตาพิเศษและรอบทั่วไป"},
-      {id:"n2", date:"10 ม.ค. 2026", title:"กิจกรรมปฐมนิเทศนักศึกษา", desc:"กำหนดการปฐมนิเทศนักศึกษาใหม่ ประจำปีการศึกษา 1/2569"},
-      {id:"n3", date:"05 ม.ค. 2026", title:"ตารางเรียนภาคเรียนที่ 1", desc:"ดาวน์โหลดตารางเรียน และตารางใช้ห้องปฏิบัติการคอมพิวเตอร์"},
-      {id:"n4", date:"28 ธ.ค. 2025", title:"คว้าชัยแข่งนวัตกรรมดิจิทัล", desc:"นักศึกษาสาขา DBT คว้ารางวัลชนะเลิศการแข่งพัฒนาเว็บ"}
-    ],
-    render: (item) => `
-      <div class="body">
-        <span class="date">${esc(item.date)}</span>
-        <h3>${esc(item.title)}</h3>
-        <p>${esc(item.desc)}</p>
-      </div>`,
-    wrapClass: "news-card"
-  },
-  courses: {
-    key: "dbt_site:courses", grid: "coursesGrid", label: "หลักสูตรที่เปิดสอน",
-    fields: [
-      {name:"title", label:"ชื่อหลักสูตร (เช่น ระดับ ปวช.)"},
-      {name:"desc", label:"คำอธิบายหลักสูตร", area:true},
-      {name:"tags", label:"ป้ายแท็ก (คั่นด้วยเครื่องหมายจุลภาค ,)", placeholder:"คอมพิวเตอร์พื้นฐาน, การขายออนไลน์"}
-    ],
-    seed: [
-      {id:"cs1", title:"ระดับ ปวช. (ประกาศนียบัตรวิชาชีพ)", desc:"ปูพื้นฐานเทคโนโลยี การตลาดดิจิทัล และการใช้งานโปรแกรมประยุกต์พื้นฐานสำหรับธุรกิจ", tags:"คอมพิวเตอร์พื้นฐาน, การสร้างสื่อดิจิทัล, การขายออนไลน์"},
-      {id:"cs2", title:"ระดับ ปวส. (ประกาศนียบัตรวิชาชีพชั้นสูง)", desc:"เจาะลึกการพัฒนาเว็บ การวิเคราะห์ข้อมูลธุรกิจ (Data Analytics) และการจัดการอีคอมเมิร์ซ", tags:"Web Development, E-Commerce, UX/UI Design"},
-      {id:"cs3", title:"ระดับ ปริญญาตรี (เทคโนโลยีบัณฑิต)", desc:"เน้นการบริหารจัดการนวัตกรรมดิจิทัล การวิเคราะห์ข้อมูลขั้นสูง และการเป็นผู้ประกอบการดิจิทัล", tags:"Digital Marketing, Business Intelligence, Startup"}
-    ],
-    render: (item) => {
-      const tagList = item.tags ? item.tags.split(',').map(t => `<span class="tag">${esc(t.trim())}</span>`).join('') : '';
-      return `
-        <h3>${esc(item.title)}</h3>
-        <p>${esc(item.desc)}</p>
-        <div class="tags">${tagList}</div>`;
-    },
-    wrapClass: "course-card"
-  },
-  works: {
-    key: "dbt_site:works", grid: "worksGrid", label: "ผลงานนักศึกษา",
-    fields: [
-      {name:"category", label:"หมวดหมู่ผลงาน", placeholder:"แอปพลิเคชัน / เว็บไซต์"},
-      {name:"title", label:"ชื่อผลงาน"},
-      {name:"img", label:"ลิงก์รูปภาพ (URL)", placeholder:"https://..."}
-    ],
-    seed: [
-      {id:"w1", category:"แอปพลิเคชันชุมชน", title:"Smart Local Shop App", img:"https://images.unsplash.com/photo-1460925895917-afdab827c52f?q=80&w=500&auto=format&fit=crop"},
-      {id:"w2", category:"ระบบวิเคราะห์ข้อมูล", title:"Data Visualization Dashboard", img:"https://images.unsplash.com/photo-1551288049-bebda4e38f71?q=80&w=500&auto=format&fit=crop"},
-      {id:"w3", category:"แคมเปญการตลาด", title:"Digital Marketing Campaign", img:"https://images.unsplash.com/photo-1542744094-3a312169a179?q=80&w=500&auto=format&fit=crop"}
-    ],
-    render: (item) => `
-      <img src="${esc(item.img)}" alt="${esc(item.title)}">
-      <div class="portfolio-overlay">
-        <div class="cat">${esc(item.category)}</div>
-        <h4>${esc(item.title)}</h4>
-      </div>`,
-    wrapClass: "portfolio-card"
-  },
-  staff: {
-    key: "dbt_site:staff", grid: "staffGrid", label: "บุคลากร",
-    fields: [
-      {name:"name", label:"ชื่อ-นามสกุล"},
-      {name:"role", label:"ตำแหน่ง / ความเชี่ยวชาญ"},
-      {name:"phone", label:"เบอร์โทรศัพท์", placeholder:"02-xxx-xxxx"},
-      {name:"email", label:"อีเมล", placeholder:"name@institution.ac.th"},
-      {name:"img", label:"ลิงก์รูปภาพ (URL)", placeholder:"https://..."}
-    ],
-    seed: [
-      {id:"s1", name:"ผศ.ดร.สมชาย ใจดี", role:"หัวหน้าสาขาวิชา", phone:"02-111-2222", email:"somchai@institution.ac.th", img:"https://images.unsplash.com/photo-1573496359142-b8d87734a5a2?q=80&w=200&auto=format&fit=crop"},
-      {id:"s2", name:"อ.ศิริพร วิทยา", role:"เชี่ยวชาญ Digital Marketing", phone:"02-111-2223", email:"siriporn@institution.ac.th", img:"https://images.unsplash.com/photo-1580894732413-a7235a909247?q=80&w=200&auto=format&fit=crop"},
-      {id:"s3", name:"อ.กิตติศักดิ์ พัฒนา", role:"เชี่ยวชาญ Web & App Development", phone:"02-111-2224", email:"kittisak@institution.ac.th", img:"https://images.unsplash.com/photo-1560250097-0b93528c311a?q=80&w=200&auto=format&fit=crop"},
-      {id:"s4", name:"อ.นภาวรรณ สุขเสริฐ", role:"เชี่ยวชาญ E-Commerce & UX/UI", phone:"02-111-2225", email:"napawan@institution.ac.th", img:"https://images.unsplash.com/photo-1573497019940-1c28c88b4f3e?q=80&w=200&auto=format&fit=crop"}
-    ],
-    render: (item) => `
-      <div class="faculty-photo"><div class="ring"></div><img src="${esc(item.img)}" alt="${esc(item.name)}"></div>
-      <h4>${esc(item.name)}</h4>
-      <div class="faculty-badge">${esc(item.role)}</div>
-      <div class="faculty-contact">
-        ${item.phone ? `<span>📞 ${esc(item.phone)}</span>` : ""}
-        ${item.email ? `<span>✉️ ${esc(item.email)}</span>` : ""}
-      </div>`,
-    wrapClass: "faculty-card"
-  },
-  downloads: {
-    key: "dbt_site:downloads", grid: "dlGrid", label: "ไฟล์ดาวน์โหลด",
-    fields: [
-      {name:"badge", label:"ประเภทไฟล์", placeholder:"PDF"},
-      {name:"label", label:"ชื่อรายการ"},
-      {name:"url", label:"ลิงก์ไฟล์ (URL)"}
-    ],
-    seed: [
-      {id:"d1", badge:"PDF", label:"แผนการเรียนสาขา DBT (ปวช./ปวส.)", url:"#"},
-      {id:"d2", badge:"PDF", label:"แบบฟอร์มคำร้องขอฝึกงาน", url:"#"},
-      {id:"d3", badge:"PDF", label:"คู่มือทำโครงงานเทคโนโลยีธุรกิจดิจิทัล", url:"#"},
-      {id:"d4", badge:"PDF", label:"ใบสมัครเข้าศึกษาต่อ", url:"#"}
-    ],
-    render: (item) => `
-      <span class="label"><span class="dl-badge">${esc(item.badge)}</span>${esc(item.label)}</span>
-      <a href="${esc(item.url)}" target="_blank" rel="noopener">ดาวน์โหลด</a>`,
-    wrapClass: "dl-item"
-  }
-};
+<li><a href="teachers.html">บุคลากร</a></li>
 
-const state = {};
-let isAdmin = false;
-let activeTab = "calendar";
-let editingId = null;
+<li><a href="schedule.html">ตารางสอน</a></li>
 
-function esc(str){
-  return String(str ?? "").replace(/[&<>"']/g, s => ({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;","'":"&#39;"}[s]));
-}
-function uid(){ return "id" + Date.now() + Math.floor(Math.random()*1000); }
-function toast(msg){
-  const t = document.getElementById("saveToast");
-  t.textContent = msg; t.classList.add("show");
-  setTimeout(()=>t.classList.remove("show"), 1800);
-}
+<li><a href="activities.html">กิจกรรม</a></li>
 
-// ===== โหลดข้อมูลจาก Google Sheets =====
-async function loadAllData(){
-  Object.keys(SECTIONS).forEach(type => { state[type] = SECTIONS[type].seed.slice(); });
-  renderAllPublic();
+<li><a href="contact.html">ติดต่อเรา</a></li>
 
-  if(!SHEET_API_URL){
-    console.warn("ยังไม่ได้ตั้งค่า SHEET_API_URL — กำลังใช้ข้อมูลตัวอย่าง");
-    return;
-  }
-  try{
-    const res = await fetch(SHEET_API_URL);
-    if(!res.ok) throw new Error("HTTP " + res.status);
-    const data = await res.json();
-    Object.keys(SECTIONS).forEach(type => {
-      const cfg = SECTIONS[type];
-      const raw = data[cfg.key];
-      if(raw){
-        try{ state[type] = JSON.parse(raw); }
-        catch(e){ /* คงใช้ข้อมูลตัวอย่างหากถอดรหัสล้มเหลว */ }
-      }
-    });
-    renderAllPublic();
-  }catch(e){
-    console.error("โหลดข้อมูลไม่สำเร็จ", e);
-  }
-}
+</ul>
 
-// ===== บันทึกข้อมูลกลับไปยัง Google Sheets =====
-async function saveSection(type){
-  const cfg = SECTIONS[type];
-  if(!SHEET_API_URL){
-    toast("ยังไม่ได้ใส่ URL ของ Google Sheets");
-    return;
-  }
-  try{
-    // ใช้ no-cors และ text/plain เพื่อหลีกเลี่ยงปัญหา CORS บนเบราว์เซอร์
-    await fetch(SHEET_API_URL, {
-      method: "POST",
-      mode: "no-cors",
-      headers: {"Content-Type": "text/plain;charset=utf-8"},
-      body: JSON.stringify({ key: cfg.key, value: JSON.stringify(state[type]) })
-    });
-    toast("บันทึกข้อมูลเรียบร้อยแล้ว");
-  }catch(e){
-    console.error("บันทึกไม่สำเร็จ", e);
-    alert("บันทึกไม่สำเร็จ กรุณาตรวจสอบการเชื่อมต่ออินเทอร์เน็ต");
-  }
-}
+</nav>
 
-function renderCardTools(type, id){
-  return `
-    <div class="card-tools">
-      <button class="edit-btn" onclick="editItem('${type}','${id}')" title="แก้ไข">✏️</button>
-      <button class="del-btn" onclick="deleteItemDirect('${type}','${id}')" title="ลบ">🗑️</button>
-    </div>
-  `;
-}
 
-function renderPublic(type){
-  const cfg = SECTIONS[type];
-  const grid = document.getElementById(cfg.grid);
-  if(!grid) return;
-  const items = state[type] || [];
-  if(items.length === 0){
-    grid.innerHTML = `<div class="empty-note">ยังไม่มีรายการ — คลิกปุ่ม ⚙️ ด้านล่างขวาเพื่อเพิ่มเนื้อหา</div>`;
-    return;
-  }
-  grid.innerHTML = items.map(item => `
-    <div class="${cfg.wrapClass}">
-      ${isAdmin ? renderCardTools(type, item.id) : ""}
-      ${cfg.render(item)}
-    </div>
-  `).join('');
-}
 
-function renderAllPublic(){
-  Object.keys(SECTIONS).forEach(renderPublic);
-}
 
-// ===== Admin Handlers =====
-function openDashboard(){
-  document.getElementById("dashOverlay").classList.remove("hidden");
-  renderAdminTab(activeTab);
-}
-function closeDashboard(){
-  document.getElementById("dashOverlay").classList.add("hidden");
-  editingId = null;
-}
+<section id="about">
 
-function renderAdminTab(type){
-  activeTab = type;
-  document.querySelectorAll(".admin-tab").forEach(btn => {
-    btn.classList.toggle("active", btn.dataset.type === type);
-  });
-  
-  const cfg = SECTIONS[type];
-  const body = document.getElementById("dashBody");
-  const items = state[type] || [];
 
-  let html = `
-    <form id="adminForm" onsubmit="handleFormSubmit(event)" style="background:#faf8fc;padding:12px;border-radius:10px;margin-bottom:16px;border:1px solid var(--line);">
-      <h4 style="font-size:13px;margin-bottom:10px;color:var(--purple);">${editingId ? '✏️ แก้ไขรายการ' : '➕ เพิ่มรายการใหม่'} (${cfg.label})</h4>
-  `;
+<h2 class="title">
+เกี่ยวกับสาขา
+</h2>
 
-  cfg.fields.forEach(f => {
-    html += `
-      <div class="field">
-        <label>${f.label}</label>
-        ${f.area ? `<textarea id="field_${f.name}" placeholder="${f.placeholder||''}"></textarea>` 
-                 : `<input type="text" id="field_${f.name}" placeholder="${f.placeholder||''}">`}
-      </div>
-    `;
-  });
 
-  html += `
-      <div class="form-actions">
-        <button type="submit" class="btn-save">${editingId ? 'อัปเดต' : 'เพิ่มรายการ'}</button>
-        ${editingId ? `<button type="button" class="btn-cancel" onclick="cancelEdit()">ยกเลิก</button>` : ''}
-      </div>
-    </form>
-    <h4 style="font-size:13px;margin-bottom:8px;">รายการทั้งหมด (${items.length})</h4>
-    <div class="admin-items-list">
-  `;
+<div class="about">
 
-  if(items.length === 0){
-    html += `<div style="text-align:center;padding:15px;color:var(--text-soft);font-size:12px;">ไม่มีข้อมูล</div>`;
-  } else {
-    items.forEach(item => {
-      const title = item.title || item.name || item.label || 'รายการ';
-      const sub = item.date || item.month || item.role || item.category || item.badge || '';
-      html += `
-        <div class="admin-list-item">
-          <div class="info">
-            <b>${esc(title)}</b>
-            <span>${esc(sub)}</span>
-          </div>
-          <div class="row-actions">
-            <button class="edit-btn" onclick="editItem('${type}','${item.id}')">แก้ไข</button>
-            <button class="del-btn" onclick="deleteItemDirect('${type}','${item.id}')">ลบ</button>
-          </div>
-        </div>
-      `;
-    });
-  }
+<p>
+สาขาเทคโนโลยีธุรกิจดิจิทัล
+มุ่งพัฒนาผู้เรียนให้มีความรู้ด้านเทคโนโลยีสารสนเทศ
+การสร้างเว็บไซต์ การจัดการข้อมูล
+การออกแบบสื่อดิจิทัล และการประยุกต์ใช้เทคโนโลยี
+ในภาคธุรกิจยุคใหม่
+</p>
 
-  html += `</div>`;
-  body.innerHTML = html;
 
-  if(editingId){
-    const item = items.find(i => i.id === editingId);
-    if(item){
-      cfg.fields.forEach(f => {
-        const el = document.getElementById(`field_${f.name}`);
-        if(el) el.value = item[f.name] || '';
-      });
-    }
-  }
-}
+</div>
 
-function handleFormSubmit(e){
-  e.preventDefault();
-  const cfg = SECTIONS[activeTab];
-  const newItem = { id: editingId || uid() };
 
-  cfg.fields.forEach(f => {
-    const el = document.getElementById(`field_${f.name}`);
-    if(el) newItem[f.name] = el.value.trim();
-  });
+</section>
 
-  if(editingId){
-    const index = state[activeTab].findIndex(i => i.id === editingId);
-    if(index !== -1) state[activeTab][index] = newItem;
-  } else {
-    state[activeTab].unshift(newItem);
-  }
 
-  editingId = null;
-  renderPublic(activeTab);
-  renderAdminTab(activeTab);
-  saveSection(activeTab);
-}
 
-function editItem(type, id){
-  activeTab = type;
-  editingId = id;
-  openDashboard();
-}
 
-function cancelEdit(){
-  editingId = null;
-  renderAdminTab(activeTab);
-}
 
-function deleteItemDirect(type, id){
-  if(confirm("คุณต้องการลบรายการนี้ใช่หรือไม่?")){
-    state[type] = state[type].filter(i => i.id !== id);
-    renderPublic(type);
-    if(!document.getElementById("dashOverlay").classList.contains("hidden")){
-      renderAdminTab(type);
-    }
-    saveSection(type);
-  }
-}
 
-// ===== Initial Listeners =====
-document.addEventListener("DOMContentLoaded", () => {
-  loadAllData();
+<section>
 
-  // Mobile Menu Toggle
-  const toggleBtn = document.getElementById("menuToggleBtn");
-  const navList = document.getElementById("navLinksList");
-  toggleBtn.addEventListener("click", () => navList.classList.toggle("open"));
-  document.querySelectorAll(".nav-link-item").forEach(a => {
-    a.addEventListener("click", () => navList.classList.remove("open"));
-  });
 
-  // Login Modal
-  const loginOverlay = document.getElementById("loginOverlay");
-  document.getElementById("adminEntryBtn").addEventListener("click", () => loginOverlay.classList.remove("hidden"));
-  document.getElementById("closeLogin").addEventListener("click", () => loginOverlay.classList.add("hidden"));
-  
-  document.getElementById("pwSubmit").addEventListener("click", () => {
-    const pw = document.getElementById("pwInput").value;
-    if(pw === ADMIN_PASSWORD){
-      isAdmin = true;
-      loginOverlay.classList.add("hidden");
-      document.getElementById("openDashboardFab").classList.remove("hidden");
-      document.querySelectorAll(".admin-live").forEach(el => el.classList.add("show-admin-tools"));
-      renderAllPublic();
-      toast("เข้าสู่ระบบแอดมินสำเร็จ");
-    } else {
-      document.getElementById("loginError").textContent = "รหัสผ่านไม่ถูกต้อง";
-    }
-  });
+<h2 class="title">
+เมนูหลัก
+</h2>
 
-  // Dashboard Modal
-  document.getElementById("openDashboardFab").addEventListener("click", openDashboard);
-  document.getElementById("closeDash").addEventListener("click", closeDashboard);
 
-  // Dashboard Tabs Switch
-  document.querySelectorAll(".admin-tab").forEach(tab => {
-    tab.addEventListener("click", (e) => {
-      editingId = null;
-      renderAdminTab(e.target.dataset.type);
-    });
-  });
-});
-</script>
+<div class="cards">
+
+
+<div class="card">
+
+<h3>👨‍🏫 บุคลากร</h3>
+
+<p>
+รายชื่อครู ตำแหน่ง
+และข้อมูลผู้สอน
+</p>
+
+<a href="teachers.html">
+เข้าชม
+</a>
+
+</div>
+
+
+
+
+<div class="card">
+
+<h3>📅 ตารางสอน</h3>
+
+<p>
+ตารางเรียน
+และตารางสอนของสาขา
+</p>
+
+<a href="schedule.html">
+เข้าชม
+</a>
+
+</div>
+
+
+
+
+<div class="card">
+
+<h3>📸 กิจกรรม</h3>
+
+<p>
+ข่าวสารกิจกรรม
+และผลงานนักเรียน
+</p>
+
+<a href="activities.html">
+เข้าชม
+</a>
+
+</div>
+
+
+
+
+<div class="card">
+
+<h3>📞 ติดต่อ</h3>
+
+<p>
+ข้อมูลติดต่อสาขา
+และช่องทางออนไลน์
+</p>
+
+<a href="contact.html">
+เข้าชม
+</a>
+
+</div>
+
+
+
+</div>
+
+
+</section>
+
+
+
+
+
+
+
+<section class="news">
+
+
+<h2 class="title">
+ข่าวประชาสัมพันธ์
+</h2>
+
+
+
+<div class="news-grid">
+
+
+<div class="news-box">
+
+<h3>
+🎓 เปิดรับสมัครนักเรียน
+</h3>
+
+<p>
+เรียนรู้เทคโนโลยีดิจิทัล
+พร้อมทักษะที่ใช้ในอนาคต
+</p>
+
+</div>
+
+
+
+
+<div class="news-box">
+
+<h3>
+💻 อบรมเทคโนโลยี
+</h3>
+
+<p>
+กิจกรรมพัฒนาทักษะด้าน AI
+และการออกแบบเว็บไซต์
+</p>
+
+</div>
+
+
+
+
+<div class="news-box">
+
+<h3>
+🏆 ผลงานนักเรียน
+</h3>
+
+<p>
+รวมผลงานและการแข่งขัน
+ของนักเรียนในสาขา
+</p>
+
+</div>
+
+
+</div>
+
+
+</section>
+
+
+
+
+
+<footer>
+
+<h3>
+DBT
+</h3>
+
+<p>
+Digital Business Technology
+</p>
+
+<p>
+© 2026
+</p>
+
+
+</footer>
+
+
 </body>
 </html>
