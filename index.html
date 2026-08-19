@@ -8,10 +8,11 @@
 <link href="https://fonts.googleapis.com/css2?family=Kanit:wght@300;400;500;600;700;800&family=Sarabun:wght@300;400;500;600;700&display=swap" rel="stylesheet">
 <style>
   :root{
-    --purple-deep:#2e0f4d;
-    --purple:#4b1a7d;
-    --purple-light:#7b4bb8;
-    --purple-mist:#f4effa;
+    --purple-deep:#3a1668;
+    --purple:#6636ab;
+    --purple-light:#a479df;
+    --purple-mist:#f6f1fc;
+    --lavender:#efe4fb;
     --gold:#d8ac52;
     --gold-light:#f0d99b;
     --gold-deep:#a9772b;
@@ -19,7 +20,8 @@
     --ink:#2a1f3d;
     --ink-soft:#6b5f80;
     --white:#ffffff;
-    --shadow: 0 20px 45px -20px rgba(46,15,77,0.35);
+    --line-green:#06c755;
+    --shadow: 0 20px 45px -20px rgba(58,22,104,0.35);
   }
 
   *{box-sizing:border-box; margin:0; padding:0;}
@@ -30,93 +32,64 @@
     background:var(--cream);
     overflow-x:hidden;
   }
-  h1,h2,h3,h4,.display{
-    font-family:'Kanit', sans-serif;
-  }
+  h1,h2,h3,h4,.display{ font-family:'Kanit', sans-serif; }
   a{text-decoration:none; color:inherit;}
   ul{list-style:none;}
   img{max-width:100%; display:block;}
   button{font-family:inherit; cursor:pointer;}
+  a:focus-visible, button:focus-visible{ outline:3px solid var(--gold); outline-offset:3px; border-radius:4px; }
+  @media (prefers-reduced-motion: reduce){ *{animation-duration:0.001ms !important; transition-duration:0.001ms !important;} }
 
-  /* focus visibility */
-  a:focus-visible, button:focus-visible{
-    outline:3px solid var(--gold);
-    outline-offset:3px;
-    border-radius:4px;
-  }
-
-  @media (prefers-reduced-motion: reduce){
-    *{animation-duration:0.001ms !important; transition-duration:0.001ms !important;}
-  }
-
-  /* ---------- Decorative gold-purple ribbon signature ---------- */
-  .ribbon-wrap{
-    position:absolute; inset:0; overflow:hidden; pointer-events:none; z-index:0;
-  }
+  .ribbon-wrap{ position:absolute; inset:0; overflow:hidden; pointer-events:none; z-index:0; }
   .ribbon-wrap svg{position:absolute;}
 
   /* ---------- Header ---------- */
   header{
     position:sticky; top:0; z-index:100;
     background:linear-gradient(90deg, var(--purple-deep), var(--purple) 60%, var(--purple-light));
-    box-shadow:0 6px 24px -10px rgba(46,15,77,0.55);
+    box-shadow:0 6px 24px -10px rgba(58,22,104,0.55);
   }
-  .nav-inner{
-    max-width:1240px; margin:0 auto;
-    display:flex; align-items:center; justify-content:space-between;
-    padding:14px 28px;
-  }
-  .brand{
-    display:flex; align-items:center; gap:12px;
-    color:var(--white);
-  }
+  .nav-inner{ max-width:1240px; margin:0 auto; display:flex; align-items:center; justify-content:space-between; padding:14px 28px; gap:12px; }
+  .brand{ display:flex; align-items:center; gap:12px; color:var(--white); }
   .brand-mark{
     width:44px; height:44px; border-radius:50%;
     background:linear-gradient(135deg, var(--gold-light), var(--gold) 55%, var(--gold-deep));
     display:flex; align-items:center; justify-content:center;
     font-family:'Kanit',sans-serif; font-weight:800; font-size:1.05rem;
-    color:var(--purple-deep);
-    box-shadow:0 0 0 3px rgba(255,255,255,0.18);
+    color:var(--purple-deep); box-shadow:0 0 0 3px rgba(255,255,255,0.18); flex-shrink:0;
   }
-  .brand-text .en{
-    display:block; font-size:0.62rem; letter-spacing:0.14em;
-    color:var(--gold-light); font-weight:500; text-transform:uppercase;
-  }
-  .brand-text .th{
-    font-family:'Kanit',sans-serif; font-weight:700; font-size:1.02rem;
-  }
+  .brand-text .en{ display:block; font-size:0.62rem; letter-spacing:0.14em; color:var(--gold-light); font-weight:500; text-transform:uppercase; }
+  .brand-text .th{ font-family:'Kanit',sans-serif; font-weight:700; font-size:1.02rem; }
 
-  nav.links{
-    display:flex; gap:6px; align-items:center;
-  }
+  nav.links{ display:flex; gap:6px; align-items:center; }
   nav.links button{
-    background:transparent; border:none;
-    color:rgba(255,255,255,0.82);
-    font-size:0.92rem; font-weight:500;
-    padding:10px 14px; border-radius:8px;
-    position:relative;
-    transition:color .2s ease, background .2s ease;
+    background:transparent; border:none; color:rgba(255,255,255,0.82);
+    font-size:0.92rem; font-weight:500; padding:10px 14px; border-radius:8px;
+    position:relative; transition:color .2s ease, background .2s ease;
   }
   nav.links button:hover{ color:var(--white); background:rgba(255,255,255,0.08); }
   nav.links button.active{ color:var(--white); font-weight:600; }
   nav.links button.active::after{
     content:''; position:absolute; left:16px; right:16px; bottom:2px; height:3px;
-    background:linear-gradient(90deg, var(--gold-light), var(--gold));
-    border-radius:3px;
+    background:linear-gradient(90deg, var(--gold-light), var(--gold)); border-radius:3px;
   }
-  .avatar-btn{
-    width:38px; height:38px; border-radius:50%;
+  .header-right{ display:flex; align-items:center; gap:10px; flex-shrink:0; }
+  .admin-btn{
+    display:flex; align-items:center; gap:6px;
+    width:auto; height:38px; padding:0 14px; border-radius:999px;
     background:rgba(255,255,255,0.14); border:1px solid rgba(255,255,255,0.3);
-    display:flex; align-items:center; justify-content:center;
-    color:var(--white); flex-shrink:0;
+    color:var(--white); font-size:0.82rem; font-weight:600; flex-shrink:0;
+    transition:background .2s ease;
   }
+  .admin-btn:hover{ background:rgba(255,255,255,0.24); }
+  .admin-btn.is-on{ background:linear-gradient(135deg, var(--gold-light), var(--gold)); color:var(--purple-deep); border-color:transparent; }
   .menu-toggle{ display:none; background:none; border:none; color:var(--white); font-size:1.5rem; }
 
   @media (max-width:900px){
     nav.links{
       position:fixed; inset:64px 0 0 0; background:var(--purple-deep);
       flex-direction:column; align-items:stretch; padding:18px;
-      transform:translateY(-110%); transition:transform .3s ease; gap:2px;
+      transform:translateY(-110%); transition:transform .3s ease; gap:2px; z-index:90;
     }
     nav.links.open{ transform:translateY(0); }
     nav.links button{ text-align:left; padding:14px 16px; font-size:1rem; }
@@ -124,210 +97,179 @@
   }
 
   /* ---------- Hero ---------- */
-  .hero{
-    position:relative;
-    background:linear-gradient(160deg, var(--purple-deep) 0%, var(--purple) 55%, #5a2496 100%);
-    padding:70px 28px 150px;
-    overflow:hidden;
-  }
-  .hero-inner{
-    max-width:1240px; margin:0 auto;
-    display:grid; grid-template-columns:1.1fr 0.9fr; gap:40px; align-items:center;
-    position:relative; z-index:2;
-  }
-  .eyebrow{
-    display:inline-flex; align-items:center; gap:8px;
-    color:var(--gold-light); font-size:0.8rem; letter-spacing:0.18em; text-transform:uppercase;
-    font-weight:600; margin-bottom:18px;
-  }
-  .eyebrow::before{
-    content:''; width:26px; height:2px; background:var(--gold-light); display:inline-block;
-  }
-  .hero h1{
-    color:var(--white); font-size:2.7rem; line-height:1.2; font-weight:700;
-    text-shadow:0 4px 20px rgba(0,0,0,0.15);
-  }
-  .hero h1 span{
-    background:linear-gradient(90deg, var(--gold-light), var(--gold) 60%, #fff6de);
-    -webkit-background-clip:text; background-clip:text; color:transparent;
-  }
-  .hero .sub{
-    margin-top:16px; color:rgba(255,255,255,0.75);
-    font-size:0.92rem; letter-spacing:0.12em; font-weight:500;
-  }
-  .hero p.lede{
-    margin-top:22px; color:rgba(255,255,255,0.82); max-width:46ch; line-height:1.8; font-size:1rem;
-  }
+  .hero{ position:relative; background:linear-gradient(160deg, var(--purple-deep) 0%, var(--purple) 55%, #8a52d4 100%); padding:70px 28px 150px; overflow:hidden; }
+  .hero-inner{ max-width:1240px; margin:0 auto; display:grid; grid-template-columns:1.1fr 0.9fr; gap:40px; align-items:center; position:relative; z-index:2; }
+  .eyebrow{ display:inline-flex; align-items:center; gap:8px; color:var(--gold-light); font-size:0.8rem; letter-spacing:0.18em; text-transform:uppercase; font-weight:600; margin-bottom:18px; }
+  .eyebrow::before{ content:''; width:26px; height:2px; background:var(--gold-light); display:inline-block; }
+  .hero h1{ color:var(--white); font-size:2.7rem; line-height:1.2; font-weight:700; text-shadow:0 4px 20px rgba(0,0,0,0.15); }
+  .hero h1 span{ background:linear-gradient(90deg, var(--gold-light), var(--gold) 60%, #fff6de); -webkit-background-clip:text; background-clip:text; color:transparent; }
+  .hero .sub{ margin-top:16px; color:rgba(255,255,255,0.75); font-size:0.92rem; letter-spacing:0.12em; font-weight:500; }
+  .hero p.lede{ margin-top:22px; color:rgba(255,255,255,0.85); max-width:46ch; line-height:1.8; font-size:1rem; }
   .hero-ctas{ display:flex; gap:14px; margin-top:32px; flex-wrap:wrap; }
-  .btn-gold{
-    background:linear-gradient(135deg, var(--gold-light), var(--gold));
-    color:var(--purple-deep); font-weight:700; padding:13px 26px; border-radius:999px;
-    border:none; font-size:0.95rem; box-shadow:0 12px 30px -10px rgba(216,172,82,0.7);
-    transition:transform .2s ease;
-  }
+  .btn-gold{ background:linear-gradient(135deg, var(--gold-light), var(--gold)); color:var(--purple-deep); font-weight:700; padding:13px 26px; border-radius:999px; border:none; font-size:0.95rem; box-shadow:0 12px 30px -10px rgba(216,172,82,0.7); transition:transform .2s ease; }
   .btn-gold:hover{ transform:translateY(-2px); }
-  .btn-outline{
-    background:transparent; border:1.5px solid rgba(255,255,255,0.5); color:var(--white);
-    font-weight:600; padding:12px 24px; border-radius:999px; font-size:0.95rem;
-    transition:background .2s ease, border-color .2s ease;
-  }
+  .btn-outline{ background:transparent; border:1.5px solid rgba(255,255,255,0.5); color:var(--white); font-weight:600; padding:12px 24px; border-radius:999px; font-size:0.95rem; transition:background .2s ease, border-color .2s ease; }
   .btn-outline:hover{ background:rgba(255,255,255,0.1); border-color:var(--white); }
 
-  .hero-photo{
-    position:relative; width:100%; aspect-ratio:1/1; max-width:420px; margin:0 auto;
-  }
-  .hero-photo .ring{
-    position:absolute; inset:0; border-radius:50%;
-    background:conic-gradient(from 210deg, var(--gold-light), var(--gold) 30%, var(--purple-light) 55%, var(--gold) 80%, var(--gold-light));
-    padding:7px;
-    animation:spin 22s linear infinite;
-  }
+  .hero-photo{ position:relative; width:100%; aspect-ratio:1/1; max-width:420px; margin:0 auto; }
+  .hero-photo .ring{ position:absolute; inset:0; border-radius:50%; background:conic-gradient(from 210deg, var(--gold-light), var(--gold) 30%, var(--purple-light) 55%, var(--gold) 80%, var(--gold-light)); padding:7px; animation:spin 22s linear infinite; }
   @media (prefers-reduced-motion: reduce){ .hero-photo .ring{ animation:none; } }
   @keyframes spin{ to{ transform:rotate(360deg); } }
-  .hero-photo .ring-inner{
-    width:100%; height:100%; border-radius:50%; overflow:hidden;
-    background:var(--purple-deep);
-  }
+  .hero-photo .ring-inner{ width:100%; height:100%; border-radius:50%; overflow:hidden; background:var(--purple-deep); }
   .hero-photo img{ width:100%; height:100%; object-fit:cover; }
-  .hero-photo .badge{
-    position:absolute; bottom:6%; left:-6%;
-    background:var(--white); color:var(--purple-deep);
-    font-family:'Kanit',sans-serif; font-weight:700; font-size:0.82rem;
-    padding:10px 16px; border-radius:14px; box-shadow:var(--shadow);
-    display:flex; align-items:center; gap:8px;
-  }
+  .hero-photo .badge{ position:absolute; bottom:6%; left:-6%; background:var(--white); color:var(--purple-deep); font-family:'Kanit',sans-serif; font-weight:700; font-size:0.82rem; padding:10px 16px; border-radius:14px; box-shadow:var(--shadow); display:flex; align-items:center; gap:8px; }
   .hero-photo .badge .dot{ width:9px; height:9px; border-radius:50%; background:#3bc17a; }
 
   /* ---------- News strip ---------- */
-  .news-strip{
-    position:relative; z-index:3; margin-top:-90px;
-    background:var(--purple-deep);
-    max-width:1240px; margin-left:auto; margin-right:auto;
-    border-radius:22px; padding:26px 32px;
-    box-shadow:var(--shadow);
-    display:flex; align-items:center; gap:24px; flex-wrap:wrap;
-    border:1px solid rgba(216,172,82,0.35);
-  }
-  .news-strip h2{
-    color:var(--white); font-size:1.35rem; font-weight:600; white-space:nowrap;
-    padding-right:24px; border-right:1px solid rgba(255,255,255,0.18);
-  }
-  .news-strip .cards{
-    display:grid; grid-template-columns:repeat(4,1fr); gap:16px; flex:1;
-  }
-  @media (max-width:1000px){
-    .news-strip{ flex-direction:column; align-items:stretch; margin-top:20px; border-radius:16px;}
-    .news-strip h2{ border-right:none; border-bottom:1px solid rgba(255,255,255,0.18); padding:0 0 14px 0; }
-    .news-strip .cards{ grid-template-columns:1fr 1fr; }
-  }
+  .news-strip{ position:relative; z-index:3; margin-top:-90px; background:var(--purple-deep); max-width:1240px; margin-left:auto; margin-right:auto; border-radius:22px; padding:26px 32px; box-shadow:var(--shadow); display:flex; align-items:center; gap:24px; flex-wrap:wrap; border:1px solid rgba(216,172,82,0.35); }
+  .news-strip h2{ color:var(--white); font-size:1.35rem; font-weight:600; white-space:nowrap; padding-right:24px; border-right:1px solid rgba(255,255,255,0.18); }
+  .news-strip .cards{ display:grid; grid-template-columns:repeat(4,1fr); gap:16px; flex:1; }
+  @media (max-width:1000px){ .news-strip{ flex-direction:column; align-items:stretch; margin-top:20px; border-radius:16px;} .news-strip h2{ border-right:none; border-bottom:1px solid rgba(255,255,255,0.18); padding:0 0 14px 0; } .news-strip .cards{ grid-template-columns:1fr 1fr; } }
   @media (max-width:560px){ .news-strip .cards{ grid-template-columns:1fr; } }
-  .news-card{
-    background:rgba(255,255,255,0.06); border:1px solid rgba(255,255,255,0.12);
-    border-radius:14px; padding:16px; color:var(--white);
-    transition:background .2s ease, transform .2s ease;
-  }
+  .news-card{ background:rgba(255,255,255,0.06); border:1px solid rgba(255,255,255,0.12); border-radius:14px; padding:16px; color:var(--white); transition:background .2s ease, transform .2s ease; }
   .news-card:hover{ background:rgba(255,255,255,0.12); transform:translateY(-3px); }
-  .news-card .tag{
-    display:inline-block; font-size:0.68rem; letter-spacing:0.08em; font-weight:700;
-    color:var(--purple-deep); background:var(--gold-light);
-    padding:3px 10px; border-radius:999px; margin-bottom:10px;
-  }
+  .news-card .tag{ display:inline-block; font-size:0.68rem; letter-spacing:0.08em; font-weight:700; color:var(--purple-deep); background:var(--gold-light); padding:3px 10px; border-radius:999px; margin-bottom:10px; }
   .news-card h3{ font-size:0.95rem; font-weight:500; line-height:1.5; }
   .news-card .date{ margin-top:10px; font-size:0.75rem; color:rgba(255,255,255,0.55); }
 
   /* ---------- General section ---------- */
   section.page-section{ padding:90px 28px; max-width:1240px; margin:0 auto; }
-  .section-head{ text-align:center; max-width:640px; margin:0 auto 56px; }
+  .section-head{ text-align:center; max-width:680px; margin:0 auto 56px; }
   .section-head .eyebrow{ color:var(--gold-deep); justify-content:center; display:flex; }
   .section-head .eyebrow::before{ background:var(--gold-deep); }
   .section-head h2{ font-size:2rem; color:var(--purple-deep); font-weight:700; }
   .section-head p{ margin-top:14px; color:var(--ink-soft); line-height:1.8; }
 
   /* ---------- Staff grid ---------- */
-  .staff-grid{
-    display:grid; grid-template-columns:repeat(3,1fr); gap:38px 28px;
-  }
+  .staff-grid{ display:grid; grid-template-columns:repeat(3,1fr); gap:34px 28px; }
   @media (max-width:860px){ .staff-grid{ grid-template-columns:repeat(2,1fr);} }
   @media (max-width:560px){ .staff-grid{ grid-template-columns:1fr;} }
-  .staff-card{ text-align:center; }
-  .staff-photo{
-    width:150px; height:150px; margin:0 auto 18px; border-radius:50%; position:relative;
-    background:conic-gradient(from 140deg, var(--gold), var(--gold-light), var(--purple-light), var(--gold));
-    padding:5px;
+  .staff-card{
+    text-align:center; background:var(--white); border-radius:24px; padding:30px 22px 26px;
+    box-shadow:0 14px 34px -22px rgba(58,22,104,0.4); border:1px solid rgba(102,54,171,0.08);
+    transition:transform .2s ease, box-shadow .2s ease;
   }
-  .staff-photo .inner{
-    width:100%; height:100%; border-radius:50%; overflow:hidden; background:var(--purple-mist);
-    display:flex; align-items:center; justify-content:center;
-  }
-  .staff-photo .inner svg{ width:56%; height:56%; color:var(--purple-light); }
+  .staff-card:hover{ transform:translateY(-4px); box-shadow:var(--shadow); }
+  .staff-photo{ width:120px; height:120px; margin:0 auto 16px; border-radius:50%; position:relative; padding:5px; }
+  .staff-photo .inner{ width:100%; height:100%; border-radius:50%; overflow:hidden; background:var(--purple-mist); display:flex; align-items:center; justify-content:center; }
+  .staff-photo .inner svg{ width:52%; height:52%; }
   .staff-card h3{ font-family:'Kanit',sans-serif; font-size:1.02rem; color:var(--purple-deep); font-weight:600; }
-  .staff-card .role{
-    display:inline-block; margin-top:8px; font-size:0.78rem; color:var(--gold-deep);
-    background:var(--purple-mist); border:1px solid var(--gold-light);
-    padding:5px 14px; border-radius:999px; font-weight:600;
+  .staff-card .role{ display:inline-block; margin-top:8px; font-size:0.76rem; color:var(--gold-deep); background:var(--purple-mist); border:1px solid var(--gold-light); padding:5px 14px; border-radius:999px; font-weight:600; }
+  .staff-contact{ display:flex; justify-content:center; gap:10px; margin-top:16px; }
+  .contact-btn{
+    display:flex; align-items:center; justify-content:center; gap:6px;
+    width:42px; height:42px; border-radius:50%; color:var(--white);
+    box-shadow:0 8px 18px -8px rgba(0,0,0,0.35); transition:transform .15s ease, box-shadow .15s ease;
+    flex-shrink:0;
   }
+  .contact-btn:hover{ transform:translateY(-2px) scale(1.05); }
+  .contact-btn svg{ width:19px; height:19px; }
+  .contact-btn.phone{ background:linear-gradient(135deg,#8a5cd6,var(--purple)); }
+  .contact-btn.line{ background:linear-gradient(135deg,#2fe07a,var(--line-green)); }
+  .contact-btn.disabled{ opacity:0.25; pointer-events:none; box-shadow:none; }
+  .staff-edit-btn{ margin-top:14px; font-size:0.72rem; color:var(--purple); background:var(--lavender); border:1px dashed var(--purple-light); border-radius:999px; padding:6px 14px; }
 
   /* ---------- Courses ---------- */
+  .why-grid{ display:grid; grid-template-columns:repeat(3,1fr); gap:24px; }
+  @media (max-width:900px){ .why-grid{ grid-template-columns:1fr 1fr; } }
+  @media (max-width:600px){ .why-grid{ grid-template-columns:1fr; } }
+  .why-card{ background:var(--white); border-radius:20px; padding:28px 24px; box-shadow:0 14px 34px -24px rgba(58,22,104,0.4); border:1px solid rgba(102,54,171,0.08); }
+  .why-card .ic{ width:48px; height:48px; border-radius:14px; background:var(--lavender); display:flex; align-items:center; justify-content:center; margin-bottom:16px; }
+  .why-card .ic svg{ width:24px; height:24px; color:var(--purple); }
+  .why-card h3{ font-size:1.05rem; color:var(--purple-deep); font-weight:700; margin-bottom:8px; }
+  .why-card p{ color:var(--ink-soft); font-size:0.88rem; line-height:1.75; }
+
   .course-grid{ display:grid; grid-template-columns:repeat(2,1fr); gap:28px; }
   @media (max-width:760px){ .course-grid{ grid-template-columns:1fr; } }
-  .course-card{
-    background:var(--white); border-radius:22px; padding:34px;
-    box-shadow:var(--shadow); border:1px solid rgba(75,26,125,0.08);
-    position:relative; overflow:hidden;
-  }
-  .course-card::before{
-    content:''; position:absolute; top:-40px; right:-40px; width:140px; height:140px;
-    border-radius:50%; background:radial-gradient(circle, rgba(216,172,82,0.25), transparent 70%);
-  }
-  .course-card .num{
-    font-family:'Kanit',sans-serif; font-weight:800; font-size:0.85rem;
-    color:var(--white); background:var(--purple); display:inline-flex;
-    align-items:center; justify-content:center; width:34px; height:34px; border-radius:50%;
-    margin-bottom:18px;
-  }
+  .course-card{ background:var(--white); border-radius:22px; padding:34px; box-shadow:var(--shadow); border:1px solid rgba(102,54,171,0.08); position:relative; overflow:hidden; }
+  .course-card::before{ content:''; position:absolute; top:-40px; right:-40px; width:140px; height:140px; border-radius:50%; background:radial-gradient(circle, rgba(216,172,82,0.25), transparent 70%); }
+  .course-card .num{ font-family:'Kanit',sans-serif; font-weight:800; font-size:0.85rem; color:var(--white); background:var(--purple); display:inline-flex; align-items:center; justify-content:center; min-width:34px; height:34px; padding:0 10px; border-radius:999px; margin-bottom:18px; }
   .course-card h3{ font-size:1.25rem; color:var(--purple-deep); font-weight:700; margin-bottom:10px; }
   .course-card p{ color:var(--ink-soft); line-height:1.85; font-size:0.93rem; }
   .course-card ul{ margin-top:18px; display:flex; flex-direction:column; gap:9px; }
-  .course-card li{
-    font-size:0.86rem; color:var(--ink); display:flex; gap:10px; align-items:flex-start;
-  }
-  .course-card li::before{
-    content:''; margin-top:7px; width:6px; height:6px; border-radius:50%; background:var(--gold); flex-shrink:0;
-  }
+  .course-card li{ font-size:0.86rem; color:var(--ink); display:flex; gap:10px; align-items:flex-start; }
+  .course-card li::before{ content:''; margin-top:7px; width:6px; height:6px; border-radius:50%; background:var(--gold); flex-shrink:0; }
+  .course-outcome{ margin-top:24px; background:linear-gradient(135deg,var(--purple-deep),var(--purple)); border-radius:20px; padding:30px 34px; color:var(--white); }
+  .course-outcome h3{ font-size:1.1rem; margin-bottom:10px; color:var(--gold-light); }
+  .course-outcome p{ line-height:1.85; font-size:0.92rem; color:rgba(255,255,255,0.88); }
 
   /* ---------- Documents / schedule folders ---------- */
   .doc-grid{ display:grid; grid-template-columns:repeat(4,1fr); gap:26px; }
   @media (max-width:900px){ .doc-grid{ grid-template-columns:repeat(2,1fr);} }
   @media (max-width:480px){ .doc-grid{ grid-template-columns:1fr;} }
-  .doc-card{
-    background:var(--white); border:1px solid rgba(75,26,125,0.1); border-radius:20px;
-    padding:34px 20px; text-align:center; box-shadow:0 10px 30px -18px rgba(46,15,77,0.25);
-    transition:transform .2s ease, box-shadow .2s ease, border-color .2s ease;
-  }
+  .doc-card{ background:var(--white); border:1px solid rgba(102,54,171,0.1); border-radius:20px; padding:34px 20px; text-align:center; box-shadow:0 10px 30px -18px rgba(58,22,104,0.25); transition:transform .2s ease, box-shadow .2s ease, border-color .2s ease; display:block; }
   .doc-card:hover{ transform:translateY(-5px); box-shadow:var(--shadow); border-color:var(--gold); }
   .doc-card svg{ width:64px; height:64px; margin:0 auto 18px; }
   .doc-card h3{ font-size:0.95rem; color:var(--purple-deep); font-weight:600; }
+  .doc-card .fmeta{ margin-top:8px; font-size:0.72rem; color:var(--ink-soft); }
+  .add-doc-card{ border:2px dashed var(--purple-light); display:flex; flex-direction:column; align-items:center; justify-content:center; gap:8px; color:var(--purple); font-weight:600; background:var(--lavender); cursor:pointer; }
+
+  /* ---------- Premium news page ---------- */
+  .news-feature{ background:linear-gradient(135deg,var(--purple-deep),var(--purple) 60%,#8a52d4); border-radius:26px; padding:44px 40px; color:var(--white); position:relative; overflow:hidden; margin-bottom:34px; }
+  .news-feature .tag{ display:inline-block; font-size:0.7rem; letter-spacing:0.08em; font-weight:700; color:var(--purple-deep); background:var(--gold-light); padding:4px 12px; border-radius:999px; margin-bottom:16px; }
+  .news-feature h3{ font-size:1.5rem; font-weight:700; max-width:28ch; line-height:1.4; }
+  .news-feature .date{ margin-top:16px; font-size:0.8rem; color:rgba(255,255,255,0.65); }
+  .news-list-grid{ display:grid; grid-template-columns:repeat(2,1fr); gap:22px; }
+  @media (max-width:760px){ .news-list-grid{ grid-template-columns:1fr; } }
+  .news-item-card{ background:var(--white); border-radius:20px; padding:26px 24px; box-shadow:0 14px 34px -24px rgba(58,22,104,0.4); border:1px solid rgba(102,54,171,0.08); position:relative; }
+  .news-item-card .tag{ display:inline-block; font-size:0.68rem; font-weight:700; color:var(--purple-deep); background:var(--gold-light); padding:3px 10px; border-radius:999px; margin-bottom:10px; }
+  .news-item-card h3{ font-size:1rem; font-weight:600; color:var(--ink); line-height:1.6; }
+  .news-item-card .date{ margin-top:12px; font-size:0.78rem; color:var(--ink-soft); }
 
   /* ---------- Footer ---------- */
-  footer{
-    position:relative; background:var(--purple-deep); color:rgba(255,255,255,0.75);
-    padding:56px 28px 26px; overflow:hidden; margin-top:40px;
-  }
-  .footer-inner{
-    max-width:1240px; margin:0 auto; position:relative; z-index:2;
-    display:flex; justify-content:space-between; gap:30px; flex-wrap:wrap;
-  }
+  footer{ position:relative; background:var(--purple-deep); color:rgba(255,255,255,0.75); padding:56px 28px 26px; overflow:hidden; margin-top:40px; }
+  .footer-inner{ max-width:1240px; margin:0 auto; position:relative; z-index:2; display:flex; justify-content:space-between; gap:30px; flex-wrap:wrap; }
   footer .brand-text .th{ color:var(--white); }
   footer .col h4{ color:var(--gold-light); font-size:0.9rem; margin-bottom:14px; font-weight:600; }
   footer .col li{ font-size:0.86rem; margin-bottom:9px; color:rgba(255,255,255,0.65); }
-  .footer-bottom{
-    max-width:1240px; margin:34px auto 0; padding-top:20px; border-top:1px solid rgba(255,255,255,0.12);
-    text-align:center; font-size:0.78rem; color:rgba(255,255,255,0.45); position:relative; z-index:2;
-  }
+  .footer-bottom{ max-width:1240px; margin:34px auto 0; padding-top:20px; border-top:1px solid rgba(255,255,255,0.12); text-align:center; font-size:0.78rem; color:rgba(255,255,255,0.45); position:relative; z-index:2; }
 
   .page{ display:none; }
   .page.active{ display:block; animation:fade .4s ease; }
   @keyframes fade{ from{ opacity:0; transform:translateY(8px);} to{ opacity:1; transform:translateY(0);} }
+
+  /* ---------- Admin overlay ---------- */
+  .modal-backdrop{ position:fixed; inset:0; background:rgba(42,15,72,0.55); backdrop-filter:blur(3px); z-index:200; display:none; align-items:center; justify-content:center; padding:20px; }
+  .modal-backdrop.open{ display:flex; }
+  .modal-box{ background:var(--white); border-radius:22px; padding:36px 32px; width:100%; max-width:380px; box-shadow:var(--shadow); text-align:center; }
+  .modal-box h3{ color:var(--purple-deep); font-size:1.2rem; margin-bottom:8px; }
+  .modal-box p{ color:var(--ink-soft); font-size:0.86rem; margin-bottom:20px; }
+  .modal-box input{ width:100%; padding:12px 14px; border-radius:12px; border:1.5px solid var(--lavender); font-size:1rem; text-align:center; letter-spacing:0.2em; }
+  .modal-box input:focus{ outline:none; border-color:var(--purple-light); }
+  .modal-actions{ display:flex; gap:10px; margin-top:20px; }
+  .modal-actions button{ flex:1; padding:12px; border-radius:12px; border:none; font-weight:600; font-size:0.9rem; }
+  .modal-cancel{ background:var(--purple-mist); color:var(--ink-soft); }
+  .modal-confirm{ background:linear-gradient(135deg,var(--gold-light),var(--gold)); color:var(--purple-deep); }
+  .modal-error{ color:#c0392b; font-size:0.8rem; margin-top:10px; min-height:1em; }
+
+  .admin-drawer{ position:fixed; top:0; right:0; bottom:0; width:min(460px,100%); background:var(--cream); z-index:210; box-shadow:-20px 0 50px rgba(0,0,0,0.25); transform:translateX(100%); transition:transform .3s ease; display:flex; flex-direction:column; }
+  .admin-drawer.open{ transform:translateX(0); }
+  .admin-head{ background:linear-gradient(90deg,var(--purple-deep),var(--purple)); color:var(--white); padding:20px 22px; display:flex; align-items:center; justify-content:space-between; }
+  .admin-head h3{ font-size:1.05rem; }
+  .admin-close{ background:rgba(255,255,255,0.15); border:none; color:var(--white); width:32px; height:32px; border-radius:50%; font-size:1.1rem; }
+  .admin-tabs{ display:flex; gap:4px; padding:12px 16px; overflow-x:auto; background:var(--white); border-bottom:1px solid var(--lavender); flex-shrink:0; }
+  .admin-tab{ background:var(--purple-mist); border:none; color:var(--purple-deep); padding:8px 14px; border-radius:999px; font-size:0.78rem; font-weight:600; white-space:nowrap; }
+  .admin-tab.active{ background:var(--purple); color:var(--white); }
+  .admin-body{ flex:1; overflow-y:auto; padding:20px 22px 100px; }
+  .admin-body h4{ color:var(--purple-deep); font-size:0.9rem; margin:18px 0 8px; }
+  .admin-body h4:first-child{ margin-top:0; }
+  .field{ margin-bottom:12px; }
+  .field label{ display:block; font-size:0.76rem; color:var(--ink-soft); margin-bottom:5px; font-weight:600; }
+  .field input, .field textarea{ width:100%; padding:10px 12px; border-radius:10px; border:1.5px solid var(--lavender); font-family:inherit; font-size:0.88rem; background:var(--white); }
+  .field input:focus, .field textarea:focus{ outline:none; border-color:var(--purple-light); }
+  .field textarea{ resize:vertical; min-height:60px; }
+  .entry-card{ background:var(--white); border:1px solid var(--lavender); border-radius:14px; padding:14px 16px; margin-bottom:12px; position:relative; }
+  .entry-del{ position:absolute; top:10px; right:10px; background:#fbe8e8; color:#c0392b; border:none; width:26px; height:26px; border-radius:50%; font-size:0.85rem; line-height:1; }
+  .add-entry-btn{ width:100%; padding:11px; border-radius:12px; border:1.5px dashed var(--purple-light); background:var(--lavender); color:var(--purple); font-weight:600; font-size:0.84rem; margin-top:4px; }
+  .admin-footer{ position:sticky; bottom:0; background:var(--white); border-top:1px solid var(--lavender); padding:14px 22px; display:flex; gap:10px; flex-shrink:0; }
+  .save-btn{ flex:1; padding:13px; border-radius:12px; border:none; background:linear-gradient(135deg,var(--gold-light),var(--gold)); color:var(--purple-deep); font-weight:700; font-size:0.92rem; }
+  .logout-btn{ padding:13px 16px; border-radius:12px; border:none; background:var(--purple-mist); color:var(--ink-soft); font-weight:600; font-size:0.85rem; }
+  .save-status{ font-size:0.76rem; text-align:center; padding:4px 22px 0; color:var(--ink-soft); min-height:1.4em; }
+  .help-box{ background:var(--lavender); border-radius:12px; padding:14px 16px; font-size:0.78rem; color:var(--ink-soft); line-height:1.7; margin-top:10px; }
+  .help-box pre{ white-space:pre-wrap; background:var(--purple-deep); color:#e9dcff; padding:12px; border-radius:10px; font-size:0.7rem; margin-top:8px; overflow-x:auto; }
+  .help-box a{ color:var(--purple); text-decoration:underline; }
+  .toast{ position:fixed; bottom:24px; left:50%; transform:translateX(-50%) translateY(20px); background:var(--purple-deep); color:var(--white); padding:12px 22px; border-radius:999px; font-size:0.85rem; z-index:300; opacity:0; pointer-events:none; transition:opacity .25s ease, transform .25s ease; box-shadow:var(--shadow); }
+  .toast.show{ opacity:1; transform:translateX(-50%) translateY(0); }
 </style>
 </head>
 <body>
@@ -348,10 +290,12 @@
       <button data-page="courses">หลักสูตร</button>
       <button data-page="docs">ตารางเรียน</button>
       <button data-page="news">ข่าวสาร</button>
-       <button data-page="news">ดาวโหลด</button>
     </nav>
-    <div class="avatar-btn" aria-hidden="true">
-      <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="8" r="4"/><path d="M4 20c0-4.4 3.6-7 8-7s8 2.6 8 7"/></svg>
+    <div class="header-right">
+      <button class="admin-btn" id="adminToggleBtn">
+        <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="4" y="10" width="16" height="10" rx="2"/><path d="M8 10V7a4 4 0 0 1 8 0v3"/></svg>
+        <span id="adminBtnLabel">แอดมิน</span>
+      </button>
     </div>
   </div>
 </header>
@@ -364,40 +308,26 @@
         <path d="M0,120 C120,40 220,180 340,90 C420,30 520,120 640,20" stroke="url(#g1)" stroke-width="26" fill="none" stroke-linecap="round" opacity="0.9"/>
         <path d="M-20,220 C110,150 230,280 360,190 C450,130 540,220 660,120" stroke="url(#g2)" stroke-width="14" fill="none" stroke-linecap="round" opacity="0.6"/>
         <defs>
-          <linearGradient id="g1" x1="0" y1="0" x2="1" y2="1">
-            <stop offset="0%" stop-color="#f0d99b"/>
-            <stop offset="50%" stop-color="#d8ac52"/>
-            <stop offset="100%" stop-color="#a9772b"/>
-          </linearGradient>
-          <linearGradient id="g2" x1="0" y1="0" x2="1" y2="0">
-            <stop offset="0%" stop-color="#7b4bb8"/>
-            <stop offset="100%" stop-color="#d8ac52"/>
-          </linearGradient>
+          <linearGradient id="g1" x1="0" y1="0" x2="1" y2="1"><stop offset="0%" stop-color="#f0d99b"/><stop offset="50%" stop-color="#d8ac52"/><stop offset="100%" stop-color="#a9772b"/></linearGradient>
+          <linearGradient id="g2" x1="0" y1="0" x2="1" y2="0"><stop offset="0%" stop-color="#a479df"/><stop offset="100%" stop-color="#d8ac52"/></linearGradient>
         </defs>
       </svg>
       <svg width="640" height="420" viewBox="0 0 640 420" style="right:-160px; bottom:-120px;">
         <path d="M0,60 C140,10 220,140 360,70 C470,20 560,110 640,60" stroke="url(#g3)" stroke-width="30" fill="none" stroke-linecap="round" opacity="0.85"/>
         <path d="M20,160 C160,110 240,240 380,170 C480,120 570,200 660,150" stroke="url(#g4)" stroke-width="12" fill="none" stroke-linecap="round" opacity="0.5"/>
         <defs>
-          <linearGradient id="g3" x1="0" y1="0" x2="1" y2="0">
-            <stop offset="0%" stop-color="#a9772b"/>
-            <stop offset="50%" stop-color="#d8ac52"/>
-            <stop offset="100%" stop-color="#f0d99b"/>
-          </linearGradient>
-          <linearGradient id="g4" x1="0" y1="0" x2="1" y2="1">
-            <stop offset="0%" stop-color="#d8ac52"/>
-            <stop offset="100%" stop-color="#7b4bb8"/>
-          </linearGradient>
+          <linearGradient id="g3" x1="0" y1="0" x2="1" y2="0"><stop offset="0%" stop-color="#a9772b"/><stop offset="50%" stop-color="#d8ac52"/><stop offset="100%" stop-color="#f0d99b"/></linearGradient>
+          <linearGradient id="g4" x1="0" y1="0" x2="1" y2="1"><stop offset="0%" stop-color="#d8ac52"/><stop offset="100%" stop-color="#a479df"/></linearGradient>
         </defs>
       </svg>
     </div>
 
     <div class="hero-inner">
       <div>
-        <span class="eyebrow">วิทยาลัยอาชีวศึกษาสระบุรี</span>
-        <h1>สาขาเทคโนโลยี<br><span>ธุรกิจดิจิทัล</span></h1>
-        <div class="sub">DIGITAL&nbsp; BUSINESS&nbsp; TECHNOLOGY</div>
-        <p class="lede">ปั้นนักธุรกิจดิจิทัลยุคใหม่ ผสานทักษะการตลาดออนไลน์ การจัดการข้อมูล และเทคโนโลยี เพื่อพร้อมก้าวสู่โลกธุรกิจจริง</p>
+        <span class="eyebrow" id="heroEyebrow">วิทยาลัยเทคโนโลยี</span>
+        <h1><span id="heroTitle1">สาขาเทคโนโลยี</span><br><span id="heroTitle2">ธุรกิจดิจิทัล</span></h1>
+        <div class="sub" id="heroSub">DIGITAL&nbsp; BUSINESS&nbsp; TECHNOLOGY</div>
+        <p class="lede" id="heroLede">ปั้นนักธุรกิจดิจิทัลยุคใหม่ ผสานทักษะการตลาดออนไลน์ การจัดการข้อมูล และเทคโนโลยี เพื่อพร้อมก้าวสู่โลกธุรกิจจริง</p>
         <div class="hero-ctas">
           <button class="btn-gold" onclick="goPage('courses')">ดูหลักสูตรที่เปิดสอน</button>
           <button class="btn-outline" onclick="goPage('news')">ข่าวประชาสัมพันธ์</button>
@@ -417,28 +347,7 @@
   <div style="padding:0 28px;">
     <div class="news-strip">
       <h2>ข่าวประชาสัมพันธ์</h2>
-      <div class="cards">
-        <div class="news-card">
-          <span class="tag">รับสมัคร</span>
-          <h3>เปิดรับสมัครนักเรียน ปวช. สาขาเทคโนโลยีธุรกิจดิจิทัล รุ่นใหม่</h3>
-          <div class="date">15 ส.ค. 2569</div>
-        </div>
-        <div class="news-card">
-          <span class="tag">กิจกรรม</span>
-          <h3>อบรมเชิงปฏิบัติการ “การตลาดดิจิทัลสำหรับธุรกิจ SME”</h3>
-          <div class="date">10 ส.ค. 2569</div>
-        </div>
-        <div class="news-card">
-          <span class="tag">ความสำเร็จ</span>
-          <h3>นักเรียนสาขาฯ คว้ารางวัลชนะเลิศแข่งขันทักษะระดับภาค</h3>
-          <div class="date">2 ส.ค. 2569</div>
-        </div>
-        <div class="news-card">
-          <span class="tag">ประกาศ</span>
-          <h3>ตารางสอบปลายภาคเรียนที่ 1 ปีการศึกษา 2569</h3>
-          <div class="date">28 ก.ค. 2569</div>
-        </div>
-      </div>
+      <div class="cards" id="newsStripCards"></div>
     </div>
   </div>
 
@@ -448,18 +357,7 @@
       <h2>เรียนรู้จากของจริง ทำงานได้จริง</h2>
       <p>หลักสูตรออกแบบร่วมกับสถานประกอบการ เน้นฝึกปฏิบัติควบคู่ทฤษฎี พร้อมเทคโนโลยีที่ทันสมัย</p>
     </div>
-    <div class="course-grid">
-      <div class="course-card">
-        <div class="num">1</div>
-        <h3>ฝึกงานกับสถานประกอบการจริง</h3>
-        <p>เครือข่ายพันธมิตรธุรกิจดิจิทัลกว่า 30 แห่ง เปิดโอกาสฝึกงานและทำงานทันทีหลังจบ</p>
-      </div>
-      <div class="course-card">
-        <div class="num">2</div>
-        <h3>ครูผู้สอนมากประสบการณ์</h3>
-        <p>ทีมครูผู้เชี่ยวชาญเฉพาะทางด้านธุรกิจดิจิทัล การตลาดออนไลน์ และเทคโนโลยีสารสนเทศ</p>
-      </div>
-    </div>
+    <div class="why-grid" id="whyGrid"></div>
   </section>
 </div>
 
@@ -469,7 +367,7 @@
     <div class="section-head">
       <span class="eyebrow">ทีมงานของเรา</span>
       <h2>บุคลากรสาขาเทคโนโลยีธุรกิจดิจิทัล</h2>
-      <p>คณะครูผู้สอนที่พร้อมดูแลและถ่ายทอดความรู้ให้นักเรียนทุกคนอย่างใกล้ชิด</p>
+      <p>ติดต่อคุณครูได้โดยตรง — แตะไอคอนโทรศัพท์เพื่อโทรออก หรือไอคอนไลน์เพื่อเปิดแชทได้ทันที</p>
     </div>
     <div class="staff-grid" id="staffGrid"></div>
   </section>
@@ -481,30 +379,10 @@
     <div class="section-head">
       <span class="eyebrow">หลักสูตร</span>
       <h2>หลักสูตรที่เปิดสอน</h2>
-      <p>เลือกเส้นทางการเรียนที่ใช่ ตั้งแต่ระดับ ปวช. ถึง ปวส.</p>
+      <p>เลือกเส้นทางการเรียนที่ใช่ ตั้งแต่ระดับ ปวช. ถึง ปวส. เรียนแล้วทำงานได้จริง มีรายได้ระหว่างเรียน</p>
     </div>
-    <div class="course-grid">
-      <div class="course-card">
-        <div class="num">ปวช.</div>
-        <h3>ประกาศนียบัตรวิชาชีพ (ปวช.)<br>สาขาเทคโนโลยีธุรกิจดิจิทัล</h3>
-        <p>หลักสูตร 3 ปี ปูพื้นฐานธุรกิจดิจิทัล การตลาดออนไลน์ และการใช้เทคโนโลยีสารสนเทศเพื่อธุรกิจ</p>
-        <ul>
-          <li>พื้นฐานการตลาดดิจิทัลและอีคอมเมิร์ซ</li>
-          <li>การออกแบบสื่อและกราฟิกเพื่อธุรกิจ</li>
-          <li>การจัดการข้อมูลและระบบสารสนเทศ</li>
-        </ul>
-      </div>
-      <div class="course-card">
-        <div class="num">ปวส.</div>
-        <h3>ประกาศนียบัตรวิชาชีพชั้นสูง (ปวส.)<br>สาขาเทคโนโลยีธุรกิจดิจิทัล</h3>
-        <p>หลักสูตร 2 ปี ต่อยอดความรู้เชิงลึก เน้นการบริหารธุรกิจดิจิทัลและการวิเคราะห์ข้อมูลระดับสูง</p>
-        <ul>
-          <li>การบริหารจัดการธุรกิจดิจิทัล</li>
-          <li>การวิเคราะห์ข้อมูลเพื่อการตัดสินใจ</li>
-          <li>โครงงานธุรกิจดิจิทัลร่วมกับสถานประกอบการ</li>
-        </ul>
-      </div>
-    </div>
+    <div class="course-grid" id="courseGrid"></div>
+    <div class="course-outcome" id="courseOutcome"></div>
   </section>
 </div>
 
@@ -528,7 +406,8 @@
       <h2>ข่าวประชาสัมพันธ์ทั้งหมด</h2>
       <p>ติดตามความเคลื่อนไหวและกิจกรรมล่าสุดของสาขา</p>
     </div>
-    <div class="doc-grid" style="grid-template-columns:repeat(2,1fr);" id="newsGrid2"></div>
+    <div id="newsFeatureWrap"></div>
+    <div class="news-list-grid" id="newsListGrid"></div>
   </section>
 </div>
 
@@ -536,12 +415,7 @@
   <div class="ribbon-wrap">
     <svg width="600" height="300" viewBox="0 0 600 300" style="left:-120px; bottom:-100px;">
       <path d="M0,150 C120,90 220,220 340,140 C420,90 500,160 600,100" stroke="url(#gf)" stroke-width="20" fill="none" stroke-linecap="round" opacity="0.5"/>
-      <defs>
-        <linearGradient id="gf" x1="0" y1="0" x2="1" y2="0">
-          <stop offset="0%" stop-color="#d8ac52"/>
-          <stop offset="100%" stop-color="#7b4bb8"/>
-        </linearGradient>
-      </defs>
+      <defs><linearGradient id="gf" x1="0" y1="0" x2="1" y2="0"><stop offset="0%" stop-color="#d8ac52"/><stop offset="100%" stop-color="#a479df"/></linearGradient></defs>
     </svg>
   </div>
   <div class="footer-inner">
@@ -554,9 +428,7 @@
     </div>
     <div class="col">
       <h4>เมนู</h4>
-      <ul>
-        <li>หน้าแรก</li><li>บุคลากร</li><li>หลักสูตร</li><li>ตารางเรียน</li>
-      </ul>
+      <ul><li>หน้าแรก</li><li>บุคลากร</li><li>หลักสูตร</li><li>ตารางเรียน</li></ul>
     </div>
     <div class="col">
       <h4>ติดต่อเรา</h4>
@@ -570,68 +442,499 @@
   <div class="footer-bottom">© 2569 สาขาเทคโนโลยีธุรกิจดิจิทัล — Digital Business Technology</div>
 </footer>
 
+<!-- Password modal -->
+<div class="modal-backdrop" id="pwModal">
+  <div class="modal-box">
+    <h3>เข้าสู่โหมดแอดมิน</h3>
+    <p>กรอกรหัสผ่านเพื่อแก้ไขข้อมูลบนเว็บไซต์</p>
+    <input type="password" id="pwInput" placeholder="รหัสผ่าน" autocomplete="off">
+    <div class="modal-error" id="pwError"></div>
+    <div class="modal-actions">
+      <button class="modal-cancel" id="pwCancel">ยกเลิก</button>
+      <button class="modal-confirm" id="pwConfirm">เข้าสู่ระบบ</button>
+    </div>
+  </div>
+</div>
+
+<!-- Admin drawer -->
+<div class="admin-drawer" id="adminDrawer">
+  <div class="admin-head">
+    <h3>แผงควบคุมแอดมิน</h3>
+    <button class="admin-close" id="adminDrawerClose">✕</button>
+  </div>
+  <div class="admin-tabs" id="adminTabs"></div>
+  <div class="admin-body" id="adminBody"></div>
+  <div class="save-status" id="saveStatus"></div>
+  <div class="admin-footer">
+    <button class="logout-btn" id="adminLogoutBtn">ออกจากระบบ</button>
+    <button class="save-btn" id="adminSaveBtn">บันทึกการเปลี่ยนแปลง</button>
+  </div>
+</div>
+
+<div class="toast" id="toast"></div>
+
 <script>
-  // Navigation
-  const buttons = document.querySelectorAll('nav.links button');
-  const pages = document.querySelectorAll('.page');
-  function goPage(id){
-    pages.forEach(p => p.classList.toggle('active', p.id === 'page-'+id));
-    buttons.forEach(b => b.classList.toggle('active', b.dataset.page === id));
-    document.getElementById('navLinks').classList.remove('open');
-    window.scrollTo({top:0, behavior:'smooth'});
+/* =========================================================
+   ข้อมูลเริ่มต้นของเว็บไซต์ (ใช้ครั้งแรกก่อนมีข้อมูลบันทึกไว้)
+   ========================================================= */
+const DEFAULT_DATA = {
+  hero: {
+    eyebrow: "วิทยาลัยเทคโนโลยี",
+    title1: "สาขาเทคโนโลยี",
+    title2: "ธุรกิจดิจิทัล",
+    sub: "DIGITAL BUSINESS TECHNOLOGY",
+    lede: "ปั้นนักธุรกิจดิจิทัลยุคใหม่ ผสานทักษะการตลาดออนไลน์ การจัดการข้อมูล และเทคโนโลยี เพื่อพร้อมก้าวสู่โลกธุรกิจจริง"
+  },
+  why: [
+    { title:"ฝึกงานกับสถานประกอบการจริง", desc:"เครือข่ายพันธมิตรธุรกิจดิจิทัลกว่า 30 แห่ง เปิดโอกาสฝึกงานและทำงานทันทีหลังจบ" },
+    { title:"ครูผู้สอนมากประสบการณ์", desc:"ทีมครูผู้เชี่ยวชาญเฉพาะทางด้านธุรกิจดิจิทัล การตลาดออนไลน์ และเทคโนโลยีสารสนเทศ" },
+    { title:"รายได้ระหว่างเรียน", desc:"นำทักษะการตลาดออนไลน์และธุรกิจอีคอมเมิร์ซไปสร้างรายได้จริงได้ตั้งแต่ยังเรียนอยู่" }
+  ],
+  staff: [
+    { name:"อาจารย์ ท่านที่ 1", role:"หัวหน้าสาขาวิชาเทคโนโลยีธุรกิจดิจิทัล", phone:"", line:"" },
+    { name:"อาจารย์ ท่านที่ 2", role:"ครูประจำสาขาวิชาเทคโนโลยีธุรกิจดิจิทัล", phone:"", line:"" },
+    { name:"อาจารย์ ท่านที่ 3", role:"ครูประจำสาขาวิชาเทคโนโลยีธุรกิจดิจิทัล", phone:"", line:"" },
+    { name:"อาจารย์ ท่านที่ 4", role:"ครูประจำสาขาวิชาเทคโนโลยีธุรกิจดิจิทัล", phone:"", line:"" },
+    { name:"อาจารย์ ท่านที่ 5", role:"ครูประจำสาขาวิชาเทคโนโลยีธุรกิจดิจิทัล", phone:"", line:"" },
+    { name:"อาจารย์ ท่านที่ 6", role:"ครูประจำสาขาวิชาเทคโนโลยีธุรกิจดิจิทัล", phone:"", line:"" },
+    { name:"อาจารย์ ท่านที่ 7", role:"ครูประจำสาขาวิชาเทคโนโลยีธุรกิจดิจิทัล", phone:"", line:"" },
+    { name:"อาจารย์ ท่านที่ 8", role:"ครูประจำสาขาวิชาเทคโนโลยีธุรกิจดิจิทัล", phone:"", line:"" },
+    { name:"อาจารย์ ท่านที่ 9", role:"ครูประจำสาขาวิชาเทคโนโลยีธุรกิจดิจิทัล", phone:"", line:"" }
+  ],
+  courses: [
+    { level:"ปวช.", title:"ประกาศนียบัตรวิชาชีพ (ปวช.)\nสาขาเทคโนโลยีธุรกิจดิจิทัล", desc:"หลักสูตร 3 ปี ปูพื้นฐานธุรกิจดิจิทัล การตลาดออนไลน์ และการใช้เทคโนโลยีสารสนเทศเพื่อธุรกิจ เรียนสนุก ลงมือทำจริงทุกวิชา", bullets:"พื้นฐานการตลาดดิจิทัลและอีคอมเมิร์ซ\nการออกแบบสื่อและกราฟิกเพื่อธุรกิจ\nการจัดการข้อมูลและระบบสารสนเทศ\nฝึกขายของจริงผ่านโซเชียลมีเดียตั้งแต่ปี 1" },
+    { level:"ปวส.", title:"ประกาศนียบัตรวิชาชีพชั้นสูง (ปวส.)\nสาขาเทคโนโลยีธุรกิจดิจิทัล", desc:"หลักสูตร 2 ปี ต่อยอดความรู้เชิงลึก เน้นการบริหารธุรกิจดิจิทัลและการวิเคราะห์ข้อมูลระดับสูง พร้อมสหกิจศึกษากับสถานประกอบการจริง", bullets:"การบริหารจัดการธุรกิจดิจิทัล\nการวิเคราะห์ข้อมูลเพื่อการตัดสินใจ\nโครงงานธุรกิจดิจิทัลร่วมกับสถานประกอบการ\nเตรียมพร้อมสู่การเป็นผู้ประกอบการหรือนักการตลาดดิจิทัลมืออาชีพ" }
+  ],
+  courseOutcome: { title:"จบไปแล้วทำอะไรได้บ้าง", body:"นักการตลาดดิจิทัล, ผู้ดูแลร้านค้าออนไลน์และแอดมินเพจ, นักวิเคราะห์ข้อมูลธุรกิจเบื้องต้น, ผู้ประกอบการอีคอมเมิร์ซของตัวเอง หรือศึกษาต่อระดับปริญญาตรีสายบริหารธุรกิจและเทคโนโลยีดิจิทัล" },
+  news: [
+    { tag:"รับสมัคร", title:"เปิดรับสมัครนักเรียน ปวช. สาขาเทคโนโลยีธุรกิจดิจิทัล รุ่นใหม่", date:"15 ส.ค. 2569" },
+    { tag:"กิจกรรม", title:"อบรมเชิงปฏิบัติการ “การตลาดดิจิทัลสำหรับธุรกิจ SME”", date:"10 ส.ค. 2569" },
+    { tag:"ความสำเร็จ", title:"นักเรียนสาขาฯ คว้ารางวัลชนะเลิศแข่งขันทักษะระดับภาค", date:"2 ส.ค. 2569" },
+    { tag:"ประกาศ", title:"ตารางสอบปลายภาคเรียนที่ 1 ปีการศึกษา 2569", date:"28 ก.ค. 2569" }
+  ],
+  docs: [
+    { name:"ตารางสอนบุคลากร", url:"" },
+    { name:"ตารางสอนนักเรียน", url:"" },
+    { name:"ใบขออนุญาตออกนอกวิทยาลัย", url:"" },
+    { name:"ใบลา", url:"" }
+  ],
+  settings: { sheetUrl:"" }
+};
+
+const STORAGE_KEY = "dbt-site-data";
+const PASS_KEY = "dbt-admin-pass";
+const DEFAULT_PASSWORD = "dbt2569";
+
+let data = JSON.parse(JSON.stringify(DEFAULT_DATA));
+let isAdmin = false;
+let adminActiveTab = "hero";
+
+const folderIcon = `<svg viewBox="0 0 64 64" fill="none" stroke="#3a1668" stroke-width="3" stroke-linejoin="round"><rect x="8" y="20" width="48" height="32" rx="4"/><path d="M8 20v-6a4 4 0 0 1 4-4h12l6 8"/><path d="M12 20h44a4 4 0 0 1 4 4v2H12z" fill="#d8ac52" stroke="none"/></svg>`;
+const staffIcon = `<svg viewBox="0 0 24 24" fill="none" stroke="#a479df" stroke-width="1.6"><circle cx="12" cy="8" r="4"/><path d="M4 20c0-4.4 3.6-7 8-7s8 2.6 8 7"/></svg>`;
+const phoneIcon = `<svg viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72c.127.96.361 1.903.7 2.81a2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45c.907.339 1.85.573 2.81.7A2 2 0 0 1 22 16.92z"/></svg>`;
+const lineIcon = `<svg viewBox="0 0 24 24" fill="white"><path d="M12 2C6.48 2 2 5.69 2 10.24c0 4.08 3.54 7.49 8.32 8.14.32.07.76.21.87.49.1.25.07.65.03.9l-.14.85c-.04.25-.19.98.86.53 1.05-.44 5.67-3.34 7.74-5.72C21.16 13.87 22 12.14 22 10.24 22 5.69 17.52 2 12 2zM8.6 12.9H6.9c-.24 0-.44-.2-.44-.44V9.2c0-.24.2-.44.44-.44s.44.2.44.44v2.83h1.26c.24 0 .44.2.44.44s-.2.43-.44.43zm1.55-.44c0 .24-.2.44-.44.44s-.44-.2-.44-.44V9.2c0-.24.2-.44.44-.44s.44.2.44.44v3.26zm3.9 0c0 .19-.12.35-.3.42-.05.02-.1.02-.15.02-.15 0-.29-.07-.37-.2l-1.6-2.17v1.93c0 .24-.2.44-.44.44s-.44-.2-.44-.44V9.2c0-.19.12-.35.3-.41.05-.02.1-.03.14-.03.14 0 .28.07.36.19l1.6 2.18V9.2c0-.24.2-.44.44-.44s.44.2.44.44v3.26zm2.87-1.98c.24 0 .44.2.44.44s-.2.44-.44.44h-1.26v.66h1.26c.24 0 .44.19.44.44 0 .24-.2.44-.44.44h-1.7c-.24 0-.43-.2-.43-.44V9.2c0-.24.19-.44.43-.44h1.7c.24 0 .44.2.44.44s-.2.44-.44.44h-1.26v.66h1.26z"/></svg>`;
+const whyIcons = [
+  `<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M3 21h18M5 21V7l7-4 7 4v14M9 9h1m4 0h1m-6 4h1m4 0h1m-6 4h1m4 0h1"/></svg>`,
+  `<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M22 10 12 5 2 10l10 5 10-5Z"/><path d="M6 12v5c0 1.5 3 3 6 3s6-1.5 6-3v-5"/></svg>`,
+  `<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M12 1v22M17 5H9.5a3.5 3.5 0 0 0 0 7h5a3.5 3.5 0 0 1 0 7H6"/></svg>`
+];
+const staffAccents = ["#6636ab","#a479df","#d8ac52","#8a5cd6","#c79a3e","#7d4fc4"];
+
+/* =========================================================
+   Storage helpers
+   ========================================================= */
+async function loadData(){
+  try{
+    const res = await window.storage.get(STORAGE_KEY, true);
+    if(res && res.value){
+      const loaded = JSON.parse(res.value);
+      data = Object.assign(JSON.parse(JSON.stringify(DEFAULT_DATA)), loaded);
+    }
+  }catch(err){
+    console.log("ยังไม่มีข้อมูลบันทึกไว้ ใช้ค่าเริ่มต้น");
   }
-  buttons.forEach(b => b.addEventListener('click', () => goPage(b.dataset.page)));
-  document.getElementById('menuToggle').addEventListener('click', () => {
-    document.getElementById('navLinks').classList.toggle('open');
-  });
+  renderAll();
+}
 
-  // Staff data
-  const staffIcon = `<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><circle cx="12" cy="8" r="4"/><path d="M4 20c0-4.4 3.6-7 8-7s8 2.6 8 7"/></svg>`;
-  const staff = [
-    ["หัวหน้าสาขาวิชาเทคโนโลยีธุรกิจดิจิทัล"],
-    ["ครูประจำสาขาวิชาเทคโนโลยีธุรกิจดิจิทัล"],
-    ["ครูประจำสาขาวิชาเทคโนโลยีธุรกิจดิจิทัล"],
-    ["ครูประจำสาขาวิชาเทคโนโลยีธุรกิจดิจิทัล"],
-    ["ครูประจำสาขาวิชาเทคโนโลยีธุรกิจดิจิทัล"],
-    ["ครูประจำสาขาวิชาเทคโนโลยีธุรกิจดิจิทัล"],
-    ["ครูประจำสาขาวิชาเทคโนโลยีธุรกิจดิจิทัล"],
-    ["ครูประจำสาขาวิชาเทคโนโลยีธุรกิจดิจิทัล"],
-    ["ครูประจำสาขาวิชาเทคโนโลยีธุรกิจดิจิทัล"]
-  ];
-  const staffGrid = document.getElementById('staffGrid');
-  staff.forEach((s,i) => {
-    staffGrid.innerHTML += `
-      <div class="staff-card">
-        <div class="staff-photo"><div class="inner">${staffIcon}</div></div>
-        <h3>อาจารย์ ท่านที่ ${i+1}</h3>
-        <span class="role">${s[0]}</span>
+async function persistData(){
+  try{
+    await window.storage.set(STORAGE_KEY, JSON.stringify(data), true);
+    return true;
+  }catch(err){
+    console.error("บันทึกข้อมูลไม่สำเร็จ", err);
+    return false;
+  }
+}
+
+async function getPassword(){
+  try{
+    const res = await window.storage.get(PASS_KEY, true);
+    if(res && res.value) return res.value;
+  }catch(err){}
+  return DEFAULT_PASSWORD;
+}
+
+async function setPassword(newPass){
+  await window.storage.set(PASS_KEY, newPass, true);
+}
+
+async function syncToSheet(){
+  const url = (data.settings && data.settings.sheetUrl || "").trim();
+  if(!url) return;
+  try{
+    await fetch(url, {
+      method:"POST",
+      headers:{ "Content-Type":"text/plain;charset=utf-8" },
+      body: JSON.stringify({ timestamp:new Date().toISOString(), data })
+    });
+    showToast("บันทึกสำรองไปยัง Google Sheet แล้ว");
+  }catch(err){
+    showToast("บันทึกในเว็บสำเร็จ แต่ส่งไป Google Sheet ไม่สำเร็จ (ตรวจลิงก์ในตั้งค่า)");
+  }
+}
+
+function showToast(msg){
+  const t = document.getElementById("toast");
+  t.textContent = msg;
+  t.classList.add("show");
+  clearTimeout(showToast._t);
+  showToast._t = setTimeout(()=> t.classList.remove("show"), 3200);
+}
+
+/* =========================================================
+   Public-facing render
+   ========================================================= */
+function renderAll(){
+  document.getElementById("heroEyebrow").textContent = data.hero.eyebrow;
+  document.getElementById("heroTitle1").textContent = data.hero.title1;
+  document.getElementById("heroTitle2").textContent = data.hero.title2;
+  document.getElementById("heroSub").textContent = data.hero.sub;
+  document.getElementById("heroLede").textContent = data.hero.lede;
+
+  const newsStrip = document.getElementById("newsStripCards");
+  newsStrip.innerHTML = data.news.slice(0,4).map(n => `
+    <div class="news-card">
+      <span class="tag">${esc(n.tag)}</span>
+      <h3>${esc(n.title)}</h3>
+      <div class="date">${esc(n.date)}</div>
+    </div>`).join("");
+
+  const whyGrid = document.getElementById("whyGrid");
+  whyGrid.innerHTML = data.why.map((w,i) => `
+    <div class="why-card">
+      <div class="ic">${whyIcons[i % whyIcons.length]}</div>
+      <h3>${esc(w.title)}</h3>
+      <p>${esc(w.desc)}</p>
+    </div>`).join("");
+
+  const staffGrid = document.getElementById("staffGrid");
+  staffGrid.innerHTML = data.staff.map((s,i) => {
+    const accent = staffAccents[i % staffAccents.length];
+    const telHref = s.phone ? `tel:${s.phone.replace(/[^0-9+]/g,"")}` : "";
+    const lineHref = s.line ? `https://line.me/ti/p/~${encodeURIComponent(s.line)}` : "";
+    return `
+    <div class="staff-card">
+      <div class="staff-photo" style="background:conic-gradient(from 140deg, ${accent}, #d8ac52, ${accent})">
+        <div class="inner">${staffIcon}</div>
+      </div>
+      <h3>${esc(s.name)}</h3>
+      <span class="role">${esc(s.role)}</span>
+      <div class="staff-contact">
+        <a class="contact-btn phone ${s.phone ? "" : "disabled"}" ${s.phone ? `href="${telHref}"` : ""} target="${s.phone ? "_blank" : ""}" rel="noopener" aria-label="โทรหา ${esc(s.name)}" title="${s.phone ? "โทร "+esc(s.phone) : "ยังไม่ระบุเบอร์โทร"}">${phoneIcon}</a>
+        <a class="contact-btn line ${s.line ? "" : "disabled"}" ${s.line ? `href="${lineHref}"` : ""} target="${s.line ? "_blank" : ""}" rel="noopener" aria-label="แชทไลน์กับ ${esc(s.name)}" title="${s.line ? "ไลน์ "+esc(s.line) : "ยังไม่ระบุไลน์"}">${lineIcon}</a>
+      </div>
+    </div>`;
+  }).join("");
+
+  const courseGrid = document.getElementById("courseGrid");
+  courseGrid.innerHTML = data.courses.map(c => `
+    <div class="course-card">
+      <div class="num">${esc(c.level)}</div>
+      <h3>${esc(c.title).replace(/\n/g,"<br>")}</h3>
+      <p>${esc(c.desc)}</p>
+      <ul>${(c.bullets||"").split("\n").filter(Boolean).map(b=>`<li>${esc(b)}</li>`).join("")}</ul>
+    </div>`).join("");
+  document.getElementById("courseOutcome").innerHTML = `
+    <h3>${esc(data.courseOutcome.title)}</h3>
+    <p>${esc(data.courseOutcome.body)}</p>`;
+
+  const docGrid = document.getElementById("docGrid");
+  docGrid.innerHTML = data.docs.map(d => {
+    if(d.url){
+      return `<a class="doc-card" href="${esc(d.url)}" target="_blank" rel="noopener">${folderIcon}<h3>${esc(d.name)}</h3><div class="fmeta">เปิดไฟล์ในแท็บใหม่</div></a>`;
+    }
+    return `<div class="doc-card">${folderIcon}<h3>${esc(d.name)}</h3><div class="fmeta">ยังไม่แนบไฟล์</div></div>`;
+  }).join("");
+
+  const newsFeatureWrap = document.getElementById("newsFeatureWrap");
+  if(data.news[0]){
+    const f = data.news[0];
+    newsFeatureWrap.innerHTML = `
+      <div class="news-feature">
+        <span class="tag">${esc(f.tag)}</span>
+        <h3>${esc(f.title)}</h3>
+        <div class="date">${esc(f.date)}</div>
       </div>`;
-  });
+  } else { newsFeatureWrap.innerHTML = ""; }
+  const newsListGrid = document.getElementById("newsListGrid");
+  newsListGrid.innerHTML = data.news.slice(1).map(n => `
+    <div class="news-item-card">
+      <span class="tag">${esc(n.tag)}</span>
+      <h3>${esc(n.title)}</h3>
+      <div class="date">${esc(n.date)}</div>
+    </div>`).join("");
+}
 
-  // Docs data
-  const folderIcon = `<svg viewBox="0 0 64 64" fill="none" stroke="#4b1a7d" stroke-width="3" stroke-linejoin="round"><rect x="8" y="20" width="48" height="32" rx="4"/><path d="M8 20v-6a4 4 0 0 1 4-4h12l6 8"/><path d="M12 20h44a4 4 0 0 1 4 4v2H12z" fill="#d8ac52" stroke="none"/></svg>`;
-  const docs = ["ตารางสอนบุคลากร","ตารางสอนนักเรียน","ใบขออนุญาติออกนอกวิทัลย์","ใบลา"];
-  const docGrid = document.getElementById('docGrid');
-  docs.forEach(d => {
-    docGrid.innerHTML += `<div class="doc-card">${folderIcon}<h3>${d}</h3></div>`;
-  });
+function esc(str){
+  return String(str==null?"":str).replace(/[&<>"']/g, c => ({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;","'":"&#39;"}[c]));
+}
 
-  // News page (full list)
-  const newsFull = [
-    ["รับสมัคร","เปิดรับสมัครนักเรียน ปวช. สาขาเทคโนโลยีธุรกิจดิจิทัล รุ่นใหม่","15 ส.ค. 2569"],
-    ["กิจกรรม","อบรมเชิงปฏิบัติการ “การตลาดดิจิทัลสำหรับธุรกิจ SME”","10 ส.ค. 2569"],
-    ["ความสำเร็จ","นักเรียนสาขาฯ คว้ารางวัลชนะเลิศแข่งขันทักษะระดับภาค","2 ส.ค. 2569"],
-    ["ประกาศ","ตารางสอบปลายภาคเรียนที่ 1 ปีการศึกษา 2569","28 ก.ค. 2569"]
-  ];
-  const newsGrid2 = document.getElementById('newsGrid2');
-  newsFull.forEach(n => {
-    newsGrid2.innerHTML += `
-      <div class="doc-card" style="text-align:left; padding:26px 24px;">
-        <span style="display:inline-block;font-size:0.68rem;font-weight:700;color:var(--purple-deep);background:var(--gold-light);padding:3px 10px;border-radius:999px;margin-bottom:10px;">${n[0]}</span>
-        <h3 style="font-size:1rem;">${n[1]}</h3>
-        <div style="margin-top:10px;font-size:0.78rem;color:var(--ink-soft);">${n[2]}</div>
+/* =========================================================
+   Navigation
+   ========================================================= */
+const buttons = document.querySelectorAll('nav.links button');
+const pages = document.querySelectorAll('.page');
+function goPage(id){
+  pages.forEach(p => p.classList.toggle('active', p.id === 'page-'+id));
+  buttons.forEach(b => b.classList.toggle('active', b.dataset.page === id));
+  document.getElementById('navLinks').classList.remove('open');
+  window.scrollTo({top:0, behavior:'smooth'});
+}
+buttons.forEach(b => b.addEventListener('click', () => goPage(b.dataset.page)));
+document.getElementById('menuToggle').addEventListener('click', () => {
+  document.getElementById('navLinks').classList.toggle('open');
+});
+
+/* =========================================================
+   Admin: login
+   ========================================================= */
+const pwModal = document.getElementById("pwModal");
+const pwInput = document.getElementById("pwInput");
+const pwError = document.getElementById("pwError");
+const adminToggleBtn = document.getElementById("adminToggleBtn");
+const adminBtnLabel = document.getElementById("adminBtnLabel");
+const adminDrawer = document.getElementById("adminDrawer");
+
+adminToggleBtn.addEventListener("click", () => {
+  if(isAdmin){ openAdminDrawer(); }
+  else { pwModal.classList.add("open"); pwInput.value=""; pwError.textContent=""; setTimeout(()=>pwInput.focus(),50); }
+});
+document.getElementById("pwCancel").addEventListener("click", ()=> pwModal.classList.remove("open"));
+document.getElementById("pwConfirm").addEventListener("click", checkPassword);
+pwInput.addEventListener("keydown", e => { if(e.key === "Enter") checkPassword(); });
+
+async function checkPassword(){
+  const correct = await getPassword();
+  if(pwInput.value === correct){
+    isAdmin = true;
+    pwModal.classList.remove("open");
+    adminToggleBtn.classList.add("is-on");
+    adminBtnLabel.textContent = "โหมดแก้ไข";
+    openAdminDrawer();
+  }else{
+    pwError.textContent = "รหัสผ่านไม่ถูกต้อง ลองใหม่อีกครั้งค่ะ";
+  }
+}
+
+document.getElementById("adminLogoutBtn").addEventListener("click", () => {
+  isAdmin = false;
+  adminToggleBtn.classList.remove("is-on");
+  adminBtnLabel.textContent = "แอดมิน";
+  adminDrawer.classList.remove("open");
+});
+document.getElementById("adminDrawerClose").addEventListener("click", ()=> adminDrawer.classList.remove("open"));
+
+/* =========================================================
+   Admin: drawer / tabs / forms
+   ========================================================= */
+const TABS = [
+  { id:"hero", label:"หน้าแรก" },
+  { id:"why", label:"จุดเด่น" },
+  { id:"staff", label:"ครู" },
+  { id:"courses", label:"หลักสูตร" },
+  { id:"news", label:"ข่าวสาร" },
+  { id:"docs", label:"เอกสาร" },
+  { id:"settings", label:"ตั้งค่า" }
+];
+
+function openAdminDrawer(){
+  const tabsEl = document.getElementById("adminTabs");
+  tabsEl.innerHTML = TABS.map(t => `<button class="admin-tab ${t.id===adminActiveTab?"active":""}" data-tab="${t.id}">${t.label}</button>`).join("");
+  tabsEl.querySelectorAll(".admin-tab").forEach(b => b.addEventListener("click", () => {
+    adminActiveTab = b.dataset.tab;
+    openAdminDrawer();
+  }));
+  renderAdminBody();
+  adminDrawer.classList.add("open");
+}
+
+function renderAdminBody(){
+  const body = document.getElementById("adminBody");
+  if(adminActiveTab === "hero"){
+    body.innerHTML = `
+      <h4>ข้อความหน้าแรก</h4>
+      <div class="field"><label>ป้ายข้อความเล็ก (Eyebrow)</label><input data-bind="hero.eyebrow" value="${escAttr(data.hero.eyebrow)}"></div>
+      <div class="field"><label>หัวข้อบรรทัดที่ 1</label><input data-bind="hero.title1" value="${escAttr(data.hero.title1)}"></div>
+      <div class="field"><label>หัวข้อบรรทัดที่ 2 (สีทอง)</label><input data-bind="hero.title2" value="${escAttr(data.hero.title2)}"></div>
+      <div class="field"><label>ข้อความรอง</label><input data-bind="hero.sub" value="${escAttr(data.hero.sub)}"></div>
+      <div class="field"><label>คำโปรย</label><textarea data-bind="hero.lede">${esc(data.hero.lede)}</textarea></div>`;
+  }
+  else if(adminActiveTab === "why"){
+    body.innerHTML = `<h4>จุดเด่นของสาขา (หน้าแรก)</h4>` + data.why.map((w,i)=>`
+      <div class="entry-card">
+        <button class="entry-del" data-del="why:${i}" title="ลบ">✕</button>
+        <div class="field"><label>หัวข้อ</label><input data-bind="why.${i}.title" value="${escAttr(w.title)}"></div>
+        <div class="field"><label>คำอธิบาย</label><textarea data-bind="why.${i}.desc">${esc(w.desc)}</textarea></div>
+      </div>`).join("") + `<button class="add-entry-btn" data-add="why">+ เพิ่มจุดเด่น</button>`;
+  }
+  else if(adminActiveTab === "staff"){
+    body.innerHTML = `<h4>รายชื่อครู / บุคลากร</h4>` + data.staff.map((s,i)=>`
+      <div class="entry-card">
+        <button class="entry-del" data-del="staff:${i}" title="ลบ">✕</button>
+        <div class="field"><label>ชื่อ</label><input data-bind="staff.${i}.name" value="${escAttr(s.name)}"></div>
+        <div class="field"><label>ตำแหน่ง</label><input data-bind="staff.${i}.role" value="${escAttr(s.role)}"></div>
+        <div class="field"><label>เบอร์โทร (ไม่ใส่ = ปุ่มโทรจะจาง)</label><input data-bind="staff.${i}.phone" value="${escAttr(s.phone)}" placeholder="เช่น 0812345678"></div>
+        <div class="field"><label>LINE ID (ไม่ใส่ = ปุ่มไลน์จะจาง)</label><input data-bind="staff.${i}.line" value="${escAttr(s.line)}" placeholder="เช่น teacher.dbt"></div>
+      </div>`).join("") + `<button class="add-entry-btn" data-add="staff">+ เพิ่มครู</button>`;
+  }
+  else if(adminActiveTab === "courses"){
+    body.innerHTML = `<h4>หลักสูตรที่เปิดสอน</h4>` + data.courses.map((c,i)=>`
+      <div class="entry-card">
+        <button class="entry-del" data-del="courses:${i}" title="ลบ">✕</button>
+        <div class="field"><label>ระดับ (เช่น ปวช. / ปวส.)</label><input data-bind="courses.${i}.level" value="${escAttr(c.level)}"></div>
+        <div class="field"><label>ชื่อหลักสูตร</label><textarea data-bind="courses.${i}.title">${esc(c.title)}</textarea></div>
+        <div class="field"><label>คำอธิบาย</label><textarea data-bind="courses.${i}.desc">${esc(c.desc)}</textarea></div>
+        <div class="field"><label>รายการย่อย (บรรทัดละ 1 รายการ)</label><textarea data-bind="courses.${i}.bullets">${esc(c.bullets)}</textarea></div>
+      </div>`).join("") + `<button class="add-entry-btn" data-add="courses">+ เพิ่มหลักสูตร</button>
+      <h4>จบไปแล้วทำอะไรได้บ้าง</h4>
+      <div class="field"><label>หัวข้อ</label><input data-bind="courseOutcome.title" value="${escAttr(data.courseOutcome.title)}"></div>
+      <div class="field"><label>เนื้อหา</label><textarea data-bind="courseOutcome.body">${esc(data.courseOutcome.body)}</textarea></div>`;
+  }
+  else if(adminActiveTab === "news"){
+    body.innerHTML = `<h4>ข่าวประชาสัมพันธ์ (รายการแรกจะขึ้นเป็นข่าวเด่น)</h4>` + data.news.map((n,i)=>`
+      <div class="entry-card">
+        <button class="entry-del" data-del="news:${i}" title="ลบ">✕</button>
+        <div class="field"><label>ป้ายกำกับ</label><input data-bind="news.${i}.tag" value="${escAttr(n.tag)}"></div>
+        <div class="field"><label>หัวข้อข่าว</label><textarea data-bind="news.${i}.title">${esc(n.title)}</textarea></div>
+        <div class="field"><label>วันที่</label><input data-bind="news.${i}.date" value="${escAttr(n.date)}"></div>
+      </div>`).join("") + `<button class="add-entry-btn" data-add="news">+ เพิ่มข่าว</button>`;
+  }
+  else if(adminActiveTab === "docs"){
+    body.innerHTML = `<h4>ไฟล์ตารางเรียน / เอกสาร</h4>` + data.docs.map((d,i)=>`
+      <div class="entry-card">
+        <button class="entry-del" data-del="docs:${i}" title="ลบ">✕</button>
+        <div class="field"><label>ชื่อไฟล์ที่แสดง</label><input data-bind="docs.${i}.name" value="${escAttr(d.name)}"></div>
+        <div class="field"><label>ลิงก์ไฟล์ (วางลิงก์ Google Drive / เอกสารที่แชร์แบบเปิดดูได้)</label><input data-bind="docs.${i}.url" value="${escAttr(d.url)}" placeholder="https://drive.google.com/..."></div>
+      </div>`).join("") + `<button class="add-entry-btn" data-add="docs">+ เพิ่มไฟล์</button>`;
+  }
+  else if(adminActiveTab === "settings"){
+    body.innerHTML = `
+      <h4>สำรองข้อมูลไปยัง Google Sheet</h4>
+      <div class="field"><label>ลิงก์ Web App ของ Google Apps Script</label><input data-bind="settings.sheetUrl" value="${escAttr(data.settings.sheetUrl)}" placeholder="https://script.google.com/macros/s/xxxx/exec"></div>
+      <div class="help-box">
+        ทุกครั้งที่กด "บันทึกการเปลี่ยนแปลง" ระบบจะส่งข้อมูลทั้งหมดไปเก็บสำรองไว้ที่ Google Sheet ของคุณ (เก็บเป็นแถวประวัติ ไม่ทับของเก่า) วิธีตั้งค่า:
+        <ol style="margin:8px 0 0 18px;">
+          <li>เปิด Google Sheet ที่ต้องการใช้เก็บข้อมูลสำรอง</li>
+          <li>ไปที่เมนู ส่วนขยาย (Extensions) → Apps Script</li>
+          <li>ลบโค้ดเดิม แล้ววางโค้ดนี้แทน:</li>
+        </ol>
+        <pre>function doPost(e) {
+  var sh = SpreadsheetApp.getActiveSpreadsheet()
+    .getSheetByName('Backup')
+    || SpreadsheetApp.getActiveSpreadsheet().insertSheet('Backup');
+  var body = JSON.parse(e.postData.contents);
+  sh.appendRow([body.timestamp, JSON.stringify(body.data)]);
+  return ContentService.createTextOutput(
+    JSON.stringify({status:'ok'})
+  ).setMimeType(ContentService.MimeType.JSON);
+}</pre>
+        <ol start="4" style="margin:8px 0 0 18px;">
+          <li>กด Deploy → New deployment → เลือกประเภท "Web app"</li>
+          <li>Execute as: <b>Me</b>, Who has access: <b>Anyone</b></li>
+          <li>กด Deploy แล้วคัดลอกลิงก์ Web App มาวางในช่องด้านบน</li>
+        </ol>
+        ทุกครั้งที่แก้ไขเว็บและกดบันทึกในภายหลัง (เช่นเปลี่ยนโค้ด) ให้ Deploy ใหม่แบบ "New deployment" อีกครั้ง ลิงก์เดิมจะยังใช้ได้เรื่อย ๆ
+      </div>
+      <h4>เปลี่ยนรหัสผ่านแอดมิน</h4>
+      <div class="field"><label>รหัสผ่านปัจจุบัน</label><input type="password" id="curPassInput" placeholder="รหัสผ่านปัจจุบัน"></div>
+      <div class="field"><label>รหัสผ่านใหม่</label><input type="password" id="newPassInput" placeholder="รหัสผ่านใหม่"></div>
+      <button class="add-entry-btn" id="changePassBtn" type="button">เปลี่ยนรหัสผ่าน</button>
+      <div class="help-box">
+        ข้อควรทราบ: รหัสผ่านนี้ป้องกันคนทั่วไปกดแก้ไขเล่น ๆ ได้ในระดับหนึ่ง แต่เนื่องจากเว็บนี้เป็นหน้าเว็บฝั่งเบราว์เซอร์ทั้งหมด จึงไม่เหมาะกับการเก็บข้อมูลที่ต้องการความปลอดภัยสูงมาก (เช่น ข้อมูลการเงิน) หากต้องใช้งานจริงจังในระยะยาว แนะนำให้ปรึกษาเพิ่มเติมเรื่องการทำระบบหลังบ้านที่ปลอดภัยกว่านี้
       </div>`;
+    setTimeout(()=>{
+      document.getElementById("changePassBtn").addEventListener("click", async ()=>{
+        const cur = document.getElementById("curPassInput").value;
+        const nw = document.getElementById("newPassInput").value;
+        const correct = await getPassword();
+        if(cur !== correct){ showToast("รหัสผ่านปัจจุบันไม่ถูกต้อง"); return; }
+        if(!nw || nw.length < 4){ showToast("รหัสผ่านใหม่ควรยาวอย่างน้อย 4 ตัวอักษร"); return; }
+        await setPassword(nw);
+        showToast("เปลี่ยนรหัสผ่านเรียบร้อยแล้ว");
+        document.getElementById("curPassInput").value = "";
+        document.getElementById("newPassInput").value = "";
+      });
+    },0);
+  }
+
+  body.querySelectorAll("[data-bind]").forEach(el => {
+    el.addEventListener("input", () => setByPath(el.dataset.bind, el.value));
   });
+  body.querySelectorAll("[data-del]").forEach(el => {
+    el.addEventListener("click", () => {
+      const [arrName, idx] = el.dataset.del.split(":");
+      data[arrName].splice(Number(idx), 1);
+      renderAdminBody();
+    });
+  });
+  body.querySelectorAll("[data-add]").forEach(el => {
+    el.addEventListener("click", () => {
+      const arrName = el.dataset.add;
+      const blanks = {
+        why:{title:"หัวข้อใหม่",desc:""},
+        staff:{name:"ชื่อครู",role:"ครูประจำสาขาวิชาเทคโนโลยีธุรกิจดิจิทัล",phone:"",line:""},
+        courses:{level:"",title:"",desc:"",bullets:""},
+        news:{tag:"ประกาศ",title:"",date:""},
+        docs:{name:"เอกสารใหม่",url:""}
+      };
+      data[arrName].push(blanks[arrName]);
+      renderAdminBody();
+    });
+  });
+}
+
+function setByPath(path, value){
+  const parts = path.split(".");
+  let obj = data;
+  for(let i=0;i<parts.length-1;i++){
+    const key = /^\d+$/.test(parts[i]) ? Number(parts[i]) : parts[i];
+    obj = obj[key];
+  }
+  const lastKey = parts[parts.length-1];
+  obj[/^\d+$/.test(lastKey) ? Number(lastKey) : lastKey] = value;
+}
+
+function escAttr(str){ return esc(str).replace(/\n/g,"&#10;"); }
+
+document.getElementById("adminSaveBtn").addEventListener("click", async () => {
+  const statusEl = document.getElementById("saveStatus");
+  statusEl.textContent = "กำลังบันทึก...";
+  const ok = await persistData();
+  renderAll();
+  if(ok){
+    statusEl.textContent = "บันทึกลงเว็บไซต์เรียบร้อยแล้ว ✓";
+    showToast("บันทึกการเปลี่ยนแปลงเรียบร้อยแล้ว");
+    await syncToSheet();
+  }else{
+    statusEl.textContent = "บันทึกไม่สำเร็จ ลองอีกครั้งค่ะ";
+  }
+  setTimeout(()=> statusEl.textContent = "", 4000);
+});
+
+/* =========================================================
+   Init
+   ========================================================= */
+loadData();
 </script>
 </body>
 </html>
