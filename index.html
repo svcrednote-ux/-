@@ -1,111 +1,1264 @@
+```html
 <!DOCTYPE html>
 <html lang="th">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>ตารางสอน | DBT</title>
-    <link rel="stylesheet" href="style.css">
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<title>DBT | เทคโนโลยีธุรกิจดิจิทัล</title>
+
+<style>
+
+@import url('https://fonts.googleapis.com/css2?family=Kanit:wght@300;400;500;600;700&display=swap');
+
+*{
+    margin:0;
+    padding:0;
+    box-sizing:border-box;
+    scroll-behavior:smooth;
+}
+
+body{
+    font-family:'Kanit',sans-serif;
+    background:#f8f7fb;
+    color:#29243a;
+    line-height:1.7;
+}
+
+/* ================= HEADER ================= */
+
+header{
+    width:100%;
+    height:75px;
+    background:rgba(255,255,255,.97);
+    display:flex;
+    align-items:center;
+    justify-content:space-between;
+    padding:0 7%;
+    position:sticky;
+    top:0;
+    z-index:1000;
+    box-shadow:0 2px 15px rgba(50,30,80,.08);
+}
+
+.logo{
+    font-size:30px;
+    font-weight:700;
+    color:#7354b8;
+    letter-spacing:2px;
+}
+
+nav{
+    display:flex;
+    gap:8px;
+}
+
+nav a{
+    text-decoration:none;
+    color:#555;
+    padding:8px 15px;
+    border-radius:20px;
+    transition:.3s;
+}
+
+nav a:hover{
+    background:#7354b8;
+    color:white;
+}
+
+/* ================= HERO ================= */
+
+.hero{
+    min-height:600px;
+    padding:80px 8%;
+    display:flex;
+    align-items:center;
+    justify-content:space-between;
+
+    background:
+    radial-gradient(circle at 80% 30%,#e5daf9 0,transparent 30%),
+    linear-gradient(135deg,#faf9ff,#f0ebf8);
+}
+
+.hero-text{
+    max-width:620px;
+}
+
+.small-title{
+    color:#8b67c7;
+    letter-spacing:3px;
+    font-size:14px;
+    font-weight:600;
+}
+
+.hero h1{
+    font-size:clamp(45px,6vw,75px);
+    line-height:1.15;
+    margin:18px 0;
+}
+
+.hero-text p{
+    color:#6d6875;
+    margin-bottom:25px;
+}
+
+.btn{
+    display:inline-block;
+    text-decoration:none;
+    background:#7354b8;
+    color:white;
+    padding:12px 28px;
+    border-radius:30px;
+    transition:.3s;
+}
+
+.btn:hover{
+    background:#5c4199;
+    transform:translateY(-3px);
+}
+
+.hero-card{
+    width:330px;
+    height:390px;
+    border-radius:35px;
+
+    background:linear-gradient(145deg,#8463c7,#55348f);
+
+    color:white;
+
+    display:flex;
+    flex-direction:column;
+    align-items:center;
+    justify-content:center;
+
+    box-shadow:0 25px 50px rgba(91,65,145,.25);
+}
+
+.circle{
+    width:150px;
+    height:150px;
+
+    border:2px solid rgba(255,255,255,.6);
+    border-radius:50%;
+
+    display:flex;
+    justify-content:center;
+    align-items:center;
+
+    font-size:45px;
+    font-weight:700;
+
+    margin-bottom:25px;
+}
+
+.hero-card h2{
+    font-size:24px;
+}
+
+/* ================= SECTION ================= */
+
+section{
+    scroll-margin-top:80px;
+}
+
+.section-title{
+    text-align:center;
+    padding:80px 20px 40px;
+}
+
+.section-title p{
+    color:#8b67c7;
+    letter-spacing:3px;
+    font-size:14px;
+    font-weight:600;
+}
+
+.section-title h2{
+    font-size:42px;
+    margin:5px 0;
+}
+
+.section-title span{
+    color:#777;
+}
+
+/* ================= FEATURES ================= */
+
+.features{
+    max-width:1100px;
+    margin:20px auto 100px;
+    padding:0 20px;
+
+    display:grid;
+    grid-template-columns:repeat(3,1fr);
+    gap:25px;
+}
+
+.feature{
+    background:white;
+    padding:35px;
+    border-radius:22px;
+
+    box-shadow:0 10px 30px rgba(70,40,100,.07);
+
+    transition:.3s;
+}
+
+.feature:hover{
+    transform:translateY(-7px);
+}
+
+.icon{
+    width:50px;
+    height:50px;
+
+    border-radius:15px;
+
+    background:#eee6fc;
+    color:#7354b8;
+
+    display:flex;
+    align-items:center;
+    justify-content:center;
+
+    font-weight:600;
+
+    margin-bottom:20px;
+}
+
+.feature h3{
+    font-size:23px;
+}
+
+.feature p{
+    color:#777;
+    margin:8px 0 15px;
+}
+
+.feature a{
+    color:#7354b8;
+    text-decoration:none;
+}
+
+/* ================= TEACHERS ================= */
+
+.teachers{
+    max-width:1100px;
+    margin:20px auto 100px;
+    padding:0 20px;
+
+    display:grid;
+    grid-template-columns:repeat(4,1fr);
+    gap:20px;
+}
+
+.teacher-card{
+    background:white;
+    padding:25px;
+
+    text-align:center;
+
+    border-radius:22px;
+
+    box-shadow:0 10px 30px rgba(70,40,100,.07);
+}
+
+.teacher-photo{
+    width:140px;
+    height:140px;
+
+    margin:0 auto 20px;
+
+    border-radius:50%;
+
+    background:#eee7fa;
+
+    display:flex;
+    align-items:center;
+    justify-content:center;
+
+    font-size:55px;
+}
+
+.teacher-card h3{
+    font-size:20px;
+}
+
+.teacher-card p{
+    color:#7354b8;
+}
+
+/* ================= SCHEDULE ================= */
+
+.schedule-box{
+    max-width:1200px;
+    margin:20px auto 100px;
+    padding:0 20px;
+}
+
+.table-wrapper{
+    overflow-x:auto;
+
+    background:white;
+
+    border-radius:20px;
+
+    box-shadow:0 10px 30px rgba(70,40,100,.07);
+}
+
+table{
+    width:100%;
+    min-width:900px;
+    border-collapse:collapse;
+}
+
+th{
+    background:#7354b8;
+    color:white;
+    padding:17px 10px;
+}
+
+td{
+    text-align:center;
+    padding:17px 10px;
+
+    border-bottom:1px solid #eee;
+}
+
+td:first-child{
+    color:#7354b8;
+    font-weight:600;
+}
+
+tr:hover td{
+    background:#faf8ff;
+}
+
+/* ================= ACTIVITIES ================= */
+
+.activities{
+    max-width:1050px;
+    margin:20px auto 100px;
+    padding:0 20px;
+
+    display:grid;
+    grid-template-columns:repeat(3,1fr);
+    gap:25px;
+}
+
+.activity-card{
+    background:white;
+
+    border-radius:22px;
+
+    overflow:hidden;
+
+    box-shadow:0 10px 30px rgba(70,40,100,.07);
+}
+
+.activity-image{
+    height:200px;
+
+    background:linear-gradient(135deg,#b99ce7,#7354b8);
+
+    color:white;
+
+    display:flex;
+    align-items:center;
+    justify-content:center;
+
+    font-size:30px;
+}
+
+.activity-content{
+    padding:25px;
+}
+
+.activity-content small{
+    color:#8b67c7;
+}
+
+.activity-content h3{
+    margin:8px 0;
+    font-size:21px;
+}
+
+.activity-content p{
+    color:#777;
+}
+
+/* ================= CONTACT ================= */
+
+.contact{
+    max-width:1050px;
+
+    margin:20px auto 100px;
+
+    padding:0 20px;
+
+    display:grid;
+
+    grid-template-columns:1fr 1fr;
+
+    gap:40px;
+}
+
+.contact-info{
+    display:flex;
+    flex-direction:column;
+    gap:20px;
+}
+
+.contact-item{
+    background:white;
+
+    padding:22px;
+
+    border-radius:18px;
+
+    display:flex;
+    align-items:center;
+
+    gap:18px;
+
+    box-shadow:0 10px 30px rgba(70,40,100,.06);
+}
+
+.contact-icon{
+    width:50px;
+    height:50px;
+
+    border-radius:15px;
+
+    background:#eee6fc;
+
+    display:flex;
+    align-items:center;
+    justify-content:center;
+
+    font-size:22px;
+}
+
+.contact-item h3{
+    font-size:18px;
+}
+
+.contact-item p{
+    color:#777;
+}
+
+.contact-box{
+    background:white;
+
+    padding:35px;
+
+    border-radius:22px;
+
+    box-shadow:0 10px 30px rgba(70,40,100,.07);
+}
+
+.contact-box h2{
+    margin-bottom:20px;
+}
+
+input,
+textarea{
+
+    width:100%;
+
+    padding:13px 16px;
+
+    margin-bottom:15px;
+
+    border:1px solid #ddd;
+
+    border-radius:12px;
+
+    font-family:inherit;
+
+    outline:none;
+}
+
+textarea{
+    height:130px;
+    resize:vertical;
+}
+
+input:focus,
+textarea:focus{
+    border-color:#7354b8;
+}
+
+button{
+
+    width:100%;
+
+    border:none;
+
+    padding:13px;
+
+    background:#7354b8;
+
+    color:white;
+
+    border-radius:25px;
+
+    font-family:inherit;
+
+    font-size:16px;
+
+    cursor:pointer;
+}
+
+button:hover{
+    background:#5c4199;
+}
+
+/* ================= FOOTER ================= */
+
+footer{
+    background:#29233b;
+
+    color:white;
+
+    text-align:center;
+
+    padding:25px;
+}
+
+/* ================= MOBILE ================= */
+
+@media(max-width:900px){
+
+    header{
+        height:auto;
+        padding:15px 5%;
+
+        flex-direction:column;
+
+        gap:12px;
+    }
+
+    nav{
+        width:100%;
+
+        justify-content:center;
+
+        flex-wrap:wrap;
+    }
+
+    nav a{
+        font-size:14px;
+        padding:6px 10px;
+    }
+
+    .hero{
+        flex-direction:column;
+
+        text-align:center;
+
+        gap:50px;
+
+        padding:60px 20px;
+    }
+
+    .hero-card{
+        width:280px;
+        height:330px;
+    }
+
+    .features,
+    .activities{
+        grid-template-columns:1fr;
+    }
+
+    .teachers{
+        grid-template-columns:repeat(2,1fr);
+    }
+
+    .contact{
+        grid-template-columns:1fr;
+    }
+}
+
+@media(max-width:500px){
+
+    .teachers{
+        grid-template-columns:1fr;
+    }
+
+    .hero h1{
+        font-size:45px;
+    }
+
+    .section-title h2{
+        font-size:32px;
+    }
+
+}
+
+</style>
 </head>
 
 <body>
 
-<header>
-    <div class="logo">DBT</div>
+<!-- ================= HEADER ================= -->
 
-    <nav>
-        <a href="index.html">หน้าแรก</a>
-        <a href="teachers.html">บุคลากร</a>
-        <a href="schedule.html" class="active">ตารางสอน</a>
-        <a href="activities.html">กิจกรรม</a>
-        <a href="contact.html">ติดต่อ</a>
-    </nav>
+<header>
+
+<div class="logo">DBT</div>
+
+<nav>
+
+<a href="#home">หน้าแรก</a>
+
+<a href="#teachers">บุคลากร</a>
+
+<a href="#schedule">ตารางสอน</a>
+
+<a href="#activities">กิจกรรม</a>
+
+<a href="#contact">ติดต่อ</a>
+
+</nav>
+
 </header>
 
-<section class="page-header">
-    <p>SCHEDULE</p>
-    <h1>ตารางสอน</h1>
-    <span>ตารางเรียนและตารางสอนของสาขา</span>
-</section>
 
-<section class="schedule-section">
+<!-- ================= HOME ================= -->
 
-    <div class="table-wrapper">
+<section id="home" class="hero">
 
-        <table>
-            <thead>
-                <tr>
-                    <th>วัน / เวลา</th>
-                    <th>08:00 - 09:00</th>
-                    <th>09:00 - 10:00</th>
-                    <th>10:00 - 11:00</th>
-                    <th>11:00 - 12:00</th>
-                    <th>13:00 - 14:00</th>
-                    <th>14:00 - 15:00</th>
-                </tr>
-            </thead>
+<div class="hero-text">
 
-            <tbody>
+<p class="small-title">
+DIGITAL BUSINESS TECHNOLOGY
+</p>
 
-                <tr>
-                    <td>จันทร์</td>
-                    <td>ฐานข้อมูล</td>
-                    <td>ฐานข้อมูล</td>
-                    <td>—</td>
-                    <td>—</td>
-                    <td>การตลาดดิจิทัล</td>
-                    <td>การตลาดดิจิทัล</td>
-                </tr>
+<h1>
+สาขาเทคโนโลยี<br>
+ธุรกิจดิจิทัล
+</h1>
 
-                <tr>
-                    <td>อังคาร</td>
-                    <td>การเขียนโปรแกรม</td>
-                    <td>การเขียนโปรแกรม</td>
-                    <td>—</td>
-                    <td>—</td>
-                    <td>กราฟิก</td>
-                    <td>กราฟิก</td>
-                </tr>
+<p>
+เรียนรู้เทคโนโลยี พัฒนาทักษะดิจิทัล
+พร้อมก้าวสู่โลกธุรกิจยุคใหม่
+</p>
 
-                <tr>
-                    <td>พุธ</td>
-                    <td>ภาษาอังกฤษ</td>
-                    <td>ภาษาอังกฤษ</td>
-                    <td>—</td>
-                    <td>—</td>
-                    <td>เว็บไซต์</td>
-                    <td>เว็บไซต์</td>
-                </tr>
+<a href="#teachers" class="btn">
+รู้จักสาขาของเรา
+</a>
 
-                <tr>
-                    <td>พฤหัสบดี</td>
-                    <td>ธุรกิจดิจิทัล</td>
-                    <td>ธุรกิจดิจิทัล</td>
-                    <td>—</td>
-                    <td>—</td>
-                    <td>กิจกรรม</td>
-                    <td>กิจกรรม</td>
-                </tr>
+</div>
 
-                <tr>
-                    <td>ศุกร์</td>
-                    <td>คอมพิวเตอร์</td>
-                    <td>คอมพิวเตอร์</td>
-                    <td>—</td>
-                    <td>—</td>
-                    <td>โครงงาน</td>
-                    <td>โครงงาน</td>
-                </tr>
 
-            </tbody>
-        </table>
+<div class="hero-card">
 
-    </div>
+<div class="circle">
+DBT
+</div>
+
+<h2>
+Digital Business
+</h2>
+
+<p>
+Technology
+</p>
+
+</div>
 
 </section>
+
+
+<!-- ================= ABOUT ================= -->
+
+<section>
+
+<div class="section-title">
+
+<p>WELCOME TO DBT</p>
+
+<h2>
+ยินดีต้อนรับเข้าสู่<br>
+สาขาเทคโนโลยีธุรกิจดิจิทัล
+</h2>
+
+<span>
+เว็บไซต์ประชาสัมพันธ์ข้อมูลของสาขา
+รวมข้อมูลบุคลากร ตารางสอน กิจกรรม และช่องทางการติดต่อ
+</span>
+
+</div>
+
+
+<div class="features">
+
+<div class="feature">
+
+<div class="icon">01</div>
+
+<h3>บุคลากร</h3>
+
+<p>
+พบกับคณะครูและบุคลากรประจำสาขา
+</p>
+
+<a href="#teachers">
+ดูข้อมูล →
+</a>
+
+</div>
+
+
+<div class="feature">
+
+<div class="icon">02</div>
+
+<h3>ตารางสอน</h3>
+
+<p>
+ตรวจสอบตารางเรียนและตารางสอน
+</p>
+
+<a href="#schedule">
+ดูตาราง →
+</a>
+
+</div>
+
+
+<div class="feature">
+
+<div class="icon">03</div>
+
+<h3>กิจกรรม</h3>
+
+<p>
+ติดตามข่าวสารและกิจกรรมของสาขา
+</p>
+
+<a href="#activities">
+ดูกิจกรรม →
+</a>
+
+</div>
+
+</div>
+
+</section>
+
+
+<!-- ================= TEACHERS ================= -->
+
+<section id="teachers">
+
+<div class="section-title">
+
+<p>OUR TEAM</p>
+
+<h2>บุคลากร</h2>
+
+<span>
+คณะครูและบุคลากร สาขาเทคโนโลยีธุรกิจดิจิทัล
+</span>
+
+</div>
+
+
+<div class="teachers">
+
+
+<div class="teacher-card">
+
+<div class="teacher-photo">
+👤
+</div>
+
+<h3>
+ชื่อ - นามสกุล
+</h3>
+
+<p>
+หัวหน้าสาขา
+</p>
+
+<span>
+เทคโนโลยีธุรกิจดิจิทัล
+</span>
+
+</div>
+
+
+<div class="teacher-card">
+
+<div class="teacher-photo">
+👤
+</div>
+
+<h3>
+ชื่อ - นามสกุล
+</h3>
+
+<p>
+ครูประจำสาขา
+</p>
+
+<span>
+เทคโนโลยีธุรกิจดิจิทัล
+</span>
+
+</div>
+
+
+<div class="teacher-card">
+
+<div class="teacher-photo">
+👤
+</div>
+
+<h3>
+ชื่อ - นามสกุล
+</h3>
+
+<p>
+ครูประจำสาขา
+</p>
+
+<span>
+เทคโนโลยีธุรกิจดิจิทัล
+</span>
+
+</div>
+
+
+<div class="teacher-card">
+
+<div class="teacher-photo">
+👤
+</div>
+
+<h3>
+ชื่อ - นามสกุล
+</h3>
+
+<p>
+ครูประจำสาขา
+</p>
+
+<span>
+เทคโนโลยีธุรกิจดิจิทัล
+</span>
+
+</div>
+
+
+</div>
+
+</section>
+
+
+<!-- ================= SCHEDULE ================= -->
+
+<section id="schedule">
+
+<div class="section-title">
+
+<p>SCHEDULE</p>
+
+<h2>ตารางสอน</h2>
+
+<span>
+ตารางเรียนและตารางสอนของสาขา
+</span>
+
+</div>
+
+
+<div class="schedule-box">
+
+<div class="table-wrapper">
+
+<table>
+
+<thead>
+
+<tr>
+
+<th>วัน / เวลา</th>
+
+<th>08:00 - 09:00</th>
+
+<th>09:00 - 10:00</th>
+
+<th>10:00 - 11:00</th>
+
+<th>11:00 - 12:00</th>
+
+<th>13:00 - 14:00</th>
+
+<th>14:00 - 15:00</th>
+
+</tr>
+
+</thead>
+
+
+<tbody>
+
+<tr>
+
+<td>จันทร์</td>
+
+<td>ฐานข้อมูล</td>
+
+<td>ฐานข้อมูล</td>
+
+<td>—</td>
+
+<td>—</td>
+
+<td>การตลาดดิจิทัล</td>
+
+<td>การตลาดดิจิทัล</td>
+
+</tr>
+
+
+<tr>
+
+<td>อังคาร</td>
+
+<td>การเขียนโปรแกรม</td>
+
+<td>การเขียนโปรแกรม</td>
+
+<td>—</td>
+
+<td>—</td>
+
+<td>กราฟิก</td>
+
+<td>กราฟิก</td>
+
+</tr>
+
+
+<tr>
+
+<td>พุธ</td>
+
+<td>ภาษาอังกฤษ</td>
+
+<td>ภาษาอังกฤษ</td>
+
+<td>—</td>
+
+<td>—</td>
+
+<td>เว็บไซต์</td>
+
+<td>เว็บไซต์</td>
+
+</tr>
+
+
+<tr>
+
+<td>พฤหัสบดี</td>
+
+<td>ธุรกิจดิจิทัล</td>
+
+<td>ธุรกิจดิจิทัล</td>
+
+<td>—</td>
+
+<td>—</td>
+
+<td>กิจกรรม</td>
+
+<td>กิจกรรม</td>
+
+</tr>
+
+
+<tr>
+
+<td>ศุกร์</td>
+
+<td>คอมพิวเตอร์</td>
+
+<td>คอมพิวเตอร์</td>
+
+<td>—</td>
+
+<td>—</td>
+
+<td>โครงงาน</td>
+
+<td>โครงงาน</td>
+
+</tr>
+
+</tbody>
+
+</table>
+
+</div>
+
+</div>
+
+</section>
+
+
+<!-- ================= ACTIVITIES ================= -->
+
+<section id="activities">
+
+<div class="section-title">
+
+<p>ACTIVITIES</p>
+
+<h2>กิจกรรมของสาขา</h2>
+
+<span>
+ข่าวสารและกิจกรรมต่าง ๆ ของ DBT
+</span>
+
+</div>
+
+
+<div class="activities">
+
+
+<div class="activity-card">
+
+<div class="activity-image">
+กิจกรรม
+</div>
+
+<div class="activity-content">
+
+<small>
+กิจกรรมที่ 01
+</small>
+
+<h3>
+กิจกรรมพัฒนาทักษะดิจิทัล
+</h3>
+
+<p>
+กิจกรรมส่งเสริมให้นักเรียนพัฒนาความรู้
+และทักษะด้านเทคโนโลยีดิจิทัล
+</p>
+
+</div>
+
+</div>
+
+
+<div class="activity-card">
+
+<div class="activity-image">
+กิจกรรม
+</div>
+
+<div class="activity-content">
+
+<small>
+กิจกรรมที่ 02
+</small>
+
+<h3>
+กิจกรรมอบรมเทคโนโลยี
+</h3>
+
+<p>
+เรียนรู้เทคโนโลยีใหม่ ๆ และการนำไปประยุกต์ใช้
+ในการเรียนและการทำงาน
+</p>
+
+</div>
+
+</div>
+
+
+<div class="activity-card">
+
+<div class="activity-image">
+กิจกรรม
+</div>
+
+<div class="activity-content">
+
+<small>
+กิจกรรมที่ 03
+</small>
+
+<h3>
+กิจกรรมการแข่งขันทักษะ
+</h3>
+
+<p>
+ส่งเสริมความสามารถของนักเรียนผ่านการแข่งขัน
+และการทำงานร่วมกันเป็นทีม
+</p>
+
+</div>
+
+</div>
+
+
+</div>
+
+</section>
+
+
+<!-- ================= CONTACT ================= -->
+
+<section id="contact">
+
+<div class="section-title">
+
+<p>CONTACT</p>
+
+<h2>ติดต่อเรา</h2>
+
+<span>
+ช่องทางการติดต่อสาขาเทคโนโลยีธุรกิจดิจิทัล
+</span>
+
+</div>
+
+
+<div class="contact">
+
+
+<div class="contact-info">
+
+
+<div class="contact-item">
+
+<div class="contact-icon">
+📍
+</div>
+
+<div>
+
+<h3>ที่อยู่</h3>
+
+<p>
+วิทยาลัยอาชีวศึกษาสระบุรี
+</p>
+
+</div>
+
+</div>
+
+
+<div class="contact-item">
+
+<div class="contact-icon">
+☎
+</div>
+
+<div>
+
+<h3>โทรศัพท์</h3>
+
+<p>
+02-XXX-XXXX
+</p>
+
+</div>
+
+</div>
+
+
+<div class="contact-item">
+
+<div class="contact-icon">
+✉
+</div>
+
+<div>
+
+<h3>Email</h3>
+
+<p>
+dbt@example.com
+</p>
+
+</div>
+
+</div>
+
+
+<div class="contact-item">
+
+<div class="contact-icon">
+🌐
+</div>
+
+<div>
+
+<h3>Facebook</h3>
+
+<p>
+DBT Digital Business Technology
+</p>
+
+</div>
+
+</div>
+
+
+</div>
+
+
+<div class="contact-box">
+
+<h2>
+สอบถามข้อมูล
+</h2>
+
+<input
+type="text"
+placeholder="ชื่อ - นามสกุล"
+>
+
+<input
+type="email"
+placeholder="อีเมล"
+>
+
+<textarea
+placeholder="ข้อความ"
+></textarea>
+
+<button>
+ส่งข้อความ
+</button>
+
+</div>
+
+
+</div>
+
+</section>
+
+
+<!-- ================= FOOTER ================= -->
 
 <footer>
-    <p>© 2026 DBT - Digital Business Technology</p>
+
+<p>
+© 2026 DBT - Digital Business Technology
+</p>
+
 </footer>
+
 
 </body>
 </html>
+```
