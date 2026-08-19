@@ -1,1594 +1,636 @@
-
 <!DOCTYPE html>
 <html lang="th">
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-
-<title>DBT | เทคโนโลยีธุรกิจดิจิทัล</title>
-
+<title>DBT | สาขาเทคโนโลยีธุรกิจดิจิทัล</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Kanit:wght@300;400;500;600;700;800&family=Sarabun:wght@300;400;500;600;700&display=swap" rel="stylesheet">
 <style>
-
-@import url('https://fonts.googleapis.com/css2?family=Kanit:wght@300;400;500;600;700&display=swap');
-
-*{
-    margin:0;
-    padding:0;
-    box-sizing:border-box;
-    scroll-behavior:smooth;
-}
-
-body{
-    font-family:'Kanit',sans-serif;
-    background:#faf8ff;
-    color:#29213d;
-}
-
-/* ================= NAVBAR ================= */
-
-header{
-    position:sticky;
-    top:0;
-    z-index:999;
-
-    width:100%;
-    padding:14px 7%;
-
-    display:flex;
-    justify-content:space-between;
-    align-items:center;
-
-    background:rgba(255,255,255,.95);
-
-    box-shadow:0 4px 20px rgba(72,40,110,.08);
-}
-
-.logo{
-    font-size:32px;
-    font-weight:700;
-
-    color:#743bb3;
-
-    letter-spacing:3px;
-}
-
-nav{
-    display:flex;
-    gap:8px;
-}
-
-nav a{
-    text-decoration:none;
-
-    color:#555;
-
-    padding:8px 15px;
-
-    border-radius:25px;
-
-    transition:.3s;
-}
-
-nav a:hover{
-    background:#743bb3;
-    color:white;
-}
-
-/* ================= HERO ================= */
-
-.hero{
-    min-height:650px;
-
-    padding:90px 8%;
-
-    display:flex;
-    justify-content:space-between;
-    align-items:center;
-
-    background:
-
-    radial-gradient(
-        circle at 85% 25%,
-        #dcc4ff,
-        transparent 30%
-    ),
-
-    linear-gradient(
-        135deg,
-        #ffffff,
-        #f1e8ff
-    );
-}
-
-.hero-text{
-    max-width:650px;
-}
-
-.hero-small{
-    color:#8b57c7;
-
-    font-size:15px;
-
-    letter-spacing:4px;
-
-    font-weight:600;
-}
-
-.hero h1{
-    font-size:clamp(48px,7vw,82px);
-
-    line-height:1.1;
-
-    margin:20px 0;
-
-    color:#271537;
-}
-
-.hero h1 span{
-    color:#743bb3;
-}
-
-.hero-description{
-    color:#706778;
-
-    font-size:18px;
-
-    max-width:550px;
-
-    margin-bottom:30px;
-}
-
-.main-button{
-    display:inline-block;
-
-    padding:13px 30px;
-
-    background:#743bb3;
-
-    color:white;
-
-    text-decoration:none;
-
-    border-radius:30px;
-
-    box-shadow:
-    0 10px 25px rgba(116,59,179,.25);
-
-    transition:.3s;
-}
-
-.main-button:hover{
-    transform:translateY(-4px);
-
-    background:#5c2d91;
-}
-
-/* HERO CARD */
-
-.hero-card{
-
-    width:360px;
-    height:420px;
-
-    border-radius:40px;
-
-    background:
-
-    linear-gradient(
-        145deg,
-        #9858d0,
-        #54238d
-    );
-
-    display:flex;
-
-    flex-direction:column;
-
-    align-items:center;
-
-    justify-content:center;
-
-    color:white;
-
-    box-shadow:
-    0 30px 60px rgba(91,39,140,.3);
-}
-
-.dbt-circle{
-
-    width:170px;
-    height:170px;
-
-    border-radius:50%;
-
-    border:2px solid rgba(255,255,255,.7);
-
-    display:flex;
-
-    align-items:center;
-
-    justify-content:center;
-
-    font-size:48px;
-
-    font-weight:700;
-
-    letter-spacing:4px;
-
-    margin-bottom:25px;
-}
-
-.hero-card h2{
-    font-size:26px;
-}
-
-.hero-card p{
-    opacity:.8;
-}
-
-/* ================= SECTION ================= */
-
-.section{
-    padding:100px 7%;
-}
-
-.section-title{
-    text-align:center;
-
-    max-width:750px;
-
-    margin:auto auto 55px;
-}
-
-.section-title small{
-    color:#9254c7;
-
-    letter-spacing:4px;
-
-    font-weight:600;
-}
-
-.section-title h2{
-    font-size:45px;
-
-    margin:8px 0;
-}
-
-.section-title p{
-    color:#777;
-}
-
-/* ================= ABOUT ================= */
-
-.about{
-
-    display:grid;
-
-    grid-template-columns:1fr 1fr;
-
-    gap:50px;
-
-    align-items:center;
-
-    max-width:1100px;
-
-    margin:auto;
-}
-
-.about-box{
-
-    padding:45px;
-
-    border-radius:30px;
-
-    background:
-    linear-gradient(
-        135deg,
-        #eee1ff,
-        #ffffff
-    );
-
-    border:1px solid #eadcff;
-}
-
-.about-box h3{
-    font-size:30px;
-
-    margin-bottom:15px;
-
-    color:#67339d;
-}
-
-.about-box p{
-    color:#686170;
-}
-
-.about-list{
-    display:grid;
-
-    grid-template-columns:1fr 1fr;
-
-    gap:15px;
-
-    margin-top:25px;
-}
-
-.about-item{
-
-    background:white;
-
-    padding:15px;
-
-    border-radius:15px;
-
-    box-shadow:
-    0 8px 20px rgba(90,40,130,.06);
-}
-
-.about-item strong{
-    color:#743bb3;
-}
-
-/* ================= TEACHERS ================= */
-
-.teachers{
-
-    max-width:1100px;
-
-    margin:auto;
-
-    display:grid;
-
-    grid-template-columns:
-    repeat(4,1fr);
-
-    gap:22px;
-}
-
-.teacher{
-
-    background:white;
-
-    border-radius:25px;
-
-    padding:25px;
-
-    text-align:center;
-
-    box-shadow:
-    0 12px 35px rgba(70,35,110,.08);
-
-    transition:.3s;
-}
-
-.teacher:hover{
-
-    transform:translateY(-8px);
-
-    box-shadow:
-    0 20px 45px rgba(90,40,140,.15);
-}
-
-.teacher-photo{
-
-    width:145px;
-    height:145px;
-
-    border-radius:50%;
-
-    margin:auto auto 20px;
-
-    background:
-    linear-gradient(
-        135deg,
-        #eadcff,
-        #c6a3ed
-    );
-
-    display:flex;
-
-    align-items:center;
-
-    justify-content:center;
-
-    font-size:55px;
-}
-
-.teacher h3{
-    font-size:20px;
-}
-
-.teacher p{
-    color:#743bb3;
-}
-
-.teacher span{
-    font-size:13px;
-
-    color:#888;
-}
-
-/* ================= SCHEDULE ================= */
-
-.schedule-wrapper{
-
-    max-width:1200px;
-
-    margin:auto;
-
-    overflow-x:auto;
-
-    border-radius:25px;
-
-    box-shadow:
-    0 15px 40px rgba(70,35,110,.08);
-}
-
-table{
-
-    width:100%;
-
-    min-width:950px;
-
-    border-collapse:collapse;
-
-    background:white;
-}
-
-th{
-
-    background:#743bb3;
-
-    color:white;
-
-    padding:18px 12px;
-}
-
-td{
-
-    padding:17px 10px;
-
-    text-align:center;
-
-    border-bottom:1px solid #eee;
-
-    color:#555;
-}
-
-td:first-child{
-
-    color:#743bb3;
-
-    font-weight:600;
-}
-
-tr:hover td{
-
-    background:#faf6ff;
-}
-
-/* ================= ACTIVITIES ================= */
-
-.activities{
-
-    max-width:1100px;
-
-    margin:auto;
-
-    display:grid;
-
-    grid-template-columns:
-    repeat(3,1fr);
-
-    gap:25px;
-}
-
-.activity{
-
-    background:white;
-
-    border-radius:25px;
-
+  :root{
+    --purple-deep:#2e0f4d;
+    --purple:#4b1a7d;
+    --purple-light:#7b4bb8;
+    --purple-mist:#f4effa;
+    --gold:#d8ac52;
+    --gold-light:#f0d99b;
+    --gold-deep:#a9772b;
+    --cream:#fbf9f5;
+    --ink:#2a1f3d;
+    --ink-soft:#6b5f80;
+    --white:#ffffff;
+    --shadow: 0 20px 45px -20px rgba(46,15,77,0.35);
+  }
+
+  *{box-sizing:border-box; margin:0; padding:0;}
+  html{scroll-behavior:smooth;}
+  body{
+    font-family:'Sarabun', sans-serif;
+    color:var(--ink);
+    background:var(--cream);
+    overflow-x:hidden;
+  }
+  h1,h2,h3,h4,.display{
+    font-family:'Kanit', sans-serif;
+  }
+  a{text-decoration:none; color:inherit;}
+  ul{list-style:none;}
+  img{max-width:100%; display:block;}
+  button{font-family:inherit; cursor:pointer;}
+
+  /* focus visibility */
+  a:focus-visible, button:focus-visible{
+    outline:3px solid var(--gold);
+    outline-offset:3px;
+    border-radius:4px;
+  }
+
+  @media (prefers-reduced-motion: reduce){
+    *{animation-duration:0.001ms !important; transition-duration:0.001ms !important;}
+  }
+
+  /* ---------- Decorative gold-purple ribbon signature ---------- */
+  .ribbon-wrap{
+    position:absolute; inset:0; overflow:hidden; pointer-events:none; z-index:0;
+  }
+  .ribbon-wrap svg{position:absolute;}
+
+  /* ---------- Header ---------- */
+  header{
+    position:sticky; top:0; z-index:100;
+    background:linear-gradient(90deg, var(--purple-deep), var(--purple) 60%, var(--purple-light));
+    box-shadow:0 6px 24px -10px rgba(46,15,77,0.55);
+  }
+  .nav-inner{
+    max-width:1240px; margin:0 auto;
+    display:flex; align-items:center; justify-content:space-between;
+    padding:14px 28px;
+  }
+  .brand{
+    display:flex; align-items:center; gap:12px;
+    color:var(--white);
+  }
+  .brand-mark{
+    width:44px; height:44px; border-radius:50%;
+    background:linear-gradient(135deg, var(--gold-light), var(--gold) 55%, var(--gold-deep));
+    display:flex; align-items:center; justify-content:center;
+    font-family:'Kanit',sans-serif; font-weight:800; font-size:1.05rem;
+    color:var(--purple-deep);
+    box-shadow:0 0 0 3px rgba(255,255,255,0.18);
+  }
+  .brand-text .en{
+    display:block; font-size:0.62rem; letter-spacing:0.14em;
+    color:var(--gold-light); font-weight:500; text-transform:uppercase;
+  }
+  .brand-text .th{
+    font-family:'Kanit',sans-serif; font-weight:700; font-size:1.02rem;
+  }
+
+  nav.links{
+    display:flex; gap:6px; align-items:center;
+  }
+  nav.links button{
+    background:transparent; border:none;
+    color:rgba(255,255,255,0.82);
+    font-size:0.92rem; font-weight:500;
+    padding:10px 14px; border-radius:8px;
+    position:relative;
+    transition:color .2s ease, background .2s ease;
+  }
+  nav.links button:hover{ color:var(--white); background:rgba(255,255,255,0.08); }
+  nav.links button.active{ color:var(--white); font-weight:600; }
+  nav.links button.active::after{
+    content:''; position:absolute; left:16px; right:16px; bottom:2px; height:3px;
+    background:linear-gradient(90deg, var(--gold-light), var(--gold));
+    border-radius:3px;
+  }
+  .avatar-btn{
+    width:38px; height:38px; border-radius:50%;
+    background:rgba(255,255,255,0.14); border:1px solid rgba(255,255,255,0.3);
+    display:flex; align-items:center; justify-content:center;
+    color:var(--white); flex-shrink:0;
+  }
+  .menu-toggle{ display:none; background:none; border:none; color:var(--white); font-size:1.5rem; }
+
+  @media (max-width:900px){
+    nav.links{
+      position:fixed; inset:64px 0 0 0; background:var(--purple-deep);
+      flex-direction:column; align-items:stretch; padding:18px;
+      transform:translateY(-110%); transition:transform .3s ease; gap:2px;
+    }
+    nav.links.open{ transform:translateY(0); }
+    nav.links button{ text-align:left; padding:14px 16px; font-size:1rem; }
+    .menu-toggle{ display:block; }
+  }
+
+  /* ---------- Hero ---------- */
+  .hero{
+    position:relative;
+    background:linear-gradient(160deg, var(--purple-deep) 0%, var(--purple) 55%, #5a2496 100%);
+    padding:70px 28px 150px;
     overflow:hidden;
-
-    box-shadow:
-    0 12px 35px rgba(70,35,110,.08);
-
-    transition:.3s;
-}
-
-.activity:hover{
-
-    transform:translateY(-8px);
-}
-
-.activity-img{
-
-    height:210px;
-
-    background:
-
-    linear-gradient(
-        135deg,
-        #a56bd5,
-        #592d91
-    );
-
-    display:flex;
-
-    align-items:center;
-
-    justify-content:center;
-
-    color:white;
-
-    font-size:28px;
-
-    font-weight:500;
-}
-
-.activity-content{
-
-    padding:25px;
-}
-
-.activity-content small{
-
-    color:#9355c7;
-}
-
-.activity-content h3{
-
-    font-size:22px;
-
-    margin:8px 0;
-}
-
-.activity-content p{
-
-    color:#777;
-}
-
-/* ================= CONTACT ================= */
-
-.contact{
-
-    max-width:1100px;
-
-    margin:auto;
-
-    display:grid;
-
-    grid-template-columns:
-    1fr 1fr;
-
-    gap:40px;
-}
-
-.contact-info{
-
-    display:flex;
-
-    flex-direction:column;
-
-    gap:18px;
-}
-
-.contact-item{
-
-    background:white;
-
-    border-radius:20px;
-
-    padding:22px;
-
-    display:flex;
-
-    gap:18px;
-
-    align-items:center;
-
-    box-shadow:
-    0 10px 30px rgba(70,35,110,.06);
-}
-
-.contact-icon{
-
-    width:55px;
-    height:55px;
-
-    border-radius:16px;
-
-    background:#eee2ff;
-
-    display:flex;
-
-    align-items:center;
-
-    justify-content:center;
-
-    font-size:23px;
-}
-
-.contact-item h3{
-
-    font-size:18px;
-}
-
-.contact-item p{
-
-    color:#777;
-}
-
-.contact-form{
-
-    background:white;
-
-    padding:35px;
-
-    border-radius:25px;
-
-    box-shadow:
-    0 10px 30px rgba(70,35,110,.07);
-}
-
-.contact-form h3{
-
-    font-size:25px;
-
-    margin-bottom:20px;
-}
-
-input,
-textarea{
-
-    width:100%;
-
-    padding:14px 17px;
-
-    border:1px solid #ddd;
-
-    border-radius:13px;
-
-    outline:none;
-
-    font-family:inherit;
-
-    margin-bottom:15px;
-}
-
-textarea{
-
-    height:130px;
-
-    resize:none;
-}
-
-input:focus,
-textarea:focus{
-
-    border-color:#743bb3;
-}
-
-button{
-
-    width:100%;
-
-    border:none;
-
-    padding:14px;
-
-    border-radius:30px;
-
-    background:#743bb3;
-
-    color:white;
-
-    font-family:inherit;
-
-    font-size:16px;
-
-    cursor:pointer;
-
-    transition:.3s;
-}
-
-button:hover{
-
-    background:#572787;
-}
-
-/* ================= FOOTER ================= */
-
-footer{
-
-    padding:30px;
-
-    text-align:center;
-
-    background:#281738;
-
-    color:white;
-}
-
-footer span{
-
-    color:#cba8ee;
-}
-
-/* ================= MOBILE ================= */
-
-@media(max-width:900px){
-
-    header{
-
-        flex-direction:column;
-
-        gap:12px;
-
-        padding:15px;
-    }
-
-    nav{
-
-        flex-wrap:wrap;
-
-        justify-content:center;
-    }
-
-    nav a{
-
-        font-size:14px;
-
-        padding:6px 10px;
-    }
-
-    .hero{
-
-        flex-direction:column;
-
-        text-align:center;
-
-        gap:50px;
-
-        padding:70px 20px;
-    }
-
-    .hero-card{
-
-        width:290px;
-
-        height:340px;
-    }
-
-    .about{
-
-        grid-template-columns:1fr;
-    }
-
-    .teachers{
-
-        grid-template-columns:
-        repeat(2,1fr);
-    }
-
-    .activities{
-
-        grid-template-columns:1fr;
-    }
-
-    .contact{
-
-        grid-template-columns:1fr;
-    }
-
-}
-
-@media(max-width:500px){
-
-    .teachers{
-
-        grid-template-columns:1fr;
-    }
-
-    .hero h1{
-
-        font-size:45px;
-    }
-
-    .section-title h2{
-
-        font-size:34px;
-    }
-
-    .about-list{
-
-        grid-template-columns:1fr;
-    }
-
-}
-
+  }
+  .hero-inner{
+    max-width:1240px; margin:0 auto;
+    display:grid; grid-template-columns:1.1fr 0.9fr; gap:40px; align-items:center;
+    position:relative; z-index:2;
+  }
+  .eyebrow{
+    display:inline-flex; align-items:center; gap:8px;
+    color:var(--gold-light); font-size:0.8rem; letter-spacing:0.18em; text-transform:uppercase;
+    font-weight:600; margin-bottom:18px;
+  }
+  .eyebrow::before{
+    content:''; width:26px; height:2px; background:var(--gold-light); display:inline-block;
+  }
+  .hero h1{
+    color:var(--white); font-size:2.7rem; line-height:1.2; font-weight:700;
+    text-shadow:0 4px 20px rgba(0,0,0,0.15);
+  }
+  .hero h1 span{
+    background:linear-gradient(90deg, var(--gold-light), var(--gold) 60%, #fff6de);
+    -webkit-background-clip:text; background-clip:text; color:transparent;
+  }
+  .hero .sub{
+    margin-top:16px; color:rgba(255,255,255,0.75);
+    font-size:0.92rem; letter-spacing:0.12em; font-weight:500;
+  }
+  .hero p.lede{
+    margin-top:22px; color:rgba(255,255,255,0.82); max-width:46ch; line-height:1.8; font-size:1rem;
+  }
+  .hero-ctas{ display:flex; gap:14px; margin-top:32px; flex-wrap:wrap; }
+  .btn-gold{
+    background:linear-gradient(135deg, var(--gold-light), var(--gold));
+    color:var(--purple-deep); font-weight:700; padding:13px 26px; border-radius:999px;
+    border:none; font-size:0.95rem; box-shadow:0 12px 30px -10px rgba(216,172,82,0.7);
+    transition:transform .2s ease;
+  }
+  .btn-gold:hover{ transform:translateY(-2px); }
+  .btn-outline{
+    background:transparent; border:1.5px solid rgba(255,255,255,0.5); color:var(--white);
+    font-weight:600; padding:12px 24px; border-radius:999px; font-size:0.95rem;
+    transition:background .2s ease, border-color .2s ease;
+  }
+  .btn-outline:hover{ background:rgba(255,255,255,0.1); border-color:var(--white); }
+
+  .hero-photo{
+    position:relative; width:100%; aspect-ratio:1/1; max-width:420px; margin:0 auto;
+  }
+  .hero-photo .ring{
+    position:absolute; inset:0; border-radius:50%;
+    background:conic-gradient(from 210deg, var(--gold-light), var(--gold) 30%, var(--purple-light) 55%, var(--gold) 80%, var(--gold-light));
+    padding:7px;
+    animation:spin 22s linear infinite;
+  }
+  @media (prefers-reduced-motion: reduce){ .hero-photo .ring{ animation:none; } }
+  @keyframes spin{ to{ transform:rotate(360deg); } }
+  .hero-photo .ring-inner{
+    width:100%; height:100%; border-radius:50%; overflow:hidden;
+    background:var(--purple-deep);
+  }
+  .hero-photo img{ width:100%; height:100%; object-fit:cover; }
+  .hero-photo .badge{
+    position:absolute; bottom:6%; left:-6%;
+    background:var(--white); color:var(--purple-deep);
+    font-family:'Kanit',sans-serif; font-weight:700; font-size:0.82rem;
+    padding:10px 16px; border-radius:14px; box-shadow:var(--shadow);
+    display:flex; align-items:center; gap:8px;
+  }
+  .hero-photo .badge .dot{ width:9px; height:9px; border-radius:50%; background:#3bc17a; }
+
+  /* ---------- News strip ---------- */
+  .news-strip{
+    position:relative; z-index:3; margin-top:-90px;
+    background:var(--purple-deep);
+    max-width:1240px; margin-left:auto; margin-right:auto;
+    border-radius:22px; padding:26px 32px;
+    box-shadow:var(--shadow);
+    display:flex; align-items:center; gap:24px; flex-wrap:wrap;
+    border:1px solid rgba(216,172,82,0.35);
+  }
+  .news-strip h2{
+    color:var(--white); font-size:1.35rem; font-weight:600; white-space:nowrap;
+    padding-right:24px; border-right:1px solid rgba(255,255,255,0.18);
+  }
+  .news-strip .cards{
+    display:grid; grid-template-columns:repeat(4,1fr); gap:16px; flex:1;
+  }
+  @media (max-width:1000px){
+    .news-strip{ flex-direction:column; align-items:stretch; margin-top:20px; border-radius:16px;}
+    .news-strip h2{ border-right:none; border-bottom:1px solid rgba(255,255,255,0.18); padding:0 0 14px 0; }
+    .news-strip .cards{ grid-template-columns:1fr 1fr; }
+  }
+  @media (max-width:560px){ .news-strip .cards{ grid-template-columns:1fr; } }
+  .news-card{
+    background:rgba(255,255,255,0.06); border:1px solid rgba(255,255,255,0.12);
+    border-radius:14px; padding:16px; color:var(--white);
+    transition:background .2s ease, transform .2s ease;
+  }
+  .news-card:hover{ background:rgba(255,255,255,0.12); transform:translateY(-3px); }
+  .news-card .tag{
+    display:inline-block; font-size:0.68rem; letter-spacing:0.08em; font-weight:700;
+    color:var(--purple-deep); background:var(--gold-light);
+    padding:3px 10px; border-radius:999px; margin-bottom:10px;
+  }
+  .news-card h3{ font-size:0.95rem; font-weight:500; line-height:1.5; }
+  .news-card .date{ margin-top:10px; font-size:0.75rem; color:rgba(255,255,255,0.55); }
+
+  /* ---------- General section ---------- */
+  section.page-section{ padding:90px 28px; max-width:1240px; margin:0 auto; }
+  .section-head{ text-align:center; max-width:640px; margin:0 auto 56px; }
+  .section-head .eyebrow{ color:var(--gold-deep); justify-content:center; display:flex; }
+  .section-head .eyebrow::before{ background:var(--gold-deep); }
+  .section-head h2{ font-size:2rem; color:var(--purple-deep); font-weight:700; }
+  .section-head p{ margin-top:14px; color:var(--ink-soft); line-height:1.8; }
+
+  /* ---------- Staff grid ---------- */
+  .staff-grid{
+    display:grid; grid-template-columns:repeat(3,1fr); gap:38px 28px;
+  }
+  @media (max-width:860px){ .staff-grid{ grid-template-columns:repeat(2,1fr);} }
+  @media (max-width:560px){ .staff-grid{ grid-template-columns:1fr;} }
+  .staff-card{ text-align:center; }
+  .staff-photo{
+    width:150px; height:150px; margin:0 auto 18px; border-radius:50%; position:relative;
+    background:conic-gradient(from 140deg, var(--gold), var(--gold-light), var(--purple-light), var(--gold));
+    padding:5px;
+  }
+  .staff-photo .inner{
+    width:100%; height:100%; border-radius:50%; overflow:hidden; background:var(--purple-mist);
+    display:flex; align-items:center; justify-content:center;
+  }
+  .staff-photo .inner svg{ width:56%; height:56%; color:var(--purple-light); }
+  .staff-card h3{ font-family:'Kanit',sans-serif; font-size:1.02rem; color:var(--purple-deep); font-weight:600; }
+  .staff-card .role{
+    display:inline-block; margin-top:8px; font-size:0.78rem; color:var(--gold-deep);
+    background:var(--purple-mist); border:1px solid var(--gold-light);
+    padding:5px 14px; border-radius:999px; font-weight:600;
+  }
+
+  /* ---------- Courses ---------- */
+  .course-grid{ display:grid; grid-template-columns:repeat(2,1fr); gap:28px; }
+  @media (max-width:760px){ .course-grid{ grid-template-columns:1fr; } }
+  .course-card{
+    background:var(--white); border-radius:22px; padding:34px;
+    box-shadow:var(--shadow); border:1px solid rgba(75,26,125,0.08);
+    position:relative; overflow:hidden;
+  }
+  .course-card::before{
+    content:''; position:absolute; top:-40px; right:-40px; width:140px; height:140px;
+    border-radius:50%; background:radial-gradient(circle, rgba(216,172,82,0.25), transparent 70%);
+  }
+  .course-card .num{
+    font-family:'Kanit',sans-serif; font-weight:800; font-size:0.85rem;
+    color:var(--white); background:var(--purple); display:inline-flex;
+    align-items:center; justify-content:center; width:34px; height:34px; border-radius:50%;
+    margin-bottom:18px;
+  }
+  .course-card h3{ font-size:1.25rem; color:var(--purple-deep); font-weight:700; margin-bottom:10px; }
+  .course-card p{ color:var(--ink-soft); line-height:1.85; font-size:0.93rem; }
+  .course-card ul{ margin-top:18px; display:flex; flex-direction:column; gap:9px; }
+  .course-card li{
+    font-size:0.86rem; color:var(--ink); display:flex; gap:10px; align-items:flex-start;
+  }
+  .course-card li::before{
+    content:''; margin-top:7px; width:6px; height:6px; border-radius:50%; background:var(--gold); flex-shrink:0;
+  }
+
+  /* ---------- Documents / schedule folders ---------- */
+  .doc-grid{ display:grid; grid-template-columns:repeat(4,1fr); gap:26px; }
+  @media (max-width:900px){ .doc-grid{ grid-template-columns:repeat(2,1fr);} }
+  @media (max-width:480px){ .doc-grid{ grid-template-columns:1fr;} }
+  .doc-card{
+    background:var(--white); border:1px solid rgba(75,26,125,0.1); border-radius:20px;
+    padding:34px 20px; text-align:center; box-shadow:0 10px 30px -18px rgba(46,15,77,0.25);
+    transition:transform .2s ease, box-shadow .2s ease, border-color .2s ease;
+  }
+  .doc-card:hover{ transform:translateY(-5px); box-shadow:var(--shadow); border-color:var(--gold); }
+  .doc-card svg{ width:64px; height:64px; margin:0 auto 18px; }
+  .doc-card h3{ font-size:0.95rem; color:var(--purple-deep); font-weight:600; }
+
+  /* ---------- Footer ---------- */
+  footer{
+    position:relative; background:var(--purple-deep); color:rgba(255,255,255,0.75);
+    padding:56px 28px 26px; overflow:hidden; margin-top:40px;
+  }
+  .footer-inner{
+    max-width:1240px; margin:0 auto; position:relative; z-index:2;
+    display:flex; justify-content:space-between; gap:30px; flex-wrap:wrap;
+  }
+  footer .brand-text .th{ color:var(--white); }
+  footer .col h4{ color:var(--gold-light); font-size:0.9rem; margin-bottom:14px; font-weight:600; }
+  footer .col li{ font-size:0.86rem; margin-bottom:9px; color:rgba(255,255,255,0.65); }
+  .footer-bottom{
+    max-width:1240px; margin:34px auto 0; padding-top:20px; border-top:1px solid rgba(255,255,255,0.12);
+    text-align:center; font-size:0.78rem; color:rgba(255,255,255,0.45); position:relative; z-index:2;
+  }
+
+  .page{ display:none; }
+  .page.active{ display:block; animation:fade .4s ease; }
+  @keyframes fade{ from{ opacity:0; transform:translateY(8px);} to{ opacity:1; transform:translateY(0);} }
 </style>
 </head>
-
 <body>
 
-<!-- ================= NAVBAR ================= -->
-
 <header>
-
-<div class="logo">
-DBT
-</div>
-
-<nav>
-
-<a href="#home">หน้าแรก</a>
-
-<a href="#about">เกี่ยวกับ</a>
-
-<a href="#teachers">บุคลากร</a>
-
-<a href="#schedule">ตารางสอน</a>
-
-<a href="#activities">กิจกรรม</a>
-
-<a href="#contact">ติดต่อ</a>
-
-</nav>
-
+  <div class="nav-inner">
+    <div class="brand">
+      <div class="brand-mark">DBT</div>
+      <div class="brand-text">
+        <span class="en">Digital Business Technology</span>
+        <span class="th">สาขาเทคโนโลยีธุรกิจดิจิทัล</span>
+      </div>
+    </div>
+    <button class="menu-toggle" id="menuToggle" aria-label="เปิดเมนู">☰</button>
+    <nav class="links" id="navLinks">
+      <button data-page="home" class="active">หน้าแรก</button>
+      <button data-page="staff">บุคลากร</button>
+      <button data-page="courses">หลักสูตร</button>
+      <button data-page="docs">ตารางเรียน</button>
+      <button data-page="news">ข่าวสาร</button>
+    </nav>
+    <div class="avatar-btn" aria-hidden="true">
+      <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="8" r="4"/><path d="M4 20c0-4.4 3.6-7 8-7s8 2.6 8 7"/></svg>
+    </div>
+  </div>
 </header>
 
+<!-- HOME PAGE -->
+<div class="page active" id="page-home">
+  <section class="hero">
+    <div class="ribbon-wrap">
+      <svg width="700" height="500" viewBox="0 0 700 500" style="left:-140px; top:-40px;">
+        <path d="M0,120 C120,40 220,180 340,90 C420,30 520,120 640,20" stroke="url(#g1)" stroke-width="26" fill="none" stroke-linecap="round" opacity="0.9"/>
+        <path d="M-20,220 C110,150 230,280 360,190 C450,130 540,220 660,120" stroke="url(#g2)" stroke-width="14" fill="none" stroke-linecap="round" opacity="0.6"/>
+        <defs>
+          <linearGradient id="g1" x1="0" y1="0" x2="1" y2="1">
+            <stop offset="0%" stop-color="#f0d99b"/>
+            <stop offset="50%" stop-color="#d8ac52"/>
+            <stop offset="100%" stop-color="#a9772b"/>
+          </linearGradient>
+          <linearGradient id="g2" x1="0" y1="0" x2="1" y2="0">
+            <stop offset="0%" stop-color="#7b4bb8"/>
+            <stop offset="100%" stop-color="#d8ac52"/>
+          </linearGradient>
+        </defs>
+      </svg>
+      <svg width="640" height="420" viewBox="0 0 640 420" style="right:-160px; bottom:-120px;">
+        <path d="M0,60 C140,10 220,140 360,70 C470,20 560,110 640,60" stroke="url(#g3)" stroke-width="30" fill="none" stroke-linecap="round" opacity="0.85"/>
+        <path d="M20,160 C160,110 240,240 380,170 C480,120 570,200 660,150" stroke="url(#g4)" stroke-width="12" fill="none" stroke-linecap="round" opacity="0.5"/>
+        <defs>
+          <linearGradient id="g3" x1="0" y1="0" x2="1" y2="0">
+            <stop offset="0%" stop-color="#a9772b"/>
+            <stop offset="50%" stop-color="#d8ac52"/>
+            <stop offset="100%" stop-color="#f0d99b"/>
+          </linearGradient>
+          <linearGradient id="g4" x1="0" y1="0" x2="1" y2="1">
+            <stop offset="0%" stop-color="#d8ac52"/>
+            <stop offset="100%" stop-color="#7b4bb8"/>
+          </linearGradient>
+        </defs>
+      </svg>
+    </div>
 
-<!-- ================= HERO ================= -->
+    <div class="hero-inner">
+      <div>
+        <span class="eyebrow">วิทยาลัยเทคโนโลยี</span>
+        <h1>สาขาเทคโนโลยี<br><span>ธุรกิจดิจิทัล</span></h1>
+        <div class="sub">DIGITAL&nbsp; BUSINESS&nbsp; TECHNOLOGY</div>
+        <p class="lede">ปั้นนักธุรกิจดิจิทัลยุคใหม่ ผสานทักษะการตลาดออนไลน์ การจัดการข้อมูล และเทคโนโลยี เพื่อพร้อมก้าวสู่โลกธุรกิจจริง</p>
+        <div class="hero-ctas">
+          <button class="btn-gold" onclick="goPage('courses')">ดูหลักสูตรที่เปิดสอน</button>
+          <button class="btn-outline" onclick="goPage('news')">ข่าวประชาสัมพันธ์</button>
+        </div>
+      </div>
+      <div class="hero-photo">
+        <div class="ring">
+          <div class="ring-inner">
+            <img src="https://images.unsplash.com/photo-1523240795612-9a054b0db644?q=80&w=800&auto=format&fit=crop" alt="นักเรียนสาขาเทคโนโลยีธุรกิจดิจิทัลถือธงในกิจกรรมของวิทยาลัย">
+          </div>
+        </div>
+        <div class="badge"><span class="dot"></span> เปิดรับสมัครนักเรียนใหม่</div>
+      </div>
+    </div>
+  </section>
 
-<section id="home" class="hero">
+  <div style="padding:0 28px;">
+    <div class="news-strip">
+      <h2>ข่าวประชาสัมพันธ์</h2>
+      <div class="cards">
+        <div class="news-card">
+          <span class="tag">รับสมัคร</span>
+          <h3>เปิดรับสมัครนักเรียน ปวช. สาขาเทคโนโลยีธุรกิจดิจิทัล รุ่นใหม่</h3>
+          <div class="date">15 ส.ค. 2569</div>
+        </div>
+        <div class="news-card">
+          <span class="tag">กิจกรรม</span>
+          <h3>อบรมเชิงปฏิบัติการ “การตลาดดิจิทัลสำหรับธุรกิจ SME”</h3>
+          <div class="date">10 ส.ค. 2569</div>
+        </div>
+        <div class="news-card">
+          <span class="tag">ความสำเร็จ</span>
+          <h3>นักเรียนสาขาฯ คว้ารางวัลชนะเลิศแข่งขันทักษะระดับภาค</h3>
+          <div class="date">2 ส.ค. 2569</div>
+        </div>
+        <div class="news-card">
+          <span class="tag">ประกาศ</span>
+          <h3>ตารางสอบปลายภาคเรียนที่ 1 ปีการศึกษา 2569</h3>
+          <div class="date">28 ก.ค. 2569</div>
+        </div>
+      </div>
+    </div>
+  </div>
 
-<div class="hero-text">
-
-<p class="hero-small">
-DIGITAL BUSINESS TECHNOLOGY
-</p>
-
-<h1>
-
-เทคโนโลยี<br>
-
-<span>ธุรกิจดิจิทัล</span>
-
-</h1>
-
-<p class="hero-description">
-
-เรียนรู้เทคโนโลยี พัฒนาความคิดสร้างสรรค์
-สร้างทักษะดิจิทัล และเตรียมพร้อมสู่โลกธุรกิจยุคใหม่
-
-</p>
-
-<a href="#about" class="main-button">
-
-รู้จักสาขาของเรา →
-
-</a>
-
+  <section class="page-section" aria-label="จุดเด่นของสาขา">
+    <div class="section-head">
+      <span class="eyebrow">ทำไมต้องเรา</span>
+      <h2>เรียนรู้จากของจริง ทำงานได้จริง</h2>
+      <p>หลักสูตรออกแบบร่วมกับสถานประกอบการ เน้นฝึกปฏิบัติควบคู่ทฤษฎี พร้อมเทคโนโลยีที่ทันสมัย</p>
+    </div>
+    <div class="course-grid">
+      <div class="course-card">
+        <div class="num">1</div>
+        <h3>ฝึกงานกับสถานประกอบการจริง</h3>
+        <p>เครือข่ายพันธมิตรธุรกิจดิจิทัลกว่า 30 แห่ง เปิดโอกาสฝึกงานและทำงานทันทีหลังจบ</p>
+      </div>
+      <div class="course-card">
+        <div class="num">2</div>
+        <h3>ครูผู้สอนมากประสบการณ์</h3>
+        <p>ทีมครูผู้เชี่ยวชาญเฉพาะทางด้านธุรกิจดิจิทัล การตลาดออนไลน์ และเทคโนโลยีสารสนเทศ</p>
+      </div>
+    </div>
+  </section>
 </div>
 
-
-<div class="hero-card">
-
-<div class="dbt-circle">
-DBT
+<!-- STAFF PAGE -->
+<div class="page" id="page-staff">
+  <section class="page-section">
+    <div class="section-head">
+      <span class="eyebrow">ทีมงานของเรา</span>
+      <h2>บุคลากรสาขาเทคโนโลยีธุรกิจดิจิทัล</h2>
+      <p>คณะครูผู้สอนที่พร้อมดูแลและถ่ายทอดความรู้ให้นักเรียนทุกคนอย่างใกล้ชิด</p>
+    </div>
+    <div class="staff-grid" id="staffGrid"></div>
+  </section>
 </div>
 
-<h2>
-Digital Business
-</h2>
-
-<p>
-Technology
-</p>
-
+<!-- COURSES PAGE -->
+<div class="page" id="page-courses">
+  <section class="page-section">
+    <div class="section-head">
+      <span class="eyebrow">หลักสูตร</span>
+      <h2>หลักสูตรที่เปิดสอน</h2>
+      <p>เลือกเส้นทางการเรียนที่ใช่ ตั้งแต่ระดับ ปวช. ถึง ปวส.</p>
+    </div>
+    <div class="course-grid">
+      <div class="course-card">
+        <div class="num">ปวช.</div>
+        <h3>ประกาศนียบัตรวิชาชีพ (ปวช.)<br>สาขาเทคโนโลยีธุรกิจดิจิทัล</h3>
+        <p>หลักสูตร 3 ปี ปูพื้นฐานธุรกิจดิจิทัล การตลาดออนไลน์ และการใช้เทคโนโลยีสารสนเทศเพื่อธุรกิจ</p>
+        <ul>
+          <li>พื้นฐานการตลาดดิจิทัลและอีคอมเมิร์ซ</li>
+          <li>การออกแบบสื่อและกราฟิกเพื่อธุรกิจ</li>
+          <li>การจัดการข้อมูลและระบบสารสนเทศ</li>
+        </ul>
+      </div>
+      <div class="course-card">
+        <div class="num">ปวส.</div>
+        <h3>ประกาศนียบัตรวิชาชีพชั้นสูง (ปวส.)<br>สาขาเทคโนโลยีธุรกิจดิจิทัล</h3>
+        <p>หลักสูตร 2 ปี ต่อยอดความรู้เชิงลึก เน้นการบริหารธุรกิจดิจิทัลและการวิเคราะห์ข้อมูลระดับสูง</p>
+        <ul>
+          <li>การบริหารจัดการธุรกิจดิจิทัล</li>
+          <li>การวิเคราะห์ข้อมูลเพื่อการตัดสินใจ</li>
+          <li>โครงงานธุรกิจดิจิทัลร่วมกับสถานประกอบการ</li>
+        </ul>
+      </div>
+    </div>
+  </section>
 </div>
 
-</section>
-
-
-<!-- ================= ABOUT ================= -->
-
-<section id="about" class="section">
-
-<div class="section-title">
-
-<small>ABOUT DBT</small>
-
-<h2>
-เกี่ยวกับสาขา
-</h2>
-
-<p>
-สาขาเทคโนโลยีธุรกิจดิจิทัล
-มุ่งเน้นการเรียนรู้เทคโนโลยีและการประยุกต์ใช้
-ในธุรกิจยุคดิจิทัล
-</p>
-
+<!-- DOCS / SCHEDULE PAGE -->
+<div class="page" id="page-docs">
+  <section class="page-section">
+    <div class="section-head">
+      <span class="eyebrow">เอกสารและตารางเรียน</span>
+      <h2>ตารางเรียน</h2>
+      <p>ดาวน์โหลดตารางสอนและแบบฟอร์มเอกสารที่เกี่ยวข้อง</p>
+    </div>
+    <div class="doc-grid" id="docGrid"></div>
+  </section>
 </div>
 
-
-<div class="about">
-
-<div class="about-box">
-
-<h3>
-เรียนรู้ สร้างสรรค์ และเติบโต
-</h3>
-
-<p>
-
-นักเรียนจะได้เรียนรู้ทั้งด้านเทคโนโลยี
-การออกแบบ การพัฒนาเว็บไซต์
-ธุรกิจดิจิทัล และทักษะที่จำเป็น
-สำหรับการทำงานในอนาคต
-
-</p>
-
+<!-- NEWS PAGE -->
+<div class="page" id="page-news">
+  <section class="page-section">
+    <div class="section-head">
+      <span class="eyebrow">ข่าวสาร</span>
+      <h2>ข่าวประชาสัมพันธ์ทั้งหมด</h2>
+      <p>ติดตามความเคลื่อนไหวและกิจกรรมล่าสุดของสาขา</p>
+    </div>
+    <div class="doc-grid" style="grid-template-columns:repeat(2,1fr);" id="newsGrid2"></div>
+  </section>
 </div>
-
-
-<div class="about-list">
-
-<div class="about-item">
-
-<strong>01</strong>
-
-<p>
-การพัฒนาเว็บไซต์
-</p>
-
-</div>
-
-<div class="about-item">
-
-<strong>02</strong>
-
-<p>
-ธุรกิจดิจิทัล
-</p>
-
-</div>
-
-<div class="about-item">
-
-<strong>03</strong>
-
-<p>
-กราฟิกและการออกแบบ
-</p>
-
-</div>
-
-<div class="about-item">
-
-<strong>04</strong>
-
-<p>
-เทคโนโลยีสารสนเทศ
-</p>
-
-</div>
-
-</div>
-
-</div>
-
-</section>
-
-
-<!-- ================= TEACHERS ================= -->
-
-<section id="teachers" class="section">
-
-<div class="section-title">
-
-<small>OUR TEAM</small>
-
-<h2>
-บุคลากร
-</h2>
-
-<p>
-คณะครูและบุคลากรประจำสาขา
-</p>
-
-</div>
-
-
-<div class="teachers">
-
-
-<div class="teacher">
-
-<div class="teacher-photo">
-👤
-</div>
-
-<h3>
-ชื่อ - นามสกุล
-</h3>
-
-<p>
-หัวหน้าสาขา
-</p>
-
-<span>
-เทคโนโลยีธุรกิจดิจิทัล
-</span>
-
-</div>
-
-
-<div class="teacher">
-
-<div class="teacher-photo">
-👤
-</div>
-
-<h3>
-ชื่อ - นามสกุล
-</h3>
-
-<p>
-ครูประจำสาขา
-</p>
-
-<span>
-เทคโนโลยีธุรกิจดิจิทัล
-</span>
-
-</div>
-
-
-<div class="teacher">
-
-<div class="teacher-photo">
-👤
-</div>
-
-<h3>
-ชื่อ - นามสกุล
-</h3>
-
-<p>
-ครูประจำสาขา
-</p>
-
-<span>
-เทคโนโลยีธุรกิจดิจิทัล
-</span>
-
-</div>
-
-
-<div class="teacher">
-
-<div class="teacher-photo">
-👤
-</div>
-
-<h3>
-ชื่อ - นามสกุล
-</h3>
-
-<p>
-ครูประจำสาขา
-</p>
-
-<span>
-เทคโนโลยีธุรกิจดิจิทัล
-</span>
-
-</div>
-
-
-</div>
-
-</section>
-
-
-<!-- ================= SCHEDULE ================= -->
-
-<section id="schedule" class="section">
-
-<div class="section-title">
-
-<small>SCHEDULE</small>
-
-<h2>
-ตารางสอน
-</h2>
-
-<p>
-ตารางเรียนและตารางสอนของสาขา
-</p>
-
-</div>
-
-
-<div class="schedule-wrapper">
-
-<table>
-
-<thead>
-
-<tr>
-
-<th>
-วัน / เวลา
-</th>
-
-<th>
-08:00 - 09:00
-</th>
-
-<th>
-09:00 - 10:00
-</th>
-
-<th>
-10:00 - 11:00
-</th>
-
-<th>
-11:00 - 12:00
-</th>
-
-<th>
-13:00 - 14:00
-</th>
-
-<th>
-14:00 - 15:00
-</th>
-
-</tr>
-
-</thead>
-
-
-<tbody>
-
-<tr>
-
-<td>
-จันทร์
-</td>
-
-<td>
-ฐานข้อมูล
-</td>
-
-<td>
-ฐานข้อมูล
-</td>
-
-<td>
-—
-</td>
-
-<td>
-—
-</td>
-
-<td>
-การตลาดดิจิทัล
-</td>
-
-<td>
-การตลาดดิจิทัล
-</td>
-
-</tr>
-
-
-<tr>
-
-<td>
-อังคาร
-</td>
-
-<td>
-การเขียนโปรแกรม
-</td>
-
-<td>
-การเขียนโปรแกรม
-</td>
-
-<td>
-—
-</td>
-
-<td>
-—
-</td>
-
-<td>
-กราฟิก
-</td>
-
-<td>
-กราฟิก
-</td>
-
-</tr>
-
-
-<tr>
-
-<td>
-พุธ
-</td>
-
-<td>
-ภาษาอังกฤษ
-</td>
-
-<td>
-ภาษาอังกฤษ
-</td>
-
-<td>
-—
-</td>
-
-<td>
-—
-</td>
-
-<td>
-เว็บไซต์
-</td>
-
-<td>
-เว็บไซต์
-</td>
-
-</tr>
-
-
-<tr>
-
-<td>
-พฤหัสบดี
-</td>
-
-<td>
-ธุรกิจดิจิทัล
-</td>
-
-<td>
-ธุรกิจดิจิทัล
-</td>
-
-<td>
-—
-</td>
-
-<td>
-—
-</td>
-
-<td>
-กิจกรรม
-</td>
-
-<td>
-กิจกรรม
-</td>
-
-</tr>
-
-
-<tr>
-
-<td>
-ศุกร์
-</td>
-
-<td>
-คอมพิวเตอร์
-</td>
-
-<td>
-คอมพิวเตอร์
-</td>
-
-<td>
-—
-</td>
-
-<td>
-—
-</td>
-
-<td>
-โครงงาน
-</td>
-
-<td>
-โครงงาน
-</td>
-
-</tr>
-
-</tbody>
-
-</table>
-
-</div>
-
-</section>
-
-
-<!-- ================= ACTIVITIES ================= -->
-
-<section id="activities" class="section">
-
-<div class="section-title">
-
-<small>ACTIVITIES</small>
-
-<h2>
-กิจกรรม
-</h2>
-
-<p>
-กิจกรรมและข่าวสารของสาขา
-</p>
-
-</div>
-
-
-<div class="activities">
-
-
-<div class="activity">
-
-<div class="activity-img">
-💻
-</div>
-
-<div class="activity-content">
-
-<small>
-ACTIVITY 01
-</small>
-
-<h3>
-กิจกรรมพัฒนาทักษะดิจิทัล
-</h3>
-
-<p>
-ส่งเสริมให้นักเรียนพัฒนาความรู้
-และทักษะด้านเทคโนโลยีดิจิทัล
-</p>
-
-</div>
-
-</div>
-
-
-<div class="activity">
-
-<div class="activity-img">
-🎨
-</div>
-
-<div class="activity-content">
-
-<small>
-ACTIVITY 02
-</small>
-
-<h3>
-กิจกรรมสร้างสรรค์ผลงาน
-</h3>
-
-<p>
-เปิดโอกาสให้นักเรียนได้สร้างสรรค์
-ผลงานและนำเสนอไอเดีย
-</p>
-
-</div>
-
-</div>
-
-
-<div class="activity">
-
-<div class="activity-img">
-🏆
-</div>
-
-<div class="activity-content">
-
-<small>
-ACTIVITY 03
-</small>
-
-<h3>
-การแข่งขันทักษะ
-</h3>
-
-<p>
-ส่งเสริมความสามารถผ่านการแข่งขัน
-และการทำงานร่วมกันเป็นทีม
-</p>
-
-</div>
-
-</div>
-
-
-</div>
-
-</section>
-
-
-<!-- ================= CONTACT ================= -->
-
-<section id="contact" class="section">
-
-<div class="section-title">
-
-<small>CONTACT</small>
-
-<h2>
-ติดต่อเรา
-</h2>
-
-<p>
-ช่องทางการติดต่อสาขาเทคโนโลยีธุรกิจดิจิทัล
-</p>
-
-</div>
-
-
-<div class="contact">
-
-
-<div class="contact-info">
-
-
-<div class="contact-item">
-
-<div class="contact-icon">
-📍
-</div>
-
-<div>
-
-<h3>
-ที่อยู่
-</h3>
-
-<p>
-วิทยาลัยอาชีวศึกษาสระบุรี
-</p>
-
-</div>
-
-</div>
-
-
-<div class="contact-item">
-
-<div class="contact-icon">
-☎
-</div>
-
-<div>
-
-<h3>
-โทรศัพท์
-</h3>
-
-<p>
-02-XXX-XXXX
-</p>
-
-</div>
-
-</div>
-
-
-<div class="contact-item">
-
-<div class="contact-icon">
-✉️
-</div>
-
-<div>
-
-<h3>
-Email
-</h3>
-
-<p>
-dbt@example.com
-</p>
-
-</div>
-
-</div>
-
-
-<div class="contact-item">
-
-<div class="contact-icon">
-🌐
-</div>
-
-<div>
-
-<h3>
-Facebook
-</h3>
-
-<p>
-DBT Digital Business Technology
-</p>
-
-</div>
-
-</div>
-
-
-</div>
-
-
-<div class="contact-form">
-
-<h3>
-ส่งข้อความถึงเรา
-</h3>
-
-<input
-type="text"
-placeholder="ชื่อ - นามสกุล"
->
-
-<input
-type="email"
-placeholder="อีเมล"
->
-
-<textarea
-placeholder="พิมพ์ข้อความของคุณ..."
-></textarea>
-
-<button>
-ส่งข้อความ
-</button>
-
-</div>
-
-
-</div>
-
-</section>
-
-
-<!-- ================= FOOTER ================= -->
 
 <footer>
-
-<p>
-© 2026 <span>DBT</span> |
-Digital Business Technology
-</p>
-
+  <div class="ribbon-wrap">
+    <svg width="600" height="300" viewBox="0 0 600 300" style="left:-120px; bottom:-100px;">
+      <path d="M0,150 C120,90 220,220 340,140 C420,90 500,160 600,100" stroke="url(#gf)" stroke-width="20" fill="none" stroke-linecap="round" opacity="0.5"/>
+      <defs>
+        <linearGradient id="gf" x1="0" y1="0" x2="1" y2="0">
+          <stop offset="0%" stop-color="#d8ac52"/>
+          <stop offset="100%" stop-color="#7b4bb8"/>
+        </linearGradient>
+      </defs>
+    </svg>
+  </div>
+  <div class="footer-inner">
+    <div>
+      <div class="brand">
+        <div class="brand-mark">DBT</div>
+        <div class="brand-text"><span class="th">เทคโนโลยีธุรกิจดิจิทัล</span></div>
+      </div>
+      <p style="margin-top:14px; max-width:34ch; font-size:0.85rem;">สาขาวิชาเทคโนโลยีธุรกิจดิจิทัล มุ่งผลิตนักธุรกิจดิจิทัลรุ่นใหม่ที่มีคุณภาพสู่ตลาดแรงงาน</p>
+    </div>
+    <div class="col">
+      <h4>เมนู</h4>
+      <ul>
+        <li>หน้าแรก</li><li>บุคลากร</li><li>หลักสูตร</li><li>ตารางเรียน</li>
+      </ul>
+    </div>
+    <div class="col">
+      <h4>ติดต่อเรา</h4>
+      <ul>
+        <li>อาคารเทคโนโลยีธุรกิจดิจิทัล ชั้น 2</li>
+        <li>โทร. 0-000-0000</li>
+        <li>dbt@college.ac.th</li>
+      </ul>
+    </div>
+  </div>
+  <div class="footer-bottom">© 2569 สาขาเทคโนโลยีธุรกิจดิจิทัล — Digital Business Technology</div>
 </footer>
 
+<script>
+  // Navigation
+  const buttons = document.querySelectorAll('nav.links button');
+  const pages = document.querySelectorAll('.page');
+  function goPage(id){
+    pages.forEach(p => p.classList.toggle('active', p.id === 'page-'+id));
+    buttons.forEach(b => b.classList.toggle('active', b.dataset.page === id));
+    document.getElementById('navLinks').classList.remove('open');
+    window.scrollTo({top:0, behavior:'smooth'});
+  }
+  buttons.forEach(b => b.addEventListener('click', () => goPage(b.dataset.page)));
+  document.getElementById('menuToggle').addEventListener('click', () => {
+    document.getElementById('navLinks').classList.toggle('open');
+  });
+
+  // Staff data
+  const staffIcon = `<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><circle cx="12" cy="8" r="4"/><path d="M4 20c0-4.4 3.6-7 8-7s8 2.6 8 7"/></svg>`;
+  const staff = [
+    ["หัวหน้าสาขาวิชาเทคโนโลยีธุรกิจดิจิทัล"],
+    ["ครูประจำสาขาวิชาเทคโนโลยีธุรกิจดิจิทัล"],
+    ["ครูประจำสาขาวิชาเทคโนโลยีธุรกิจดิจิทัล"],
+    ["ครูประจำสาขาวิชาเทคโนโลยีธุรกิจดิจิทัล"],
+    ["ครูประจำสาขาวิชาเทคโนโลยีธุรกิจดิจิทัล"],
+    ["ครูประจำสาขาวิชาเทคโนโลยีธุรกิจดิจิทัล"],
+    ["ครูประจำสาขาวิชาเทคโนโลยีธุรกิจดิจิทัล"],
+    ["ครูประจำสาขาวิชาเทคโนโลยีธุรกิจดิจิทัล"],
+    ["ครูประจำสาขาวิชาเทคโนโลยีธุรกิจดิจิทัล"]
+  ];
+  const staffGrid = document.getElementById('staffGrid');
+  staff.forEach((s,i) => {
+    staffGrid.innerHTML += `
+      <div class="staff-card">
+        <div class="staff-photo"><div class="inner">${staffIcon}</div></div>
+        <h3>อาจารย์ ท่านที่ ${i+1}</h3>
+        <span class="role">${s[0]}</span>
+      </div>`;
+  });
+
+  // Docs data
+  const folderIcon = `<svg viewBox="0 0 64 64" fill="none" stroke="#4b1a7d" stroke-width="3" stroke-linejoin="round"><rect x="8" y="20" width="48" height="32" rx="4"/><path d="M8 20v-6a4 4 0 0 1 4-4h12l6 8"/><path d="M12 20h44a4 4 0 0 1 4 4v2H12z" fill="#d8ac52" stroke="none"/></svg>`;
+  const docs = ["ตารางสอนบุคลากร","ตารางสอนนักเรียน","ใบขออนุญาติออกนอกวิทัลย์","ใบลา"];
+  const docGrid = document.getElementById('docGrid');
+  docs.forEach(d => {
+    docGrid.innerHTML += `<div class="doc-card">${folderIcon}<h3>${d}</h3></div>`;
+  });
+
+  // News page (full list)
+  const newsFull = [
+    ["รับสมัคร","เปิดรับสมัครนักเรียน ปวช. สาขาเทคโนโลยีธุรกิจดิจิทัล รุ่นใหม่","15 ส.ค. 2569"],
+    ["กิจกรรม","อบรมเชิงปฏิบัติการ “การตลาดดิจิทัลสำหรับธุรกิจ SME”","10 ส.ค. 2569"],
+    ["ความสำเร็จ","นักเรียนสาขาฯ คว้ารางวัลชนะเลิศแข่งขันทักษะระดับภาค","2 ส.ค. 2569"],
+    ["ประกาศ","ตารางสอบปลายภาคเรียนที่ 1 ปีการศึกษา 2569","28 ก.ค. 2569"]
+  ];
+  const newsGrid2 = document.getElementById('newsGrid2');
+  newsFull.forEach(n => {
+    newsGrid2.innerHTML += `
+      <div class="doc-card" style="text-align:left; padding:26px 24px;">
+        <span style="display:inline-block;font-size:0.68rem;font-weight:700;color:var(--purple-deep);background:var(--gold-light);padding:3px 10px;border-radius:999px;margin-bottom:10px;">${n[0]}</span>
+        <h3 style="font-size:1rem;">${n[1]}</h3>
+        <div style="margin-top:10px;font-size:0.78rem;color:var(--ink-soft);">${n[2]}</div>
+      </div>`;
+  });
+</script>
 </body>
 </html>
-```
