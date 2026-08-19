@@ -20,32 +20,36 @@
 
 body{
     font-family:'Kanit',sans-serif;
-    background:#f8f7fb;
-    color:#29243a;
-    line-height:1.7;
+    background:#faf8ff;
+    color:#29213d;
 }
 
-/* ================= HEADER ================= */
+/* ================= NAVBAR ================= */
 
 header{
-    width:100%;
-    height:75px;
-    background:rgba(255,255,255,.97);
-    display:flex;
-    align-items:center;
-    justify-content:space-between;
-    padding:0 7%;
     position:sticky;
     top:0;
-    z-index:1000;
-    box-shadow:0 2px 15px rgba(50,30,80,.08);
+    z-index:999;
+
+    width:100%;
+    padding:14px 7%;
+
+    display:flex;
+    justify-content:space-between;
+    align-items:center;
+
+    background:rgba(255,255,255,.95);
+
+    box-shadow:0 4px 20px rgba(72,40,110,.08);
 }
 
 .logo{
-    font-size:30px;
+    font-size:32px;
     font-weight:700;
-    color:#7354b8;
-    letter-spacing:2px;
+
+    color:#743bb3;
+
+    letter-spacing:3px;
 }
 
 nav{
@@ -55,409 +59,583 @@ nav{
 
 nav a{
     text-decoration:none;
+
     color:#555;
+
     padding:8px 15px;
-    border-radius:20px;
+
+    border-radius:25px;
+
     transition:.3s;
 }
 
 nav a:hover{
-    background:#7354b8;
+    background:#743bb3;
     color:white;
 }
 
 /* ================= HERO ================= */
 
 .hero{
-    min-height:600px;
-    padding:80px 8%;
+    min-height:650px;
+
+    padding:90px 8%;
+
     display:flex;
-    align-items:center;
     justify-content:space-between;
+    align-items:center;
 
     background:
-    radial-gradient(circle at 80% 30%,#e5daf9 0,transparent 30%),
-    linear-gradient(135deg,#faf9ff,#f0ebf8);
+
+    radial-gradient(
+        circle at 85% 25%,
+        #dcc4ff,
+        transparent 30%
+    ),
+
+    linear-gradient(
+        135deg,
+        #ffffff,
+        #f1e8ff
+    );
 }
 
 .hero-text{
-    max-width:620px;
+    max-width:650px;
 }
 
-.small-title{
-    color:#8b67c7;
-    letter-spacing:3px;
-    font-size:14px;
+.hero-small{
+    color:#8b57c7;
+
+    font-size:15px;
+
+    letter-spacing:4px;
+
     font-weight:600;
 }
 
 .hero h1{
-    font-size:clamp(45px,6vw,75px);
-    line-height:1.15;
-    margin:18px 0;
+    font-size:clamp(48px,7vw,82px);
+
+    line-height:1.1;
+
+    margin:20px 0;
+
+    color:#271537;
 }
 
-.hero-text p{
-    color:#6d6875;
-    margin-bottom:25px;
+.hero h1 span{
+    color:#743bb3;
 }
 
-.btn{
+.hero-description{
+    color:#706778;
+
+    font-size:18px;
+
+    max-width:550px;
+
+    margin-bottom:30px;
+}
+
+.main-button{
     display:inline-block;
-    text-decoration:none;
-    background:#7354b8;
+
+    padding:13px 30px;
+
+    background:#743bb3;
+
     color:white;
-    padding:12px 28px;
+
+    text-decoration:none;
+
     border-radius:30px;
+
+    box-shadow:
+    0 10px 25px rgba(116,59,179,.25);
+
     transition:.3s;
 }
 
-.btn:hover{
-    background:#5c4199;
-    transform:translateY(-3px);
+.main-button:hover{
+    transform:translateY(-4px);
+
+    background:#5c2d91;
 }
 
-.hero-card{
-    width:330px;
-    height:390px;
-    border-radius:35px;
+/* HERO CARD */
 
-    background:linear-gradient(145deg,#8463c7,#55348f);
+.hero-card{
+
+    width:360px;
+    height:420px;
+
+    border-radius:40px;
+
+    background:
+
+    linear-gradient(
+        145deg,
+        #9858d0,
+        #54238d
+    );
+
+    display:flex;
+
+    flex-direction:column;
+
+    align-items:center;
+
+    justify-content:center;
 
     color:white;
 
-    display:flex;
-    flex-direction:column;
-    align-items:center;
-    justify-content:center;
-
-    box-shadow:0 25px 50px rgba(91,65,145,.25);
+    box-shadow:
+    0 30px 60px rgba(91,39,140,.3);
 }
 
-.circle{
-    width:150px;
-    height:150px;
+.dbt-circle{
 
-    border:2px solid rgba(255,255,255,.6);
+    width:170px;
+    height:170px;
+
     border-radius:50%;
 
+    border:2px solid rgba(255,255,255,.7);
+
     display:flex;
-    justify-content:center;
+
     align-items:center;
 
-    font-size:45px;
+    justify-content:center;
+
+    font-size:48px;
+
     font-weight:700;
+
+    letter-spacing:4px;
 
     margin-bottom:25px;
 }
 
 .hero-card h2{
-    font-size:24px;
+    font-size:26px;
+}
+
+.hero-card p{
+    opacity:.8;
 }
 
 /* ================= SECTION ================= */
 
-section{
-    scroll-margin-top:80px;
+.section{
+    padding:100px 7%;
 }
 
 .section-title{
     text-align:center;
-    padding:80px 20px 40px;
+
+    max-width:750px;
+
+    margin:auto auto 55px;
 }
 
-.section-title p{
-    color:#8b67c7;
-    letter-spacing:3px;
-    font-size:14px;
+.section-title small{
+    color:#9254c7;
+
+    letter-spacing:4px;
+
     font-weight:600;
 }
 
 .section-title h2{
-    font-size:42px;
-    margin:5px 0;
+    font-size:45px;
+
+    margin:8px 0;
 }
 
-.section-title span{
+.section-title p{
     color:#777;
 }
 
-/* ================= FEATURES ================= */
+/* ================= ABOUT ================= */
 
-.features{
-    max-width:1100px;
-    margin:20px auto 100px;
-    padding:0 20px;
+.about{
 
     display:grid;
-    grid-template-columns:repeat(3,1fr);
-    gap:25px;
+
+    grid-template-columns:1fr 1fr;
+
+    gap:50px;
+
+    align-items:center;
+
+    max-width:1100px;
+
+    margin:auto;
 }
 
-.feature{
+.about-box{
+
+    padding:45px;
+
+    border-radius:30px;
+
+    background:
+    linear-gradient(
+        135deg,
+        #eee1ff,
+        #ffffff
+    );
+
+    border:1px solid #eadcff;
+}
+
+.about-box h3{
+    font-size:30px;
+
+    margin-bottom:15px;
+
+    color:#67339d;
+}
+
+.about-box p{
+    color:#686170;
+}
+
+.about-list{
+    display:grid;
+
+    grid-template-columns:1fr 1fr;
+
+    gap:15px;
+
+    margin-top:25px;
+}
+
+.about-item{
+
     background:white;
-    padding:35px;
-    border-radius:22px;
 
-    box-shadow:0 10px 30px rgba(70,40,100,.07);
-
-    transition:.3s;
-}
-
-.feature:hover{
-    transform:translateY(-7px);
-}
-
-.icon{
-    width:50px;
-    height:50px;
+    padding:15px;
 
     border-radius:15px;
 
-    background:#eee6fc;
-    color:#7354b8;
-
-    display:flex;
-    align-items:center;
-    justify-content:center;
-
-    font-weight:600;
-
-    margin-bottom:20px;
+    box-shadow:
+    0 8px 20px rgba(90,40,130,.06);
 }
 
-.feature h3{
-    font-size:23px;
-}
-
-.feature p{
-    color:#777;
-    margin:8px 0 15px;
-}
-
-.feature a{
-    color:#7354b8;
-    text-decoration:none;
+.about-item strong{
+    color:#743bb3;
 }
 
 /* ================= TEACHERS ================= */
 
 .teachers{
+
     max-width:1100px;
-    margin:20px auto 100px;
-    padding:0 20px;
+
+    margin:auto;
 
     display:grid;
-    grid-template-columns:repeat(4,1fr);
-    gap:20px;
+
+    grid-template-columns:
+    repeat(4,1fr);
+
+    gap:22px;
 }
 
-.teacher-card{
+.teacher{
+
     background:white;
+
+    border-radius:25px;
+
     padding:25px;
 
     text-align:center;
 
-    border-radius:22px;
+    box-shadow:
+    0 12px 35px rgba(70,35,110,.08);
 
-    box-shadow:0 10px 30px rgba(70,40,100,.07);
+    transition:.3s;
+}
+
+.teacher:hover{
+
+    transform:translateY(-8px);
+
+    box-shadow:
+    0 20px 45px rgba(90,40,140,.15);
 }
 
 .teacher-photo{
-    width:140px;
-    height:140px;
 
-    margin:0 auto 20px;
+    width:145px;
+    height:145px;
 
     border-radius:50%;
 
-    background:#eee7fa;
+    margin:auto auto 20px;
+
+    background:
+    linear-gradient(
+        135deg,
+        #eadcff,
+        #c6a3ed
+    );
 
     display:flex;
+
     align-items:center;
+
     justify-content:center;
 
     font-size:55px;
 }
 
-.teacher-card h3{
+.teacher h3{
     font-size:20px;
 }
 
-.teacher-card p{
-    color:#7354b8;
+.teacher p{
+    color:#743bb3;
+}
+
+.teacher span{
+    font-size:13px;
+
+    color:#888;
 }
 
 /* ================= SCHEDULE ================= */
 
-.schedule-box{
-    max-width:1200px;
-    margin:20px auto 100px;
-    padding:0 20px;
-}
+.schedule-wrapper{
 
-.table-wrapper{
+    max-width:1200px;
+
+    margin:auto;
+
     overflow-x:auto;
 
-    background:white;
+    border-radius:25px;
 
-    border-radius:20px;
-
-    box-shadow:0 10px 30px rgba(70,40,100,.07);
+    box-shadow:
+    0 15px 40px rgba(70,35,110,.08);
 }
 
 table{
+
     width:100%;
-    min-width:900px;
+
+    min-width:950px;
+
     border-collapse:collapse;
+
+    background:white;
 }
 
 th{
-    background:#7354b8;
+
+    background:#743bb3;
+
     color:white;
-    padding:17px 10px;
+
+    padding:18px 12px;
 }
 
 td{
-    text-align:center;
+
     padding:17px 10px;
 
+    text-align:center;
+
     border-bottom:1px solid #eee;
+
+    color:#555;
 }
 
 td:first-child{
-    color:#7354b8;
+
+    color:#743bb3;
+
     font-weight:600;
 }
 
 tr:hover td{
-    background:#faf8ff;
+
+    background:#faf6ff;
 }
 
 /* ================= ACTIVITIES ================= */
 
 .activities{
-    max-width:1050px;
-    margin:20px auto 100px;
-    padding:0 20px;
+
+    max-width:1100px;
+
+    margin:auto;
 
     display:grid;
-    grid-template-columns:repeat(3,1fr);
+
+    grid-template-columns:
+    repeat(3,1fr);
+
     gap:25px;
 }
 
-.activity-card{
+.activity{
+
     background:white;
 
-    border-radius:22px;
+    border-radius:25px;
 
     overflow:hidden;
 
-    box-shadow:0 10px 30px rgba(70,40,100,.07);
+    box-shadow:
+    0 12px 35px rgba(70,35,110,.08);
+
+    transition:.3s;
 }
 
-.activity-image{
-    height:200px;
+.activity:hover{
 
-    background:linear-gradient(135deg,#b99ce7,#7354b8);
+    transform:translateY(-8px);
+}
+
+.activity-img{
+
+    height:210px;
+
+    background:
+
+    linear-gradient(
+        135deg,
+        #a56bd5,
+        #592d91
+    );
+
+    display:flex;
+
+    align-items:center;
+
+    justify-content:center;
 
     color:white;
 
-    display:flex;
-    align-items:center;
-    justify-content:center;
+    font-size:28px;
 
-    font-size:30px;
+    font-weight:500;
 }
 
 .activity-content{
+
     padding:25px;
 }
 
 .activity-content small{
-    color:#8b67c7;
+
+    color:#9355c7;
 }
 
 .activity-content h3{
+
+    font-size:22px;
+
     margin:8px 0;
-    font-size:21px;
 }
 
 .activity-content p{
+
     color:#777;
 }
 
 /* ================= CONTACT ================= */
 
 .contact{
-    max-width:1050px;
 
-    margin:20px auto 100px;
+    max-width:1100px;
 
-    padding:0 20px;
+    margin:auto;
 
     display:grid;
 
-    grid-template-columns:1fr 1fr;
+    grid-template-columns:
+    1fr 1fr;
 
     gap:40px;
 }
 
 .contact-info{
+
     display:flex;
+
     flex-direction:column;
-    gap:20px;
+
+    gap:18px;
 }
 
 .contact-item{
+
     background:white;
+
+    border-radius:20px;
 
     padding:22px;
 
-    border-radius:18px;
-
     display:flex;
-    align-items:center;
 
     gap:18px;
 
-    box-shadow:0 10px 30px rgba(70,40,100,.06);
+    align-items:center;
+
+    box-shadow:
+    0 10px 30px rgba(70,35,110,.06);
 }
 
 .contact-icon{
-    width:50px;
-    height:50px;
 
-    border-radius:15px;
+    width:55px;
+    height:55px;
 
-    background:#eee6fc;
+    border-radius:16px;
+
+    background:#eee2ff;
 
     display:flex;
+
     align-items:center;
+
     justify-content:center;
 
-    font-size:22px;
+    font-size:23px;
 }
 
 .contact-item h3{
+
     font-size:18px;
 }
 
 .contact-item p{
+
     color:#777;
 }
 
-.contact-box{
+.contact-form{
+
     background:white;
 
     padding:35px;
 
-    border-radius:22px;
+    border-radius:25px;
 
-    box-shadow:0 10px 30px rgba(70,40,100,.07);
+    box-shadow:
+    0 10px 30px rgba(70,35,110,.07);
 }
 
-.contact-box h2{
+.contact-form h3{
+
+    font-size:25px;
+
     margin-bottom:20px;
 }
 
@@ -466,27 +644,30 @@ textarea{
 
     width:100%;
 
-    padding:13px 16px;
-
-    margin-bottom:15px;
+    padding:14px 17px;
 
     border:1px solid #ddd;
 
-    border-radius:12px;
+    border-radius:13px;
+
+    outline:none;
 
     font-family:inherit;
 
-    outline:none;
+    margin-bottom:15px;
 }
 
 textarea{
+
     height:130px;
-    resize:vertical;
+
+    resize:none;
 }
 
 input:focus,
 textarea:focus{
-    border-color:#7354b8;
+
+    border-color:#743bb3;
 }
 
 button{
@@ -495,35 +676,44 @@ button{
 
     border:none;
 
-    padding:13px;
+    padding:14px;
 
-    background:#7354b8;
+    border-radius:30px;
+
+    background:#743bb3;
 
     color:white;
-
-    border-radius:25px;
 
     font-family:inherit;
 
     font-size:16px;
 
     cursor:pointer;
+
+    transition:.3s;
 }
 
 button:hover{
-    background:#5c4199;
+
+    background:#572787;
 }
 
 /* ================= FOOTER ================= */
 
 footer{
-    background:#29233b;
 
-    color:white;
+    padding:30px;
 
     text-align:center;
 
-    padding:25px;
+    background:#281738;
+
+    color:white;
+}
+
+footer span{
+
+    color:#cba8ee;
 }
 
 /* ================= MOBILE ================= */
@@ -531,68 +721,89 @@ footer{
 @media(max-width:900px){
 
     header{
-        height:auto;
-        padding:15px 5%;
 
         flex-direction:column;
 
         gap:12px;
+
+        padding:15px;
     }
 
     nav{
-        width:100%;
-
-        justify-content:center;
 
         flex-wrap:wrap;
+
+        justify-content:center;
     }
 
     nav a{
+
         font-size:14px;
+
         padding:6px 10px;
     }
 
     .hero{
+
         flex-direction:column;
 
         text-align:center;
 
         gap:50px;
 
-        padding:60px 20px;
+        padding:70px 20px;
     }
 
     .hero-card{
-        width:280px;
-        height:330px;
+
+        width:290px;
+
+        height:340px;
     }
 
-    .features,
-    .activities{
+    .about{
+
         grid-template-columns:1fr;
     }
 
     .teachers{
-        grid-template-columns:repeat(2,1fr);
+
+        grid-template-columns:
+        repeat(2,1fr);
+    }
+
+    .activities{
+
+        grid-template-columns:1fr;
     }
 
     .contact{
+
         grid-template-columns:1fr;
     }
+
 }
 
 @media(max-width:500px){
 
     .teachers{
+
         grid-template-columns:1fr;
     }
 
     .hero h1{
+
         font-size:45px;
     }
 
     .section-title h2{
-        font-size:32px;
+
+        font-size:34px;
+    }
+
+    .about-list{
+
+        grid-template-columns:1fr;
     }
 
 }
@@ -602,15 +813,19 @@ footer{
 
 <body>
 
-<!-- ================= HEADER ================= -->
+<!-- ================= NAVBAR ================= -->
 
 <header>
 
-<div class="logo">DBT</div>
+<div class="logo">
+DBT
+</div>
 
 <nav>
 
 <a href="#home">หน้าแรก</a>
+
+<a href="#about">เกี่ยวกับ</a>
 
 <a href="#teachers">บุคลากร</a>
 
@@ -625,28 +840,35 @@ footer{
 </header>
 
 
-<!-- ================= HOME ================= -->
+<!-- ================= HERO ================= -->
 
 <section id="home" class="hero">
 
 <div class="hero-text">
 
-<p class="small-title">
+<p class="hero-small">
 DIGITAL BUSINESS TECHNOLOGY
 </p>
 
 <h1>
-สาขาเทคโนโลยี<br>
-ธุรกิจดิจิทัล
+
+เทคโนโลยี<br>
+
+<span>ธุรกิจดิจิทัล</span>
+
 </h1>
 
-<p>
-เรียนรู้เทคโนโลยี พัฒนาทักษะดิจิทัล
-พร้อมก้าวสู่โลกธุรกิจยุคใหม่
+<p class="hero-description">
+
+เรียนรู้เทคโนโลยี พัฒนาความคิดสร้างสรรค์
+สร้างทักษะดิจิทัล และเตรียมพร้อมสู่โลกธุรกิจยุคใหม่
+
 </p>
 
-<a href="#teachers" class="btn">
-รู้จักสาขาของเรา
+<a href="#about" class="main-button">
+
+รู้จักสาขาของเรา →
+
 </a>
 
 </div>
@@ -654,7 +876,7 @@ DIGITAL BUSINESS TECHNOLOGY
 
 <div class="hero-card">
 
-<div class="circle">
+<div class="dbt-circle">
 DBT
 </div>
 
@@ -673,74 +895,86 @@ Technology
 
 <!-- ================= ABOUT ================= -->
 
-<section>
+<section id="about" class="section">
 
 <div class="section-title">
 
-<p>WELCOME TO DBT</p>
+<small>ABOUT DBT</small>
 
 <h2>
-ยินดีต้อนรับเข้าสู่<br>
-สาขาเทคโนโลยีธุรกิจดิจิทัล
+เกี่ยวกับสาขา
 </h2>
 
-<span>
-เว็บไซต์ประชาสัมพันธ์ข้อมูลของสาขา
-รวมข้อมูลบุคลากร ตารางสอน กิจกรรม และช่องทางการติดต่อ
-</span>
+<p>
+สาขาเทคโนโลยีธุรกิจดิจิทัล
+มุ่งเน้นการเรียนรู้เทคโนโลยีและการประยุกต์ใช้
+ในธุรกิจยุคดิจิทัล
+</p>
 
 </div>
 
 
-<div class="features">
+<div class="about">
 
-<div class="feature">
+<div class="about-box">
 
-<div class="icon">01</div>
-
-<h3>บุคลากร</h3>
+<h3>
+เรียนรู้ สร้างสรรค์ และเติบโต
+</h3>
 
 <p>
-พบกับคณะครูและบุคลากรประจำสาขา
-</p>
 
-<a href="#teachers">
-ดูข้อมูล →
-</a>
+นักเรียนจะได้เรียนรู้ทั้งด้านเทคโนโลยี
+การออกแบบ การพัฒนาเว็บไซต์
+ธุรกิจดิจิทัล และทักษะที่จำเป็น
+สำหรับการทำงานในอนาคต
+
+</p>
 
 </div>
 
 
-<div class="feature">
+<div class="about-list">
 
-<div class="icon">02</div>
+<div class="about-item">
 
-<h3>ตารางสอน</h3>
+<strong>01</strong>
 
 <p>
-ตรวจสอบตารางเรียนและตารางสอน
+การพัฒนาเว็บไซต์
 </p>
-
-<a href="#schedule">
-ดูตาราง →
-</a>
 
 </div>
 
+<div class="about-item">
 
-<div class="feature">
-
-<div class="icon">03</div>
-
-<h3>กิจกรรม</h3>
+<strong>02</strong>
 
 <p>
-ติดตามข่าวสารและกิจกรรมของสาขา
+ธุรกิจดิจิทัล
 </p>
 
-<a href="#activities">
-ดูกิจกรรม →
-</a>
+</div>
+
+<div class="about-item">
+
+<strong>03</strong>
+
+<p>
+กราฟิกและการออกแบบ
+</p>
+
+</div>
+
+<div class="about-item">
+
+<strong>04</strong>
+
+<p>
+เทคโนโลยีสารสนเทศ
+</p>
+
+</div>
 
 </div>
 
@@ -751,17 +985,19 @@ Technology
 
 <!-- ================= TEACHERS ================= -->
 
-<section id="teachers">
+<section id="teachers" class="section">
 
 <div class="section-title">
 
-<p>OUR TEAM</p>
+<small>OUR TEAM</small>
 
-<h2>บุคลากร</h2>
+<h2>
+บุคลากร
+</h2>
 
-<span>
-คณะครูและบุคลากร สาขาเทคโนโลยีธุรกิจดิจิทัล
-</span>
+<p>
+คณะครูและบุคลากรประจำสาขา
+</p>
 
 </div>
 
@@ -769,7 +1005,7 @@ Technology
 <div class="teachers">
 
 
-<div class="teacher-card">
+<div class="teacher">
 
 <div class="teacher-photo">
 👤
@@ -790,7 +1026,7 @@ Technology
 </div>
 
 
-<div class="teacher-card">
+<div class="teacher">
 
 <div class="teacher-photo">
 👤
@@ -811,7 +1047,7 @@ Technology
 </div>
 
 
-<div class="teacher-card">
+<div class="teacher">
 
 <div class="teacher-photo">
 👤
@@ -832,7 +1068,7 @@ Technology
 </div>
 
 
-<div class="teacher-card">
+<div class="teacher">
 
 <div class="teacher-photo">
 👤
@@ -860,24 +1096,24 @@ Technology
 
 <!-- ================= SCHEDULE ================= -->
 
-<section id="schedule">
+<section id="schedule" class="section">
 
 <div class="section-title">
 
-<p>SCHEDULE</p>
+<small>SCHEDULE</small>
 
-<h2>ตารางสอน</h2>
+<h2>
+ตารางสอน
+</h2>
 
-<span>
+<p>
 ตารางเรียนและตารางสอนของสาขา
-</span>
+</p>
 
 </div>
 
 
-<div class="schedule-box">
-
-<div class="table-wrapper">
+<div class="schedule-wrapper">
 
 <table>
 
@@ -885,19 +1121,33 @@ Technology
 
 <tr>
 
-<th>วัน / เวลา</th>
+<th>
+วัน / เวลา
+</th>
 
-<th>08:00 - 09:00</th>
+<th>
+08:00 - 09:00
+</th>
 
-<th>09:00 - 10:00</th>
+<th>
+09:00 - 10:00
+</th>
 
-<th>10:00 - 11:00</th>
+<th>
+10:00 - 11:00
+</th>
 
-<th>11:00 - 12:00</th>
+<th>
+11:00 - 12:00
+</th>
 
-<th>13:00 - 14:00</th>
+<th>
+13:00 - 14:00
+</th>
 
-<th>14:00 - 15:00</th>
+<th>
+14:00 - 15:00
+</th>
 
 </tr>
 
@@ -908,95 +1158,165 @@ Technology
 
 <tr>
 
-<td>จันทร์</td>
+<td>
+จันทร์
+</td>
 
-<td>ฐานข้อมูล</td>
+<td>
+ฐานข้อมูล
+</td>
 
-<td>ฐานข้อมูล</td>
+<td>
+ฐานข้อมูล
+</td>
 
-<td>—</td>
+<td>
+—
+</td>
 
-<td>—</td>
+<td>
+—
+</td>
 
-<td>การตลาดดิจิทัล</td>
+<td>
+การตลาดดิจิทัล
+</td>
 
-<td>การตลาดดิจิทัล</td>
-
-</tr>
-
-
-<tr>
-
-<td>อังคาร</td>
-
-<td>การเขียนโปรแกรม</td>
-
-<td>การเขียนโปรแกรม</td>
-
-<td>—</td>
-
-<td>—</td>
-
-<td>กราฟิก</td>
-
-<td>กราฟิก</td>
+<td>
+การตลาดดิจิทัล
+</td>
 
 </tr>
 
 
 <tr>
 
-<td>พุธ</td>
+<td>
+อังคาร
+</td>
 
-<td>ภาษาอังกฤษ</td>
+<td>
+การเขียนโปรแกรม
+</td>
 
-<td>ภาษาอังกฤษ</td>
+<td>
+การเขียนโปรแกรม
+</td>
 
-<td>—</td>
+<td>
+—
+</td>
 
-<td>—</td>
+<td>
+—
+</td>
 
-<td>เว็บไซต์</td>
+<td>
+กราฟิก
+</td>
 
-<td>เว็บไซต์</td>
-
-</tr>
-
-
-<tr>
-
-<td>พฤหัสบดี</td>
-
-<td>ธุรกิจดิจิทัล</td>
-
-<td>ธุรกิจดิจิทัล</td>
-
-<td>—</td>
-
-<td>—</td>
-
-<td>กิจกรรม</td>
-
-<td>กิจกรรม</td>
+<td>
+กราฟิก
+</td>
 
 </tr>
 
 
 <tr>
 
-<td>ศุกร์</td>
+<td>
+พุธ
+</td>
 
-<td>คอมพิวเตอร์</td>
+<td>
+ภาษาอังกฤษ
+</td>
 
-<td>คอมพิวเตอร์</td>
+<td>
+ภาษาอังกฤษ
+</td>
 
-<td>—</td>
+<td>
+—
+</td>
 
-<td>—</td>
+<td>
+—
+</td>
 
-<td>โครงงาน</td>
+<td>
+เว็บไซต์
+</td>
 
-<td>โครงงาน</td>
+<td>
+เว็บไซต์
+</td>
+
+</tr>
+
+
+<tr>
+
+<td>
+พฤหัสบดี
+</td>
+
+<td>
+ธุรกิจดิจิทัล
+</td>
+
+<td>
+ธุรกิจดิจิทัล
+</td>
+
+<td>
+—
+</td>
+
+<td>
+—
+</td>
+
+<td>
+กิจกรรม
+</td>
+
+<td>
+กิจกรรม
+</td>
+
+</tr>
+
+
+<tr>
+
+<td>
+ศุกร์
+</td>
+
+<td>
+คอมพิวเตอร์
+</td>
+
+<td>
+คอมพิวเตอร์
+</td>
+
+<td>
+—
+</td>
+
+<td>
+—
+</td>
+
+<td>
+โครงงาน
+</td>
+
+<td>
+โครงงาน
+</td>
 
 </tr>
 
@@ -1006,24 +1326,24 @@ Technology
 
 </div>
 
-</div>
-
 </section>
 
 
 <!-- ================= ACTIVITIES ================= -->
 
-<section id="activities">
+<section id="activities" class="section">
 
 <div class="section-title">
 
-<p>ACTIVITIES</p>
+<small>ACTIVITIES</small>
 
-<h2>กิจกรรมของสาขา</h2>
+<h2>
+กิจกรรม
+</h2>
 
-<span>
-ข่าวสารและกิจกรรมต่าง ๆ ของ DBT
-</span>
+<p>
+กิจกรรมและข่าวสารของสาขา
+</p>
 
 </div>
 
@@ -1031,16 +1351,16 @@ Technology
 <div class="activities">
 
 
-<div class="activity-card">
+<div class="activity">
 
-<div class="activity-image">
-กิจกรรม
+<div class="activity-img">
+💻
 </div>
 
 <div class="activity-content">
 
 <small>
-กิจกรรมที่ 01
+ACTIVITY 01
 </small>
 
 <h3>
@@ -1048,7 +1368,7 @@ Technology
 </h3>
 
 <p>
-กิจกรรมส่งเสริมให้นักเรียนพัฒนาความรู้
+ส่งเสริมให้นักเรียนพัฒนาความรู้
 และทักษะด้านเทคโนโลยีดิจิทัล
 </p>
 
@@ -1057,25 +1377,25 @@ Technology
 </div>
 
 
-<div class="activity-card">
+<div class="activity">
 
-<div class="activity-image">
-กิจกรรม
+<div class="activity-img">
+🎨
 </div>
 
 <div class="activity-content">
 
 <small>
-กิจกรรมที่ 02
+ACTIVITY 02
 </small>
 
 <h3>
-กิจกรรมอบรมเทคโนโลยี
+กิจกรรมสร้างสรรค์ผลงาน
 </h3>
 
 <p>
-เรียนรู้เทคโนโลยีใหม่ ๆ และการนำไปประยุกต์ใช้
-ในการเรียนและการทำงาน
+เปิดโอกาสให้นักเรียนได้สร้างสรรค์
+ผลงานและนำเสนอไอเดีย
 </p>
 
 </div>
@@ -1083,24 +1403,24 @@ Technology
 </div>
 
 
-<div class="activity-card">
+<div class="activity">
 
-<div class="activity-image">
-กิจกรรม
+<div class="activity-img">
+🏆
 </div>
 
 <div class="activity-content">
 
 <small>
-กิจกรรมที่ 03
+ACTIVITY 03
 </small>
 
 <h3>
-กิจกรรมการแข่งขันทักษะ
+การแข่งขันทักษะ
 </h3>
 
 <p>
-ส่งเสริมความสามารถของนักเรียนผ่านการแข่งขัน
+ส่งเสริมความสามารถผ่านการแข่งขัน
 และการทำงานร่วมกันเป็นทีม
 </p>
 
@@ -1116,17 +1436,19 @@ Technology
 
 <!-- ================= CONTACT ================= -->
 
-<section id="contact">
+<section id="contact" class="section">
 
 <div class="section-title">
 
-<p>CONTACT</p>
+<small>CONTACT</small>
 
-<h2>ติดต่อเรา</h2>
+<h2>
+ติดต่อเรา
+</h2>
 
-<span>
+<p>
 ช่องทางการติดต่อสาขาเทคโนโลยีธุรกิจดิจิทัล
-</span>
+</p>
 
 </div>
 
@@ -1145,7 +1467,9 @@ Technology
 
 <div>
 
-<h3>ที่อยู่</h3>
+<h3>
+ที่อยู่
+</h3>
 
 <p>
 วิทยาลัยอาชีวศึกษาสระบุรี
@@ -1164,7 +1488,9 @@ Technology
 
 <div>
 
-<h3>โทรศัพท์</h3>
+<h3>
+โทรศัพท์
+</h3>
 
 <p>
 02-XXX-XXXX
@@ -1178,12 +1504,14 @@ Technology
 <div class="contact-item">
 
 <div class="contact-icon">
-✉
+✉️
 </div>
 
 <div>
 
-<h3>Email</h3>
+<h3>
+Email
+</h3>
 
 <p>
 dbt@example.com
@@ -1202,7 +1530,9 @@ dbt@example.com
 
 <div>
 
-<h3>Facebook</h3>
+<h3>
+Facebook
+</h3>
 
 <p>
 DBT Digital Business Technology
@@ -1216,11 +1546,11 @@ DBT Digital Business Technology
 </div>
 
 
-<div class="contact-box">
+<div class="contact-form">
 
-<h2>
-สอบถามข้อมูล
-</h2>
+<h3>
+ส่งข้อความถึงเรา
+</h3>
 
 <input
 type="text"
@@ -1233,7 +1563,7 @@ placeholder="อีเมล"
 >
 
 <textarea
-placeholder="ข้อความ"
+placeholder="พิมพ์ข้อความของคุณ..."
 ></textarea>
 
 <button>
@@ -1253,11 +1583,11 @@ placeholder="ข้อความ"
 <footer>
 
 <p>
-© 2026 DBT - Digital Business Technology
+© 2026 <span>DBT</span> |
+Digital Business Technology
 </p>
 
 </footer>
-
 
 </body>
 </html>
