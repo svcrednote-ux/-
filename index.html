@@ -57,7 +57,9 @@
     display:flex; align-items:center; justify-content:center;
     font-family:'Kanit',sans-serif; font-weight:800; font-size:1.05rem;
     color:var(--purple-deep); box-shadow:0 0 0 3px rgba(255,255,255,0.18); flex-shrink:0;
+    overflow:hidden;
   }
+  .brand-mark img{ width:100%; height:100%; object-fit:cover; }
   .brand-text .en{ display:block; font-size:0.62rem; letter-spacing:0.14em; color:var(--gold-light); font-weight:500; text-transform:uppercase; }
   .brand-text .th{ font-family:'Kanit',sans-serif; font-weight:700; font-size:1.02rem; }
 
@@ -126,8 +128,10 @@
   .news-strip .cards{ display:grid; grid-template-columns:repeat(4,1fr); gap:16px; flex:1; }
   @media (max-width:1000px){ .news-strip{ flex-direction:column; align-items:stretch; margin-top:20px; border-radius:16px;} .news-strip h2{ border-right:none; border-bottom:1px solid rgba(255,255,255,0.18); padding:0 0 14px 0; } .news-strip .cards{ grid-template-columns:1fr 1fr; } }
   @media (max-width:560px){ .news-strip .cards{ grid-template-columns:1fr; } }
-  .news-card{ background:rgba(255,255,255,0.06); border:1px solid rgba(255,255,255,0.12); border-radius:14px; padding:16px; color:var(--white); transition:background .2s ease, transform .2s ease; }
+  .news-card{ background:rgba(255,255,255,0.06); border:1px solid rgba(255,255,255,0.12); border-radius:14px; padding:16px; color:var(--white); transition:background .2s ease, transform .2s ease; overflow:hidden; }
   .news-card:hover{ background:rgba(255,255,255,0.12); transform:translateY(-3px); }
+  .news-card .thumb{ width:100%; aspect-ratio:16/9; border-radius:10px; overflow:hidden; margin:-2px -2px 12px; background:rgba(255,255,255,0.08); }
+  .news-card .thumb img{ width:100%; height:100%; object-fit:cover; }
   .news-card .tag{ display:inline-block; font-size:0.68rem; letter-spacing:0.08em; font-weight:700; color:var(--purple-deep); background:var(--gold-light); padding:3px 10px; border-radius:999px; margin-bottom:10px; }
   .news-card h3{ font-size:0.95rem; font-weight:500; line-height:1.5; }
   .news-card .date{ margin-top:10px; font-size:0.75rem; color:rgba(255,255,255,0.55); }
@@ -153,6 +157,7 @@
   .staff-photo{ width:120px; height:120px; margin:0 auto 16px; border-radius:50%; position:relative; padding:5px; }
   .staff-photo .inner{ width:100%; height:100%; border-radius:50%; overflow:hidden; background:var(--purple-mist); display:flex; align-items:center; justify-content:center; }
   .staff-photo .inner svg{ width:52%; height:52%; }
+  .staff-photo .inner img{ width:100%; height:100%; object-fit:cover; }
   .staff-card h3{ font-family:'Kanit',sans-serif; font-size:1.02rem; color:var(--purple-deep); font-weight:600; }
   .staff-card .role{ display:inline-block; margin-top:8px; font-size:0.76rem; color:var(--gold-deep); background:var(--purple-mist); border:1px solid var(--gold-light); padding:5px 14px; border-radius:999px; font-weight:600; }
   .staff-contact{ display:flex; justify-content:center; gap:10px; margin-top:16px; }
@@ -173,7 +178,9 @@
   .why-grid{ display:grid; grid-template-columns:repeat(3,1fr); gap:24px; }
   @media (max-width:900px){ .why-grid{ grid-template-columns:1fr 1fr; } }
   @media (max-width:600px){ .why-grid{ grid-template-columns:1fr; } }
-  .why-card{ background:var(--white); border-radius:20px; padding:28px 24px; box-shadow:0 14px 34px -24px rgba(58,22,104,0.4); border:1px solid rgba(102,54,171,0.08); }
+  .why-card{ background:var(--white); border-radius:20px; padding:28px 24px; box-shadow:0 14px 34px -24px rgba(58,22,104,0.4); border:1px solid rgba(102,54,171,0.08); overflow:hidden; }
+  .why-card .thumb{ width:calc(100% + 48px); margin:-28px -24px 18px; aspect-ratio:16/9; overflow:hidden; background:var(--lavender); }
+  .why-card .thumb img{ width:100%; height:100%; object-fit:cover; }
   .why-card .ic{ width:48px; height:48px; border-radius:14px; background:var(--lavender); display:flex; align-items:center; justify-content:center; margin-bottom:16px; }
   .why-card .ic svg{ width:24px; height:24px; color:var(--purple); }
   .why-card h3{ font-size:1.05rem; color:var(--purple-deep); font-weight:700; margin-bottom:8px; }
@@ -181,8 +188,13 @@
 
   .course-grid{ display:grid; grid-template-columns:repeat(2,1fr); gap:28px; }
   @media (max-width:760px){ .course-grid{ grid-template-columns:1fr; } }
-  .course-card{ background:var(--white); border-radius:22px; padding:34px; box-shadow:var(--shadow); border:1px solid rgba(102,54,171,0.08); position:relative; overflow:hidden; }
-  .course-card::before{ content:''; position:absolute; top:-40px; right:-40px; width:140px; height:140px; border-radius:50%; background:radial-gradient(circle, rgba(216,172,82,0.25), transparent 70%); }
+  .course-card{ background:var(--white); border-radius:22px; padding:0 0 34px; box-shadow:var(--shadow); border:1px solid rgba(102,54,171,0.08); position:relative; overflow:hidden; }
+  .course-card::before{ content:''; position:absolute; top:-40px; right:-40px; width:140px; height:140px; border-radius:50%; background:radial-gradient(circle, rgba(216,172,82,0.25), transparent 70%); z-index:0;}
+  .course-card .thumb{ width:100%; aspect-ratio:16/8; overflow:hidden; background:var(--lavender); position:relative; z-index:1; }
+  .course-card .thumb img{ width:100%; height:100%; object-fit:cover; }
+  .course-card .body-pad{ padding:34px; position:relative; z-index:1; }
+  .course-card .body-pad.no-thumb{ padding-top:34px; }
+  .course-card .body-pad.has-thumb{ padding-top:24px; }
   .course-card .num{ font-family:'Kanit',sans-serif; font-weight:800; font-size:0.85rem; color:var(--white); background:var(--purple); display:inline-flex; align-items:center; justify-content:center; min-width:34px; height:34px; padding:0 10px; border-radius:999px; margin-bottom:18px; }
   .course-card h3{ font-size:1.25rem; color:var(--purple-deep); font-weight:700; margin-bottom:10px; }
   .course-card p{ color:var(--ink-soft); line-height:1.85; font-size:0.93rem; }
@@ -206,12 +218,19 @@
 
   /* ---------- Premium news page ---------- */
   .news-feature{ background:linear-gradient(135deg,var(--purple-deep),var(--purple) 60%,#8a52d4); border-radius:26px; padding:44px 40px; color:var(--white); position:relative; overflow:hidden; margin-bottom:34px; }
+  .news-feature.has-img{ padding:0; display:grid; grid-template-columns:1.1fr 1fr; align-items:stretch; min-height:280px; }
+  .news-feature .feat-img{ overflow:hidden; }
+  .news-feature .feat-img img{ width:100%; height:100%; object-fit:cover; min-height:220px; }
+  .news-feature .feat-text{ padding:44px 40px; align-self:center; }
   .news-feature .tag{ display:inline-block; font-size:0.7rem; letter-spacing:0.08em; font-weight:700; color:var(--purple-deep); background:var(--gold-light); padding:4px 12px; border-radius:999px; margin-bottom:16px; }
   .news-feature h3{ font-size:1.5rem; font-weight:700; max-width:28ch; line-height:1.4; }
   .news-feature .date{ margin-top:16px; font-size:0.8rem; color:rgba(255,255,255,0.65); }
+  @media (max-width:700px){ .news-feature.has-img{ grid-template-columns:1fr; } .news-feature .feat-img img{ min-height:180px; } .news-feature .feat-text{ padding:28px 26px; } }
   .news-list-grid{ display:grid; grid-template-columns:repeat(2,1fr); gap:22px; }
   @media (max-width:760px){ .news-list-grid{ grid-template-columns:1fr; } }
-  .news-item-card{ background:var(--white); border-radius:20px; padding:26px 24px; box-shadow:0 14px 34px -24px rgba(58,22,104,0.4); border:1px solid rgba(102,54,171,0.08); position:relative; }
+  .news-item-card{ background:var(--white); border-radius:20px; padding:26px 24px; box-shadow:0 14px 34px -24px rgba(58,22,104,0.4); border:1px solid rgba(102,54,171,0.08); position:relative; overflow:hidden; }
+  .news-item-card .thumb{ width:calc(100% + 48px); margin:-26px -24px 18px; aspect-ratio:16/9; overflow:hidden; background:var(--lavender); }
+  .news-item-card .thumb img{ width:100%; height:100%; object-fit:cover; }
   .news-item-card .tag{ display:inline-block; font-size:0.68rem; font-weight:700; color:var(--purple-deep); background:var(--gold-light); padding:3px 10px; border-radius:999px; margin-bottom:10px; }
   .news-item-card h3{ font-size:1rem; font-weight:600; color:var(--ink); line-height:1.6; }
   .news-item-card .date{ margin-top:12px; font-size:0.78rem; color:var(--ink-soft); }
@@ -270,6 +289,20 @@
   .help-box a{ color:var(--purple); text-decoration:underline; }
   .toast{ position:fixed; bottom:24px; left:50%; transform:translateX(-50%) translateY(20px); background:var(--purple-deep); color:var(--white); padding:12px 22px; border-radius:999px; font-size:0.85rem; z-index:300; opacity:0; pointer-events:none; transition:opacity .25s ease, transform .25s ease; box-shadow:var(--shadow); }
   .toast.show{ opacity:1; transform:translateX(-50%) translateY(0); }
+
+  /* ---------- Image upload widget (admin) ---------- */
+  .img-field{ margin-bottom:16px; }
+  .img-field label{ display:block; font-size:0.76rem; color:var(--ink-soft); margin-bottom:6px; font-weight:600; }
+  .img-upload{ display:flex; align-items:center; gap:12px; background:var(--white); border:1.5px dashed var(--purple-light); border-radius:14px; padding:10px; }
+  .img-upload .preview{ width:64px; height:64px; border-radius:10px; overflow:hidden; background:var(--purple-mist); flex-shrink:0; display:flex; align-items:center; justify-content:center; }
+  .img-upload .preview img{ width:100%; height:100%; object-fit:cover; }
+  .img-upload .preview .ph-empty{ color:var(--purple-light); font-size:0.65rem; text-align:center; padding:4px; }
+  .img-upload .img-actions{ display:flex; flex-direction:column; gap:6px; flex:1; }
+  .img-upload .img-btn-row{ display:flex; gap:8px; flex-wrap:wrap; }
+  .img-upload .upload-btn{ font-size:0.76rem; font-weight:600; color:var(--purple); background:var(--lavender); border:none; padding:7px 12px; border-radius:999px; }
+  .img-upload .remove-btn{ font-size:0.76rem; font-weight:600; color:#c0392b; background:#fbe8e8; border:none; padding:7px 12px; border-radius:999px; }
+  .img-upload .img-hint{ font-size:0.68rem; color:var(--ink-soft); }
+  .img-upload input[type=file]{ display:none; }
 </style>
 </head>
 <body>
@@ -277,7 +310,7 @@
 <header>
   <div class="nav-inner">
     <div class="brand">
-      <div class="brand-mark">DBT</div>
+      <div class="brand-mark" id="brandMark">DBT</div>
       <div class="brand-text">
         <span class="en">Digital Business Technology</span>
         <span class="th">สาขาเทคโนโลยีธุรกิจดิจิทัล</span>
@@ -336,7 +369,7 @@
       <div class="hero-photo">
         <div class="ring">
           <div class="ring-inner">
-            <img src="https://images.unsplash.com/photo-1523240795612-9a054b0db644?q=80&w=800&auto=format&fit=crop" alt="นักเรียนสาขาเทคโนโลยีธุรกิจดิจิทัลถือธงในกิจกรรมของวิทยาลัย">
+            <img id="heroImg" src="https://images.unsplash.com/photo-1523240795612-9a054b0db644?q=80&w=800&auto=format&fit=crop" alt="นักเรียนสาขาเทคโนโลยีธุรกิจดิจิทัลถือธงในกิจกรรมของวิทยาลัย">
           </div>
         </div>
         <div class="badge"><span class="dot"></span> เปิดรับสมัครนักเรียนใหม่</div>
@@ -483,34 +516,36 @@ const DEFAULT_DATA = {
     title1: "สาขาเทคโนโลยี",
     title2: "ธุรกิจดิจิทัล",
     sub: "DIGITAL BUSINESS TECHNOLOGY",
-    lede: "ปั้นนักธุรกิจดิจิทัลยุคใหม่ ผสานทักษะการตลาดออนไลน์ การจัดการข้อมูล และเทคโนโลยี เพื่อพร้อมก้าวสู่โลกธุรกิจจริง"
+    lede: "ปั้นนักธุรกิจดิจิทัลยุคใหม่ ผสานทักษะการตลาดออนไลน์ การจัดการข้อมูล และเทคโนโลยี เพื่อพร้อมก้าวสู่โลกธุรกิจจริง",
+    image: "https://images.unsplash.com/photo-1523240795612-9a054b0db644?q=80&w=800&auto=format&fit=crop",
+    logo: ""
   },
   why: [
-    { title:"ฝึกงานกับสถานประกอบการจริง", desc:"เครือข่ายพันธมิตรธุรกิจดิจิทัลกว่า 30 แห่ง เปิดโอกาสฝึกงานและทำงานทันทีหลังจบ" },
-    { title:"ครูผู้สอนมากประสบการณ์", desc:"ทีมครูผู้เชี่ยวชาญเฉพาะทางด้านธุรกิจดิจิทัล การตลาดออนไลน์ และเทคโนโลยีสารสนเทศ" },
-    { title:"รายได้ระหว่างเรียน", desc:"นำทักษะการตลาดออนไลน์และธุรกิจอีคอมเมิร์ซไปสร้างรายได้จริงได้ตั้งแต่ยังเรียนอยู่" }
+    { title:"ฝึกงานกับสถานประกอบการจริง", desc:"เครือข่ายพันธมิตรธุรกิจดิจิทัลกว่า 30 แห่ง เปิดโอกาสฝึกงานและทำงานทันทีหลังจบ", image:"" },
+    { title:"ครูผู้สอนมากประสบการณ์", desc:"ทีมครูผู้เชี่ยวชาญเฉพาะทางด้านธุรกิจดิจิทัล การตลาดออนไลน์ และเทคโนโลยีสารสนเทศ", image:"" },
+    { title:"รายได้ระหว่างเรียน", desc:"นำทักษะการตลาดออนไลน์และธุรกิจอีคอมเมิร์ซไปสร้างรายได้จริงได้ตั้งแต่ยังเรียนอยู่", image:"" }
   ],
   staff: [
-    { name:"อาจารย์ ท่านที่ 1", role:"หัวหน้าสาขาวิชาเทคโนโลยีธุรกิจดิจิทัล", phone:"", line:"" },
-    { name:"อาจารย์ ท่านที่ 2", role:"ครูประจำสาขาวิชาเทคโนโลยีธุรกิจดิจิทัล", phone:"", line:"" },
-    { name:"อาจารย์ ท่านที่ 3", role:"ครูประจำสาขาวิชาเทคโนโลยีธุรกิจดิจิทัล", phone:"", line:"" },
-    { name:"อาจารย์ ท่านที่ 4", role:"ครูประจำสาขาวิชาเทคโนโลยีธุรกิจดิจิทัล", phone:"", line:"" },
-    { name:"อาจารย์ ท่านที่ 5", role:"ครูประจำสาขาวิชาเทคโนโลยีธุรกิจดิจิทัล", phone:"", line:"" },
-    { name:"อาจารย์ ท่านที่ 6", role:"ครูประจำสาขาวิชาเทคโนโลยีธุรกิจดิจิทัล", phone:"", line:"" },
-    { name:"อาจารย์ ท่านที่ 7", role:"ครูประจำสาขาวิชาเทคโนโลยีธุรกิจดิจิทัล", phone:"", line:"" },
-    { name:"อาจารย์ ท่านที่ 8", role:"ครูประจำสาขาวิชาเทคโนโลยีธุรกิจดิจิทัล", phone:"", line:"" },
-    { name:"อาจารย์ ท่านที่ 9", role:"ครูประจำสาขาวิชาเทคโนโลยีธุรกิจดิจิทัล", phone:"", line:"" }
+    { name:"อาจารย์ ท่านที่ 1", role:"หัวหน้าสาขาวิชาเทคโนโลยีธุรกิจดิจิทัล", phone:"", line:"", photo:"" },
+    { name:"อาจารย์ ท่านที่ 2", role:"ครูประจำสาขาวิชาเทคโนโลยีธุรกิจดิจิทัล", phone:"", line:"", photo:"" },
+    { name:"อาจารย์ ท่านที่ 3", role:"ครูประจำสาขาวิชาเทคโนโลยีธุรกิจดิจิทัล", phone:"", line:"", photo:"" },
+    { name:"อาจารย์ ท่านที่ 4", role:"ครูประจำสาขาวิชาเทคโนโลยีธุรกิจดิจิทัล", phone:"", line:"", photo:"" },
+    { name:"อาจารย์ ท่านที่ 5", role:"ครูประจำสาขาวิชาเทคโนโลยีธุรกิจดิจิทัล", phone:"", line:"", photo:"" },
+    { name:"อาจารย์ ท่านที่ 6", role:"ครูประจำสาขาวิชาเทคโนโลยีธุรกิจดิจิทัล", phone:"", line:"", photo:"" },
+    { name:"อาจารย์ ท่านที่ 7", role:"ครูประจำสาขาวิชาเทคโนโลยีธุรกิจดิจิทัล", phone:"", line:"", photo:"" },
+    { name:"อาจารย์ ท่านที่ 8", role:"ครูประจำสาขาวิชาเทคโนโลยีธุรกิจดิจิทัล", phone:"", line:"", photo:"" },
+    { name:"อาจารย์ ท่านที่ 9", role:"ครูประจำสาขาวิชาเทคโนโลยีธุรกิจดิจิทัล", phone:"", line:"", photo:"" }
   ],
   courses: [
-    { level:"ปวช.", title:"ประกาศนียบัตรวิชาชีพ (ปวช.)\nสาขาเทคโนโลยีธุรกิจดิจิทัล", desc:"หลักสูตร 3 ปี ปูพื้นฐานธุรกิจดิจิทัล การตลาดออนไลน์ และการใช้เทคโนโลยีสารสนเทศเพื่อธุรกิจ เรียนสนุก ลงมือทำจริงทุกวิชา", bullets:"พื้นฐานการตลาดดิจิทัลและอีคอมเมิร์ซ\nการออกแบบสื่อและกราฟิกเพื่อธุรกิจ\nการจัดการข้อมูลและระบบสารสนเทศ\nฝึกขายของจริงผ่านโซเชียลมีเดียตั้งแต่ปี 1" },
-    { level:"ปวส.", title:"ประกาศนียบัตรวิชาชีพชั้นสูง (ปวส.)\nสาขาเทคโนโลยีธุรกิจดิจิทัล", desc:"หลักสูตร 2 ปี ต่อยอดความรู้เชิงลึก เน้นการบริหารธุรกิจดิจิทัลและการวิเคราะห์ข้อมูลระดับสูง พร้อมสหกิจศึกษากับสถานประกอบการจริง", bullets:"การบริหารจัดการธุรกิจดิจิทัล\nการวิเคราะห์ข้อมูลเพื่อการตัดสินใจ\nโครงงานธุรกิจดิจิทัลร่วมกับสถานประกอบการ\nเตรียมพร้อมสู่การเป็นผู้ประกอบการหรือนักการตลาดดิจิทัลมืออาชีพ" }
+    { level:"ปวช.", title:"ประกาศนียบัตรวิชาชีพ (ปวช.)\nสาขาเทคโนโลยีธุรกิจดิจิทัล", desc:"หลักสูตร 3 ปี ปูพื้นฐานธุรกิจดิจิทัล การตลาดออนไลน์ และการใช้เทคโนโลยีสารสนเทศเพื่อธุรกิจ เรียนสนุก ลงมือทำจริงทุกวิชา", bullets:"พื้นฐานการตลาดดิจิทัลและอีคอมเมิร์ซ\nการออกแบบสื่อและกราฟิกเพื่อธุรกิจ\nการจัดการข้อมูลและระบบสารสนเทศ\nฝึกขายของจริงผ่านโซเชียลมีเดียตั้งแต่ปี 1", image:"" },
+    { level:"ปวส.", title:"ประกาศนียบัตรวิชาชีพชั้นสูง (ปวส.)\nสาขาเทคโนโลยีธุรกิจดิจิทัล", desc:"หลักสูตร 2 ปี ต่อยอดความรู้เชิงลึก เน้นการบริหารธุรกิจดิจิทัลและการวิเคราะห์ข้อมูลระดับสูง พร้อมสหกิจศึกษากับสถานประกอบการจริง", bullets:"การบริหารจัดการธุรกิจดิจิทัล\nการวิเคราะห์ข้อมูลเพื่อการตัดสินใจ\nโครงงานธุรกิจดิจิทัลร่วมกับสถานประกอบการ\nเตรียมพร้อมสู่การเป็นผู้ประกอบการหรือนักการตลาดดิจิทัลมืออาชีพ", image:"" }
   ],
   courseOutcome: { title:"จบไปแล้วทำอะไรได้บ้าง", body:"นักการตลาดดิจิทัล, ผู้ดูแลร้านค้าออนไลน์และแอดมินเพจ, นักวิเคราะห์ข้อมูลธุรกิจเบื้องต้น, ผู้ประกอบการอีคอมเมิร์ซของตัวเอง หรือศึกษาต่อระดับปริญญาตรีสายบริหารธุรกิจและเทคโนโลยีดิจิทัล" },
   news: [
-    { tag:"รับสมัคร", title:"เปิดรับสมัครนักเรียน ปวช. สาขาเทคโนโลยีธุรกิจดิจิทัล รุ่นใหม่", date:"15 ส.ค. 2569" },
-    { tag:"กิจกรรม", title:"อบรมเชิงปฏิบัติการ “การตลาดดิจิทัลสำหรับธุรกิจ SME”", date:"10 ส.ค. 2569" },
-    { tag:"ความสำเร็จ", title:"นักเรียนสาขาฯ คว้ารางวัลชนะเลิศแข่งขันทักษะระดับภาค", date:"2 ส.ค. 2569" },
-    { tag:"ประกาศ", title:"ตารางสอบปลายภาคเรียนที่ 1 ปีการศึกษา 2569", date:"28 ก.ค. 2569" }
+    { tag:"รับสมัคร", title:"เปิดรับสมัครนักเรียน ปวช. สาขาเทคโนโลยีธุรกิจดิจิทัล รุ่นใหม่", date:"15 ส.ค. 2569", image:"" },
+    { tag:"กิจกรรม", title:"อบรมเชิงปฏิบัติการ “การตลาดดิจิทัลสำหรับธุรกิจ SME”", date:"10 ส.ค. 2569", image:"" },
+    { tag:"ความสำเร็จ", title:"นักเรียนสาขาฯ คว้ารางวัลชนะเลิศแข่งขันทักษะระดับภาค", date:"2 ส.ค. 2569", image:"" },
+    { tag:"ประกาศ", title:"ตารางสอบปลายภาคเรียนที่ 1 ปีการศึกษา 2569", date:"28 ก.ค. 2569", image:"" }
   ],
   docs: [
     { name:"ตารางสอนบุคลากร", url:"" },
@@ -599,6 +634,94 @@ function showToast(msg){
 }
 
 /* =========================================================
+   Image upload helper — อ่านไฟล์รูปจากเครื่อง แล้วบีบอัด/ย่อขนาด
+   ให้เป็น data URL (base64) เก็บลง data object ตัวเดียวกับ
+   ข้อมูลอื่น ๆ ที่ persistData() ส่งไปเก็บใน Google Sheet
+   ========================================================= */
+function fileToCompressedDataURL(file, maxDim, quality){
+  return new Promise((resolve, reject) => {
+    if(!file || !file.type || !file.type.startsWith("image/")){ reject(new Error("ไม่ใช่ไฟล์รูปภาพ")); return; }
+    const reader = new FileReader();
+    reader.onerror = () => reject(new Error("อ่านไฟล์ไม่สำเร็จ"));
+    reader.onload = () => {
+      const img = new Image();
+      img.onerror = () => reject(new Error("โหลดรูปไม่สำเร็จ"));
+      img.onload = () => {
+        let w = img.width, h = img.height;
+        if(w > h && w > maxDim){ h = Math.round(h * (maxDim / w)); w = maxDim; }
+        else if(h > maxDim){ w = Math.round(w * (maxDim / h)); h = maxDim; }
+        const canvas = document.createElement("canvas");
+        canvas.width = w; canvas.height = h;
+        canvas.getContext("2d").drawImage(img, 0, 0, w, h);
+        resolve(canvas.toDataURL("image/jpeg", quality));
+      };
+      img.src = reader.result;
+    };
+    reader.readAsDataURL(file);
+  });
+}
+
+/* ผูก input[type=file] เข้ากับ path ใน data object โดยอัตโนมัติ
+   หา element ทุกตัวที่มี data-img-bind แล้วต่อ event ให้ครบ */
+function wireImageUploads(container){
+  container.querySelectorAll("[data-img-bind]").forEach(wrap => {
+    const path = wrap.dataset.imgBind;
+    const fileInput = wrap.querySelector("input[type=file]");
+    const uploadBtn = wrap.querySelector(".upload-btn");
+    const removeBtn = wrap.querySelector(".remove-btn");
+    if(uploadBtn) uploadBtn.addEventListener("click", () => fileInput.click());
+    if(fileInput) fileInput.addEventListener("change", async () => {
+      const file = fileInput.files && fileInput.files[0];
+      if(!file) return;
+      try{
+        const maxDim = Number(wrap.dataset.maxDim) || 900;
+        const dataUrl = await fileToCompressedDataURL(file, maxDim, 0.82);
+        setByPath(path, dataUrl);
+        const previewImg = wrap.querySelector(".preview img");
+        const previewPh = wrap.querySelector(".preview .ph-empty");
+        if(previewImg){ previewImg.src = dataUrl; previewImg.style.display = ""; }
+        if(previewPh) previewPh.style.display = "none";
+        removeBtn && (removeBtn.style.display = "");
+      }catch(err){
+        showToast("อัปโหลดรูปไม่สำเร็จ: " + err.message);
+      }
+      fileInput.value = "";
+    });
+    if(removeBtn) removeBtn.addEventListener("click", () => {
+      setByPath(path, "");
+      const previewImg = wrap.querySelector(".preview img");
+      const previewPh = wrap.querySelector(".preview .ph-empty");
+      if(previewImg) previewImg.style.display = "none";
+      if(previewPh) previewPh.style.display = "";
+      removeBtn.style.display = "none";
+    });
+  });
+}
+
+/* สร้าง HTML ของช่องอัปโหลดรูปสำหรับใช้ในแผงแอดมิน */
+function imgFieldHTML(label, path, currentUrl, maxDim){
+  const has = !!currentUrl;
+  return `
+    <div class="img-field">
+      <label>${esc(label)}</label>
+      <div class="img-upload" data-img-bind="${path}" data-max-dim="${maxDim||900}">
+        <div class="preview">
+          <img src="${escAttr(currentUrl||"")}" style="${has?"":"display:none;"}">
+          <span class="ph-empty" style="${has?"display:none;":""}">ยังไม่มีรูป</span>
+        </div>
+        <div class="img-actions">
+          <div class="img-btn-row">
+            <button type="button" class="upload-btn">📷 ${has?"เปลี่ยนรูป":"อัปโหลดรูป"}</button>
+            <button type="button" class="remove-btn" style="${has?"":"display:none;"}">ลบรูป</button>
+          </div>
+          <span class="img-hint">รองรับ JPG / PNG — ระบบจะย่อขนาดให้อัตโนมัติ</span>
+        </div>
+        <input type="file" accept="image/*">
+      </div>
+    </div>`;
+}
+
+/* =========================================================
    Public-facing render
    ========================================================= */
 function renderAll(){
@@ -607,10 +730,15 @@ function renderAll(){
   document.getElementById("heroTitle2").textContent = data.hero.title2;
   document.getElementById("heroSub").textContent = data.hero.sub;
   document.getElementById("heroLede").textContent = data.hero.lede;
+  document.getElementById("heroImg").src = data.hero.image || DEFAULT_DATA.hero.image;
+
+  const brandMark = document.getElementById("brandMark");
+  brandMark.innerHTML = data.hero.logo ? `<img src="${escAttr(data.hero.logo)}" alt="โลโก้">` : "DBT";
 
   const newsStrip = document.getElementById("newsStripCards");
   newsStrip.innerHTML = data.news.slice(0,4).map(n => `
     <div class="news-card">
+      ${n.image ? `<div class="thumb"><img src="${escAttr(n.image)}" alt="${escAttr(n.title)}"></div>` : ""}
       <span class="tag">${esc(n.tag)}</span>
       <h3>${esc(n.title)}</h3>
       <div class="date">${esc(n.date)}</div>
@@ -619,7 +747,7 @@ function renderAll(){
   const whyGrid = document.getElementById("whyGrid");
   whyGrid.innerHTML = data.why.map((w,i) => `
     <div class="why-card">
-      <div class="ic">${whyIcons[i % whyIcons.length]}</div>
+      ${w.image ? `<div class="thumb"><img src="${escAttr(w.image)}" alt="${escAttr(w.title)}"></div>` : `<div class="ic">${whyIcons[i % whyIcons.length]}</div>`}
       <h3>${esc(w.title)}</h3>
       <p>${esc(w.desc)}</p>
     </div>`).join("");
@@ -632,7 +760,7 @@ function renderAll(){
     return `
     <div class="staff-card">
       <div class="staff-photo" style="background:conic-gradient(from 140deg, ${accent}, #d8ac52, ${accent})">
-        <div class="inner">${staffIcon}</div>
+        <div class="inner">${s.photo ? `<img src="${escAttr(s.photo)}" alt="${escAttr(s.name)}">` : staffIcon}</div>
       </div>
       <h3>${esc(s.name)}</h3>
       <span class="role">${esc(s.role)}</span>
@@ -646,10 +774,13 @@ function renderAll(){
   const courseGrid = document.getElementById("courseGrid");
   courseGrid.innerHTML = data.courses.map(c => `
     <div class="course-card">
-      <div class="num">${esc(c.level)}</div>
-      <h3>${esc(c.title).replace(/\n/g,"<br>")}</h3>
-      <p>${esc(c.desc)}</p>
-      <ul>${(c.bullets||"").split("\n").filter(Boolean).map(b=>`<li>${esc(b)}</li>`).join("")}</ul>
+      ${c.image ? `<div class="thumb"><img src="${escAttr(c.image)}" alt="${escAttr(c.level)}"></div>` : ""}
+      <div class="body-pad ${c.image ? "has-thumb" : "no-thumb"}">
+        <div class="num">${esc(c.level)}</div>
+        <h3>${esc(c.title).replace(/\n/g,"<br>")}</h3>
+        <p>${esc(c.desc)}</p>
+        <ul>${(c.bullets||"").split("\n").filter(Boolean).map(b=>`<li>${esc(b)}</li>`).join("")}</ul>
+      </div>
     </div>`).join("");
   document.getElementById("courseOutcome").innerHTML = `
     <h3>${esc(data.courseOutcome.title)}</h3>
@@ -667,15 +798,19 @@ function renderAll(){
   if(data.news[0]){
     const f = data.news[0];
     newsFeatureWrap.innerHTML = `
-      <div class="news-feature">
-        <span class="tag">${esc(f.tag)}</span>
-        <h3>${esc(f.title)}</h3>
-        <div class="date">${esc(f.date)}</div>
+      <div class="news-feature ${f.image ? "has-img" : ""}">
+        ${f.image ? `<div class="feat-img"><img src="${escAttr(f.image)}" alt="${escAttr(f.title)}"></div>` : ""}
+        <div class="feat-text">
+          <span class="tag">${esc(f.tag)}</span>
+          <h3>${esc(f.title)}</h3>
+          <div class="date">${esc(f.date)}</div>
+        </div>
       </div>`;
   } else { newsFeatureWrap.innerHTML = ""; }
   const newsListGrid = document.getElementById("newsListGrid");
   newsListGrid.innerHTML = data.news.slice(1).map(n => `
     <div class="news-item-card">
+      ${n.image ? `<div class="thumb"><img src="${escAttr(n.image)}" alt="${escAttr(n.title)}"></div>` : ""}
       <span class="tag">${esc(n.tag)}</span>
       <h3>${esc(n.title)}</h3>
       <div class="date">${esc(n.date)}</div>
@@ -769,6 +904,10 @@ function renderAdminBody(){
   const body = document.getElementById("adminBody");
   if(adminActiveTab === "hero"){
     body.innerHTML = `
+      <h4>โลโก้สาขา (มุมซ้ายบน)</h4>
+      ${imgFieldHTML("โลโก้", "hero.logo", data.hero.logo, 300)}
+      <h4>รูปภาพหน้าแรก (วงกลมด้านขวา)</h4>
+      ${imgFieldHTML("รูปหน้าแรก", "hero.image", data.hero.image, 1000)}
       <h4>ข้อความหน้าแรก</h4>
       <div class="field"><label>ป้ายข้อความเล็ก (Eyebrow)</label><input data-bind="hero.eyebrow" value="${escAttr(data.hero.eyebrow)}"></div>
       <div class="field"><label>หัวข้อบรรทัดที่ 1</label><input data-bind="hero.title1" value="${escAttr(data.hero.title1)}"></div>
@@ -780,6 +919,7 @@ function renderAdminBody(){
     body.innerHTML = `<h4>จุดเด่นของสาขา (หน้าแรก)</h4>` + data.why.map((w,i)=>`
       <div class="entry-card">
         <button class="entry-del" data-del="why:${i}" title="ลบ">✕</button>
+        ${imgFieldHTML("รูปประกอบ (ไม่ใส่ = แสดงไอคอน)", "why."+i+".image", w.image, 700)}
         <div class="field"><label>หัวข้อ</label><input data-bind="why.${i}.title" value="${escAttr(w.title)}"></div>
         <div class="field"><label>คำอธิบาย</label><textarea data-bind="why.${i}.desc">${esc(w.desc)}</textarea></div>
       </div>`).join("") + `<button class="add-entry-btn" data-add="why">+ เพิ่มจุดเด่น</button>`;
@@ -788,6 +928,7 @@ function renderAdminBody(){
     body.innerHTML = `<h4>รายชื่อครู / บุคลากร</h4>` + data.staff.map((s,i)=>`
       <div class="entry-card">
         <button class="entry-del" data-del="staff:${i}" title="ลบ">✕</button>
+        ${imgFieldHTML("รูปประจำตัว (ไม่ใส่ = แสดงไอคอน)", "staff."+i+".photo", s.photo, 500)}
         <div class="field"><label>ชื่อ</label><input data-bind="staff.${i}.name" value="${escAttr(s.name)}"></div>
         <div class="field"><label>ตำแหน่ง</label><input data-bind="staff.${i}.role" value="${escAttr(s.role)}"></div>
         <div class="field"><label>เบอร์โทร (ไม่ใส่ = ปุ่มโทรจะจาง)</label><input data-bind="staff.${i}.phone" value="${escAttr(s.phone)}" placeholder="เช่น 0812345678"></div>
@@ -798,6 +939,7 @@ function renderAdminBody(){
     body.innerHTML = `<h4>หลักสูตรที่เปิดสอน</h4>` + data.courses.map((c,i)=>`
       <div class="entry-card">
         <button class="entry-del" data-del="courses:${i}" title="ลบ">✕</button>
+        ${imgFieldHTML("รูปปกหลักสูตร", "courses."+i+".image", c.image, 900)}
         <div class="field"><label>ระดับ (เช่น ปวช. / ปวส.)</label><input data-bind="courses.${i}.level" value="${escAttr(c.level)}"></div>
         <div class="field"><label>ชื่อหลักสูตร</label><textarea data-bind="courses.${i}.title">${esc(c.title)}</textarea></div>
         <div class="field"><label>คำอธิบาย</label><textarea data-bind="courses.${i}.desc">${esc(c.desc)}</textarea></div>
@@ -811,6 +953,7 @@ function renderAdminBody(){
     body.innerHTML = `<h4>ข่าวประชาสัมพันธ์ (รายการแรกจะขึ้นเป็นข่าวเด่น)</h4>` + data.news.map((n,i)=>`
       <div class="entry-card">
         <button class="entry-del" data-del="news:${i}" title="ลบ">✕</button>
+        ${imgFieldHTML("รูปข่าว", "news."+i+".image", n.image, 900)}
         <div class="field"><label>ป้ายกำกับ</label><input data-bind="news.${i}.tag" value="${escAttr(n.tag)}"></div>
         <div class="field"><label>หัวข้อข่าว</label><textarea data-bind="news.${i}.title">${esc(n.title)}</textarea></div>
         <div class="field"><label>วันที่</label><input data-bind="news.${i}.date" value="${escAttr(n.date)}"></div>
@@ -828,7 +971,8 @@ function renderAdminBody(){
     body.innerHTML = `
       <h4>ฐานข้อมูล Google Sheet</h4>
       <div class="help-box">
-        เว็บนี้เก็บข้อมูลทั้งหมด (ครู, ข่าว, หลักสูตร ฯลฯ) ไว้จริงบน Google Sheet ที่เชื่อมไว้แล้ว ทุกครั้งที่กด "บันทึกการเปลี่ยนแปลง" ข้อมูลปัจจุบันจะถูกเขียนทับลงชีต "Data" และเก็บสำเนาไว้ในชีต "History" ด้วย เวลาใครก็ตามเปิดเว็บนี้ (ไม่ว่าจะเปิดจากเครื่องไหน) จะดึงข้อมูลล่าสุดจาก Sheet มาแสดงให้อัตโนมัติ<br><br>
+        เว็บนี้เก็บข้อมูลทั้งหมด (ครู, ข่าว, หลักสูตร, รูปภาพ ฯลฯ) ไว้จริงบน Google Sheet ที่เชื่อมไว้แล้ว ทุกครั้งที่กด "บันทึกการเปลี่ยนแปลง" ข้อมูลปัจจุบันจะถูกเขียนทับลงชีต "Data" และเก็บสำเนาไว้ในชีต "History" ด้วย เวลาใครก็ตามเปิดเว็บนี้ (ไม่ว่าจะเปิดจากเครื่องไหน) จะดึงข้อมูลล่าสุดจาก Sheet มาแสดงให้อัตโนมัติ<br><br>
+        รูปภาพที่อัปโหลดจะถูกย่อขนาดและแปลงเป็นข้อความก่อนบันทึก หากอัปโหลดรูปจำนวนมากหรือรูปความละเอียดสูง อาจทำให้บันทึกช้าลงหรือไฟล์ข้อมูลมีขนาดใหญ่ขึ้น แนะนำให้ใช้รูปที่มีขนาดพอเหมาะ<br><br>
         ลิงก์ Web App ที่เชื่อมอยู่ตอนนี้ถูกฝังไว้ในโค้ดของเว็บแล้ว (ไม่ต้องมาวางในหน้านี้อีก) ถ้าต้องการเปลี่ยนไปใช้ Google Sheet ชุดใหม่ ต้องแก้ค่า <code>SHEET_API_URL</code> ในไฟล์ dbt-site.html โดยตรง แล้วอัปโหลดไฟล์ใหม่ทับของเดิม
       </div>
       <h4>เปลี่ยนรหัสผ่านแอดมิน</h4>
@@ -868,16 +1012,17 @@ function renderAdminBody(){
     el.addEventListener("click", () => {
       const arrName = el.dataset.add;
       const blanks = {
-        why:{title:"หัวข้อใหม่",desc:""},
-        staff:{name:"ชื่อครู",role:"ครูประจำสาขาวิชาเทคโนโลยีธุรกิจดิจิทัล",phone:"",line:""},
-        courses:{level:"",title:"",desc:"",bullets:""},
-        news:{tag:"ประกาศ",title:"",date:""},
+        why:{title:"หัวข้อใหม่",desc:"",image:""},
+        staff:{name:"ชื่อครู",role:"ครูประจำสาขาวิชาเทคโนโลยีธุรกิจดิจิทัล",phone:"",line:"",photo:""},
+        courses:{level:"",title:"",desc:"",bullets:"",image:""},
+        news:{tag:"ประกาศ",title:"",date:"",image:""},
         docs:{name:"เอกสารใหม่",url:""}
       };
       data[arrName].push(blanks[arrName]);
       renderAdminBody();
     });
   });
+  wireImageUploads(body);
 }
 
 function setByPath(path, value){
