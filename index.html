@@ -864,11 +864,20 @@ async function persistData(){
       headers:{ "Content-Type":"text/plain;charset=utf-8" },
       body: JSON.stringify({ timestamp:new Date().toISOString(), data })
     });
-    const json = await res.json().catch(()=>null);
-    return !!(json && json.status === "ok");
+    const text = await res.text();
+    let json = null;
+    try{ json = JSON.parse(text); }catch(e){ /* ไม่ใช่ JSON */ }
+
+    if(json && json.status === "ok"){
+      return { ok:true, message:"" };
+    }
+    // แสดงเหตุผลจริงที่ได้จาก Apps Script (หรือข้อความดิบถ้า parse ไม่ได้)
+    const reason = (json && json.message) ? json.message : (text ? text.slice(0,200) : ("HTTP " + res.status));
+    console.error("บันทึกข้อมูลไม่สำเร็จ:", reason);
+    return { ok:false, message:reason };
   }catch(err){
     console.error("บันทึกข้อมูลไม่สำเร็จ", err);
-    return false;
+    return { ok:false, message: err.message || String(err) };
   }
 }
 
@@ -1411,8 +1420,8 @@ function renderAdminBody(){
         if(cur !== correct){ showToast("รหัสผ่านปัจจุบันไม่ถูกต้อง"); return; }
         if(!nw || nw.length < 4){ showToast("รหัสผ่านใหม่ควรยาวอย่างน้อย 4 ตัวอักษร"); return; }
         data.settings.password = nw;
-        const ok = await persistData();
-        showToast(ok ? "เปลี่ยนรหัสผ่านเรียบร้อยแล้ว" : "เปลี่ยนรหัสผ่านไม่สำเร็จ ลองอีกครั้งค่ะ");
+        const result = await persistData();
+        showToast(result.ok ? "เปลี่ยนรหัสผ่านเรียบร้อยแล้ว" : ("เปลี่ยนรหัสผ่านไม่สำเร็จ: " + result.message));
         document.getElementById("curPassInput").value = "";
         document.getElementById("newPassInput").value = "";
       });
@@ -1476,15 +1485,16 @@ function escAttr(str){ return esc(str).replace(/\n/g,"&#10;"); }
 document.getElementById("adminSaveBtn").addEventListener("click", async () => {
   const statusEl = document.getElementById("saveStatus");
   statusEl.textContent = "กำลังบันทึก...";
-  const ok = await persistData();
+  const result = await persistData();
   renderAll();
-  if(ok){
+  if(result.ok){
     statusEl.textContent = "บันทึกลง Google Sheet เรียบร้อยแล้ว ✓";
     showToast("บันทึกการเปลี่ยนแปลงเรียบร้อยแล้ว");
   }else{
-    statusEl.textContent = "บันทึกไม่สำเร็จ ตรวจการเชื่อมต่ออินเทอร์เน็ตแล้วลองอีกครั้งค่ะ";
+    statusEl.textContent = "บันทึกไม่สำเร็จ: " + result.message;
+    showToast("บันทึกไม่สำเร็จ: " + result.message);
   }
-  setTimeout(()=> statusEl.textContent = "", 4000);
+  setTimeout(()=> statusEl.textContent = "", 8000);
 });
 
 /* =========================================================
