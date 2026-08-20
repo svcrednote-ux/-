@@ -92,6 +92,7 @@
       position:fixed; inset:64px 0 0 0; background:var(--purple-deep);
       flex-direction:column; align-items:stretch; padding:18px;
       transform:translateY(-110%); transition:transform .3s ease; gap:2px; z-index:90;
+      overflow-y:auto;
     }
     nav.links.open{ transform:translateY(0); }
     nav.links button{ text-align:left; padding:14px 16px; font-size:1rem; }
@@ -235,12 +236,85 @@
   .news-item-card h3{ font-size:1rem; font-weight:600; color:var(--ink); line-height:1.6; }
   .news-item-card .date{ margin-top:12px; font-size:0.78rem; color:var(--ink-soft); }
 
+  /* ---------- Portfolio ---------- */
+  .portfolio-grid{ display:grid; grid-template-columns:repeat(3,1fr); gap:26px; }
+  @media (max-width:900px){ .portfolio-grid{ grid-template-columns:1fr 1fr; } }
+  @media (max-width:600px){ .portfolio-grid{ grid-template-columns:1fr; } }
+  .portfolio-card{ background:var(--white); border-radius:20px; overflow:hidden; box-shadow:0 14px 34px -24px rgba(58,22,104,0.4); border:1px solid rgba(102,54,171,0.08); }
+  .portfolio-card .thumb{ width:100%; aspect-ratio:4/3; background:var(--lavender); overflow:hidden; }
+  .portfolio-card .thumb img{ width:100%; height:100%; object-fit:cover; }
+  .portfolio-card .body{ padding:20px 22px 24px; }
+  .portfolio-card .tag{ display:inline-block; font-size:0.68rem; font-weight:700; color:var(--purple-deep); background:var(--gold-light); padding:3px 10px; border-radius:999px; margin-bottom:10px; }
+  .portfolio-card h3{ font-size:1rem; color:var(--purple-deep); font-weight:700; margin-bottom:6px; }
+  .portfolio-card p{ font-size:0.85rem; color:var(--ink-soft); line-height:1.7; }
+  .portfolio-card .owner{ margin-top:12px; font-size:0.78rem; color:var(--gold-deep); font-weight:600; }
+
+  /* ---------- Student life gallery ---------- */
+  .life-grid{ display:grid; grid-template-columns:repeat(4,1fr); gap:16px; }
+  @media (max-width:900px){ .life-grid{ grid-template-columns:repeat(3,1fr);} }
+  @media (max-width:600px){ .life-grid{ grid-template-columns:repeat(2,1fr);} }
+  .life-photo{ position:relative; aspect-ratio:1/1; border-radius:16px; overflow:hidden; background:var(--lavender); box-shadow:0 10px 26px -18px rgba(58,22,104,0.4); }
+  .life-photo img{ width:100%; height:100%; object-fit:cover; transition:transform .3s ease; }
+  .life-photo:hover img{ transform:scale(1.06); }
+  .life-photo .cap{ position:absolute; left:0; right:0; bottom:0; padding:10px 12px; background:linear-gradient(0deg, rgba(42,15,72,0.85), transparent); color:var(--white); font-size:0.74rem; font-weight:600; }
+
+  /* ---------- Reviews ---------- */
+  .review-grid{ display:grid; grid-template-columns:repeat(3,1fr); gap:24px; }
+  @media (max-width:900px){ .review-grid{ grid-template-columns:1fr 1fr; } }
+  @media (max-width:600px){ .review-grid{ grid-template-columns:1fr; } }
+  .review-card{ background:var(--white); border-radius:20px; padding:26px 24px; box-shadow:0 14px 34px -24px rgba(58,22,104,0.4); border:1px solid rgba(102,54,171,0.08); }
+  .review-card .stars{ color:var(--gold); font-size:0.95rem; letter-spacing:2px; margin-bottom:12px; }
+  .review-card p.quote{ font-size:0.88rem; color:var(--ink); line-height:1.8; font-style:italic; }
+  .review-card .who{ display:flex; align-items:center; gap:12px; margin-top:18px; }
+  .review-card .avatar{ width:42px; height:42px; border-radius:50%; overflow:hidden; background:var(--purple-mist); flex-shrink:0; display:flex; align-items:center; justify-content:center; }
+  .review-card .avatar img{ width:100%; height:100%; object-fit:cover; }
+  .review-card .who .name{ font-size:0.85rem; font-weight:700; color:var(--purple-deep); }
+  .review-card .who .meta{ font-size:0.72rem; color:var(--ink-soft); }
+
+  /* ---------- FAQ ---------- */
+  .faq-list{ max-width:820px; margin:0 auto; display:flex; flex-direction:column; gap:14px; }
+  .faq-item{ background:var(--white); border-radius:16px; border:1px solid rgba(102,54,171,0.1); box-shadow:0 10px 26px -20px rgba(58,22,104,0.3); overflow:hidden; }
+  .faq-q{ width:100%; text-align:left; background:none; border:none; padding:18px 22px; display:flex; justify-content:space-between; align-items:center; gap:14px; font-weight:600; color:var(--purple-deep); font-size:0.94rem; }
+  .faq-q .plus{ font-size:1.2rem; color:var(--gold-deep); transition:transform .2s ease; flex-shrink:0; }
+  .faq-item.open .faq-q .plus{ transform:rotate(45deg); }
+  .faq-a{ max-height:0; overflow:hidden; transition:max-height .25s ease; }
+  .faq-item.open .faq-a{ max-height:400px; }
+  .faq-a-inner{ padding:0 22px 20px; color:var(--ink-soft); font-size:0.87rem; line-height:1.8; }
+
+  /* ---------- Apply ---------- */
+  .apply-wrap{ display:grid; grid-template-columns:1fr 1fr; gap:36px; align-items:start; }
+  @media (max-width:800px){ .apply-wrap{ grid-template-columns:1fr; } }
+  .apply-steps{ display:flex; flex-direction:column; gap:18px; }
+  .apply-step{ display:flex; gap:16px; background:var(--white); border-radius:16px; padding:18px 20px; box-shadow:0 10px 26px -20px rgba(58,22,104,0.3); border:1px solid rgba(102,54,171,0.08); }
+  .apply-step .n{ width:36px; height:36px; border-radius:50%; background:linear-gradient(135deg,var(--gold-light),var(--gold)); color:var(--purple-deep); font-weight:800; font-family:'Kanit',sans-serif; display:flex; align-items:center; justify-content:center; flex-shrink:0; }
+  .apply-step h4{ color:var(--purple-deep); font-size:0.95rem; margin-bottom:4px; }
+  .apply-step p{ font-size:0.83rem; color:var(--ink-soft); line-height:1.7; }
+  .apply-panel{ background:linear-gradient(135deg,var(--purple-deep),var(--purple)); border-radius:22px; padding:34px 30px; color:var(--white); }
+  .apply-panel h3{ color:var(--gold-light); font-size:1.15rem; margin-bottom:14px; }
+  .apply-panel p{ font-size:0.88rem; line-height:1.85; color:rgba(255,255,255,0.85); margin-bottom:22px; }
+  .apply-panel .btn-gold{ width:100%; text-align:center; }
+
+  /* ---------- Contact ---------- */
+  .contact-wrap{ display:grid; grid-template-columns:1fr 1fr; gap:30px; }
+  @media (max-width:800px){ .contact-wrap{ grid-template-columns:1fr; } }
+  .contact-info-card{ background:var(--white); border-radius:20px; padding:30px 28px; box-shadow:0 14px 34px -24px rgba(58,22,104,0.4); border:1px solid rgba(102,54,171,0.08); }
+  .contact-info-card .row{ display:flex; gap:14px; align-items:flex-start; padding:14px 0; border-bottom:1px solid var(--lavender); }
+  .contact-info-card .row:last-child{ border-bottom:none; }
+  .contact-info-card .ic{ width:38px; height:38px; border-radius:10px; background:var(--lavender); display:flex; align-items:center; justify-content:center; flex-shrink:0; }
+  .contact-info-card .ic svg{ width:18px; height:18px; color:var(--purple); }
+  .contact-info-card .txt h4{ font-size:0.85rem; color:var(--purple-deep); margin-bottom:3px; }
+  .contact-info-card .txt p{ font-size:0.83rem; color:var(--ink-soft); }
+  .map-embed{ border-radius:20px; overflow:hidden; box-shadow:0 14px 34px -24px rgba(58,22,104,0.4); min-height:280px; }
+  .map-embed iframe{ width:100%; height:100%; min-height:280px; border:0; display:block; }
+
   /* ---------- Footer ---------- */
   footer{ position:relative; background:var(--purple-deep); color:rgba(255,255,255,0.75); padding:56px 28px 26px; overflow:hidden; margin-top:40px; }
   .footer-inner{ max-width:1240px; margin:0 auto; position:relative; z-index:2; display:flex; justify-content:space-between; gap:30px; flex-wrap:wrap; }
   footer .brand-text .th{ color:var(--white); }
   footer .col h4{ color:var(--gold-light); font-size:0.9rem; margin-bottom:14px; font-weight:600; }
   footer .col li{ font-size:0.86rem; margin-bottom:9px; color:rgba(255,255,255,0.65); }
+  footer .col li button{ background:none; border:none; color:inherit; font-size:inherit; padding:0; }
+  footer .col li button:hover{ color:var(--gold-light); }
   .footer-bottom{ max-width:1240px; margin:34px auto 0; padding-top:20px; border-top:1px solid rgba(255,255,255,0.12); text-align:center; font-size:0.78rem; color:rgba(255,255,255,0.45); position:relative; z-index:2; }
 
   .page{ display:none; }
@@ -303,6 +377,36 @@
   .img-upload .remove-btn{ font-size:0.76rem; font-weight:600; color:#c0392b; background:#fbe8e8; border:none; padding:7px 12px; border-radius:999px; }
   .img-upload .img-hint{ font-size:0.68rem; color:var(--ink-soft); }
   .img-upload input[type=file]{ display:none; }
+
+  /* ---------- Dark mode ---------- */
+  body.dark{
+    --cream:#1c1130;
+    --white:#241a3d;
+    --ink:#efe8fb;
+    --ink-soft:#b7a7d6;
+    --lavender:#33254f;
+    --purple-mist:#2c2049;
+    --shadow: 0 20px 45px -20px rgba(0,0,0,0.6);
+  }
+  body.dark .doc-card, body.dark .staff-card, body.dark .why-card, body.dark .course-card,
+  body.dark .news-item-card, body.dark .portfolio-card, body.dark .review-card,
+  body.dark .faq-item, body.dark .apply-step, body.dark .contact-info-card{
+    border-color: rgba(216,172,82,0.18);
+  }
+  body.dark .modal-box, body.dark .admin-drawer, body.dark .admin-body, body.dark .admin-head + .admin-tabs{
+    background:var(--cream);
+  }
+  body.dark .field input, body.dark .field textarea, body.dark .img-upload{
+    background:var(--white); color:var(--ink); border-color:var(--lavender);
+  }
+  .darkmode-btn{
+    display:flex; align-items:center; justify-content:center;
+    width:38px; height:38px; border-radius:50%;
+    background:rgba(255,255,255,0.14); border:1px solid rgba(255,255,255,0.3);
+    color:var(--white); flex-shrink:0; transition:background .2s ease;
+  }
+  .darkmode-btn:hover{ background:rgba(255,255,255,0.24); }
+  .darkmode-btn svg{ width:17px; height:17px; }
 </style>
 </head>
 <body>
@@ -321,10 +425,19 @@
       <button data-page="home" class="active">หน้าแรก</button>
       <button data-page="staff">บุคลากร</button>
       <button data-page="courses">หลักสูตร</button>
+      <button data-page="portfolio">ผลงานนักศึกษา</button>
+      <button data-page="life">ชีวิตนักศึกษา</button>
+      <button data-page="reviews">รีวิวจากรุ่นพี่</button>
       <button data-page="docs">ตารางเรียน</button>
       <button data-page="news">ข่าวสาร</button>
+      <button data-page="faq">FAQ</button>
+      <button data-page="apply">สมัครเรียน</button>
+      <button data-page="contact">ติดต่อเรา</button>
     </nav>
     <div class="header-right">
+      <button class="darkmode-btn" id="darkModeBtn" aria-label="สลับโหมดมืด" title="สลับโหมดมืด/สว่าง">
+        <svg id="darkModeIcon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"/></svg>
+      </button>
       <button class="admin-btn" id="adminToggleBtn">
         <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="4" y="10" width="16" height="10" rx="2"/><path d="M8 10V7a4 4 0 0 1 8 0v3"/></svg>
         <span id="adminBtnLabel">แอดมิน</span>
@@ -419,6 +532,42 @@
   </section>
 </div>
 
+<!-- PORTFOLIO PAGE -->
+<div class="page" id="page-portfolio">
+  <section class="page-section">
+    <div class="section-head">
+      <span class="eyebrow">ผลงานนักศึกษา</span>
+      <h2>ผลงานเด่นของนักศึกษา</h2>
+      <p>ตัวอย่างโครงงาน ธุรกิจ และผลงานสร้างสรรค์จากนักศึกษาสาขาเทคโนโลยีธุรกิจดิจิทัล</p>
+    </div>
+    <div class="portfolio-grid" id="portfolioGrid"></div>
+  </section>
+</div>
+
+<!-- STUDENT LIFE PAGE -->
+<div class="page" id="page-life">
+  <section class="page-section">
+    <div class="section-head">
+      <span class="eyebrow">ชีวิตนักศึกษา</span>
+      <h2>ชีวิตในรั้วสาขา DBT</h2>
+      <p>บรรยากาศการเรียน กิจกรรม และความสนุกระหว่างเป็นนักศึกษาสาขาเทคโนโลยีธุรกิจดิจิทัล</p>
+    </div>
+    <div class="life-grid" id="lifeGrid"></div>
+  </section>
+</div>
+
+<!-- REVIEWS PAGE -->
+<div class="page" id="page-reviews">
+  <section class="page-section">
+    <div class="section-head">
+      <span class="eyebrow">รีวิวจากรุ่นพี่</span>
+      <h2>เสียงจากรุ่นพี่ที่เรียนจบไปแล้ว</h2>
+      <p>ประสบการณ์จริงจากรุ่นพี่ที่ผ่านการเรียนสาขาเทคโนโลยีธุรกิจดิจิทัลมาแล้ว</p>
+    </div>
+    <div class="review-grid" id="reviewGrid"></div>
+  </section>
+</div>
+
 <!-- DOCS / SCHEDULE PAGE -->
 <div class="page" id="page-docs">
   <section class="page-section">
@@ -444,6 +593,48 @@
   </section>
 </div>
 
+<!-- FAQ PAGE -->
+<div class="page" id="page-faq">
+  <section class="page-section">
+    <div class="section-head">
+      <span class="eyebrow">คำถามที่พบบ่อย</span>
+      <h2>FAQ</h2>
+      <p>รวมคำถามที่ผู้ปกครองและนักเรียนถามบ่อยเกี่ยวกับสาขาเทคโนโลยีธุรกิจดิจิทัล</p>
+    </div>
+    <div class="faq-list" id="faqList"></div>
+  </section>
+</div>
+
+<!-- APPLY PAGE -->
+<div class="page" id="page-apply">
+  <section class="page-section">
+    <div class="section-head">
+      <span class="eyebrow">สมัครเรียน</span>
+      <h2>ขั้นตอนการสมัครเรียน</h2>
+      <p>สมัครเรียนสาขาเทคโนโลยีธุรกิจดิจิทัลได้ง่าย ๆ ตามขั้นตอนด้านล่าง</p>
+    </div>
+    <div class="apply-wrap">
+      <div class="apply-steps" id="applySteps"></div>
+      <div class="apply-panel" id="applyPanel"></div>
+    </div>
+  </section>
+</div>
+
+<!-- CONTACT PAGE -->
+<div class="page" id="page-contact">
+  <section class="page-section">
+    <div class="section-head">
+      <span class="eyebrow">ติดต่อเรา</span>
+      <h2>ติดต่อสาขาเทคโนโลยีธุรกิจดิจิทัล</h2>
+      <p>สอบถามข้อมูลเพิ่มเติมหรือเดินทางมาเยี่ยมชมสาขาได้ตามช่องทางด้านล่าง</p>
+    </div>
+    <div class="contact-wrap">
+      <div class="contact-info-card" id="contactInfoCard"></div>
+      <div class="map-embed" id="mapEmbed"></div>
+    </div>
+  </section>
+</div>
+
 <footer>
   <div class="ribbon-wrap">
     <svg width="600" height="300" viewBox="0 0 600 300" style="left:-120px; bottom:-100px;">
@@ -461,11 +652,17 @@
     </div>
     <div class="col">
       <h4>เมนู</h4>
-      <ul><li>หน้าแรก</li><li>บุคลากร</li><li>หลักสูตร</li><li>ตารางเรียน</li></ul>
+      <ul>
+        <li><button onclick="goPage('home')">หน้าแรก</button></li>
+        <li><button onclick="goPage('staff')">บุคลากร</button></li>
+        <li><button onclick="goPage('courses')">หลักสูตร</button></li>
+        <li><button onclick="goPage('portfolio')">ผลงานนักศึกษา</button></li>
+        <li><button onclick="goPage('apply')">สมัครเรียน</button></li>
+      </ul>
     </div>
     <div class="col">
       <h4>ติดต่อเรา</h4>
-      <ul>
+      <ul id="footerContactList">
         <li>อาคารเทคโนโลยีธุรกิจดิจิทัล ชั้น 2</li>
         <li>โทร. 0-000-0000</li>
         <li>dbt@college.ac.th</li>
@@ -553,12 +750,54 @@ const DEFAULT_DATA = {
     { name:"ใบขออนุญาตออกนอกวิทยาลัย", url:"" },
     { name:"ใบลา", url:"" }
   ],
+  portfolio: [
+    { title:"ร้านค้าออนไลน์ตัวอย่าง", tag:"อีคอมเมิร์ซ", owner:"นักศึกษาชั้น ปวส.2", desc:"โครงงานร้านค้าออนไลน์ครบวงจร ตั้งแต่ออกแบบแบรนด์จนถึงระบบสั่งซื้อ", image:"" },
+    { title:"แคมเปญการตลาดโซเชียลมีเดีย", tag:"การตลาดดิจิทัล", owner:"นักศึกษาชั้น ปวช.3", desc:"วางแผนและดำเนินแคมเปญโฆษณาให้ธุรกิจท้องถิ่นจริง", image:"" },
+    { title:"แดชบอร์ดวิเคราะห์ข้อมูลยอดขาย", tag:"วิเคราะห์ข้อมูล", owner:"นักศึกษาชั้น ปวส.1", desc:"ระบบแดชบอร์ดสรุปยอดขายและพฤติกรรมลูกค้าสำหรับร้านค้า SME", image:"" }
+  ],
+  life: [
+    { caption:"กิจกรรมปฐมนิเทศนักศึกษาใหม่", image:"" },
+    { caption:"ค่ายพัฒนาทักษะดิจิทัล", image:"" },
+    { caption:"งานแข่งขันทักษะวิชาชีพ", image:"" },
+    { caption:"กิจกรรมจิตอาสาของสาขา", image:"" }
+  ],
+  reviews: [
+    { name:"ศิษย์เก่า ท่านที่ 1", meta:"จบ ปวส. รุ่น 2567", quote:"เรียนที่นี่ได้ลงมือทำจริงเยอะมาก พอจบมาก็สมัครงานได้ทันทีเพราะมีพอร์ตผลงานติดตัว", rating:5, photo:"" },
+    { name:"ศิษย์เก่า ท่านที่ 2", meta:"จบ ปวช. รุ่น 2566", quote:"ครูดูแลใกล้ชิด สอนสนุก และได้ทดลองทำธุรกิจออนไลน์จริงตั้งแต่ยังเรียนอยู่", rating:5, photo:"" },
+    { name:"ศิษย์เก่า ท่านที่ 3", meta:"จบ ปวส. รุ่น 2568", quote:"หลักสูตรทันสมัย ตรงกับที่ตลาดงานต้องการ แนะนำให้น้อง ๆ ที่ชอบสายธุรกิจดิจิทัลมาก", rating:4, photo:"" }
+  ],
+  faq: [
+    { q:"สาขานี้เหมาะกับใคร?", a:"เหมาะกับผู้ที่สนใจธุรกิจ การตลาดออนไลน์ และเทคโนโลยี ไม่จำเป็นต้องมีพื้นฐานมาก่อน เพราะหลักสูตรปูพื้นฐานให้ตั้งแต่ต้น" },
+    { q:"เรียนจบแล้วทำงานอะไรได้บ้าง?", a:"สามารถทำงานเป็นนักการตลาดดิจิทัล แอดมินเพจ/ร้านค้าออนไลน์ นักวิเคราะห์ข้อมูลธุรกิจเบื้องต้น หรือเป็นผู้ประกอบการของตัวเองก็ได้" },
+    { q:"มีทุนการศึกษาหรือไม่?", a:"มีทุนการศึกษาสำหรับนักเรียนที่เรียนดีหรือมีความจำเป็น สามารถสอบถามรายละเอียดเพิ่มเติมได้ที่ฝ่ายแนะแนวของสาขา" },
+    { q:"ต้องเตรียมเอกสารอะไรบ้างตอนสมัคร?", a:"ใช้สำเนาบัตรประชาชน สำเนาทะเบียนบ้าน และเอกสารแสดงผลการเรียน (ถ้ามี) ดูรายละเอียดเพิ่มเติมได้ในหน้าสมัครเรียน" }
+  ],
+  apply: {
+    intro: "สมัครเรียนสาขาเทคโนโลยีธุรกิจดิจิทัลได้ทั้งช่องทางออนไลน์และเดินทางมาสมัครด้วยตนเองที่วิทยาลัย",
+    steps: [
+      { title:"กรอกใบสมัคร", desc:"กรอกข้อมูลผู้สมัครผ่านระบบออนไลน์ของวิทยาลัย หรือขอรับใบสมัครที่ฝ่ายทะเบียน" },
+      { title:"เตรียมเอกสาร", desc:"เตรียมสำเนาบัตรประชาชน ทะเบียนบ้าน และผลการเรียน (ถ้ามี) ให้ครบถ้วน" },
+      { title:"ยื่นเอกสารและสัมภาษณ์", desc:"ยื่นเอกสารที่ฝ่ายทะเบียน และเข้ารับการสัมภาษณ์ตามวันเวลาที่กำหนด" },
+      { title:"รอประกาศผลและรายงานตัว", desc:"ติดตามประกาศผลผ่านเว็บไซต์ แล้วมารายงานตัวยืนยันสิทธิ์ตามกำหนด" }
+    ],
+    panelTitle:"พร้อมสมัครเรียนกับเราแล้วหรือยัง?",
+    panelBody:"ติดต่อฝ่ายแนะแนวของสาขาเทคโนโลยีธุรกิจดิจิทัลเพื่อสอบถามรายละเอียดเพิ่มเติม หรือดาวน์โหลดใบสมัครได้ที่นี่",
+    panelLink:""
+  },
+  contact: {
+    address:"อาคารเทคโนโลยีธุรกิจดิจิทัล ชั้น 2 วิทยาลัยฯ",
+    phone:"0-000-0000",
+    email:"dbt@college.ac.th",
+    lineId:"",
+    facebook:"",
+    mapUrl:""
+  },
   settings: { password:"dbt2569" }
 };
 
 /* ลิงก์ Google Apps Script Web App ที่ใช้เป็นฐานข้อมูลจริงของเว็บนี้
    (แก้ตรงนี้ถ้าย้ายไปใช้ Google Sheet ชุดใหม่ แล้วต้อง deploy ใหม่ทุกครั้งที่แก้โค้ด Apps Script) */
-const SHEET_API_URL = "https://script.google.com/macros/s/AKfycbwKSPBV8mfxHh35YYq40p16WQmmCJ9L758Da3Qr3x_s77mG-DyRNdTukw5TQj06xLov/exec";
+const SHEET_API_URL = "https://script.google.com/macros/s/AKfycbyVrVu7EYSeT8GgMeKEtBRVwYtIM3jREC9eJl3u2-xhKfAu8J1Y7koWVrYkEUOSaSff/exec";
 const DEFAULT_PASSWORD = "dbt2569";
 
 let data = JSON.parse(JSON.stringify(DEFAULT_DATA));
@@ -575,6 +814,13 @@ const whyIcons = [
   `<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M12 1v22M17 5H9.5a3.5 3.5 0 0 0 0 7h5a3.5 3.5 0 0 1 0 7H6"/></svg>`
 ];
 const staffAccents = ["#6636ab","#a479df","#d8ac52","#8a5cd6","#c79a3e","#7d4fc4"];
+const contactIcons = {
+  address: `<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M21 10c0 6-9 12-9 12s-9-6-9-12a9 9 0 0 1 18 0Z"/><circle cx="12" cy="10" r="3"/></svg>`,
+  phone: phoneIcon.replace(/stroke="white"/,'stroke="currentColor"'),
+  email: `<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><rect x="2" y="4" width="20" height="16" rx="2"/><path d="m22 6-10 7L2 6"/></svg>`,
+  line: lineIcon.replace(/fill="white"/,'fill="currentColor"'),
+  facebook: `<svg viewBox="0 0 24 24" fill="currentColor"><path d="M13.5 21v-7.5H16l.5-3h-3V8.2c0-.9.3-1.7 1.7-1.7H16.6V3.6C16.3 3.6 15.2 3.5 14 3.5c-2.5 0-4.2 1.5-4.2 4.3V10.5H7v3h2.8V21h3.7z"/></svg>`
+};
 
 /* =========================================================
    Storage helpers — ข้อมูลจริงทั้งหมดเก็บอยู่ใน Google Sheet
@@ -593,6 +839,7 @@ async function loadData(){
     console.log("โหลดข้อมูลจาก Google Sheet ไม่สำเร็จ ใช้ข้อมูลเริ่มต้นชั่วคราว", err);
     showToast("โหลดข้อมูลจาก Google Sheet ไม่สำเร็จ กำลังแสดงข้อมูลเริ่มต้นไปก่อน");
   }
+  applyDarkModePreference();
   renderAll();
 }
 
@@ -632,6 +879,27 @@ function showToast(msg){
   clearTimeout(showToast._t);
   showToast._t = setTimeout(()=> t.classList.remove("show"), 3200);
 }
+
+/* =========================================================
+   Dark mode — เก็บค่าไว้ในตัวแปรของหน้านี้เท่านั้น (ไม่ใช้
+   localStorage) ดังนั้นค่าจะรีเซ็ตเป็นโหมดสว่างทุกครั้งที่โหลด
+   หน้าใหม่ แต่สลับได้ทันทีระหว่างที่เปิดหน้าอยู่
+   ========================================================= */
+let darkModeOn = false;
+function applyDarkModePreference(){
+  document.body.classList.toggle("dark", darkModeOn);
+  updateDarkModeIcon();
+}
+function updateDarkModeIcon(){
+  const icon = document.getElementById("darkModeIcon");
+  icon.innerHTML = darkModeOn
+    ? `<circle cx="12" cy="12" r="4"/><path d="M12 2v2M12 20v2M4.93 4.93l1.41 1.41M17.66 17.66l1.41 1.41M2 12h2M20 12h2M4.93 19.07l1.41-1.41M17.66 6.34l1.41-1.41"/>`
+    : `<path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"/>`;
+}
+document.getElementById("darkModeBtn").addEventListener("click", () => {
+  darkModeOn = !darkModeOn;
+  applyDarkModePreference();
+});
 
 /* =========================================================
    Image upload helper — อ่านไฟล์รูปจากเครื่อง แล้วบีบอัด/ย่อขนาด
@@ -815,6 +1083,85 @@ function renderAll(){
       <h3>${esc(n.title)}</h3>
       <div class="date">${esc(n.date)}</div>
     </div>`).join("");
+
+  const portfolioGrid = document.getElementById("portfolioGrid");
+  portfolioGrid.innerHTML = data.portfolio.map(p => `
+    <div class="portfolio-card">
+      <div class="thumb">${p.image ? `<img src="${escAttr(p.image)}" alt="${escAttr(p.title)}">` : ""}</div>
+      <div class="body">
+        <span class="tag">${esc(p.tag)}</span>
+        <h3>${esc(p.title)}</h3>
+        <p>${esc(p.desc)}</p>
+        <div class="owner">${esc(p.owner)}</div>
+      </div>
+    </div>`).join("");
+
+  const lifeGrid = document.getElementById("lifeGrid");
+  lifeGrid.innerHTML = data.life.map(l => `
+    <div class="life-photo">
+      ${l.image ? `<img src="${escAttr(l.image)}" alt="${escAttr(l.caption)}">` : ""}
+      <div class="cap">${esc(l.caption)}</div>
+    </div>`).join("");
+
+  const reviewGrid = document.getElementById("reviewGrid");
+  reviewGrid.innerHTML = data.reviews.map(r => {
+    const stars = "★".repeat(Math.max(0,Math.min(5,Number(r.rating)||5))) + "☆".repeat(5-Math.max(0,Math.min(5,Number(r.rating)||5)));
+    return `
+    <div class="review-card">
+      <div class="stars">${stars}</div>
+      <p class="quote">“${esc(r.quote)}”</p>
+      <div class="who">
+        <div class="avatar">${r.photo ? `<img src="${escAttr(r.photo)}" alt="${escAttr(r.name)}">` : staffIcon}</div>
+        <div>
+          <div class="name">${esc(r.name)}</div>
+          <div class="meta">${esc(r.meta)}</div>
+        </div>
+      </div>
+    </div>`;
+  }).join("");
+
+  const faqList = document.getElementById("faqList");
+  faqList.innerHTML = data.faq.map((f,i) => `
+    <div class="faq-item" data-faq="${i}">
+      <button class="faq-q"><span>${esc(f.q)}</span><span class="plus">+</span></button>
+      <div class="faq-a"><div class="faq-a-inner">${esc(f.a)}</div></div>
+    </div>`).join("");
+  faqList.querySelectorAll(".faq-q").forEach(btn => {
+    btn.addEventListener("click", () => btn.closest(".faq-item").classList.toggle("open"));
+  });
+
+  const applySteps = document.getElementById("applySteps");
+  applySteps.innerHTML = (data.apply.steps||[]).map((s,i) => `
+    <div class="apply-step">
+      <div class="n">${i+1}</div>
+      <div><h4>${esc(s.title)}</h4><p>${esc(s.desc)}</p></div>
+    </div>`).join("");
+  const applyPanel = document.getElementById("applyPanel");
+  applyPanel.innerHTML = `
+    <h3>${esc(data.apply.panelTitle)}</h3>
+    <p>${esc(data.apply.panelBody)}</p>
+    ${data.apply.panelLink ? `<a class="btn-gold" href="${esc(data.apply.panelLink)}" target="_blank" rel="noopener" style="display:block;text-align:center;">ดาวน์โหลด / สมัครออนไลน์</a>` : `<button class="btn-gold" onclick="goPage('contact')">ติดต่อสอบถาม</button>`}`;
+
+  const c = data.contact;
+  const contactRows = [
+    c.address ? {ic:contactIcons.address, h:"ที่อยู่", v:c.address} : null,
+    c.phone ? {ic:contactIcons.phone, h:"โทรศัพท์", v:c.phone} : null,
+    c.email ? {ic:contactIcons.email, h:"อีเมล", v:c.email} : null,
+    c.lineId ? {ic:contactIcons.line, h:"LINE", v:c.lineId} : null,
+    c.facebook ? {ic:contactIcons.facebook, h:"Facebook", v:c.facebook} : null
+  ].filter(Boolean);
+  document.getElementById("contactInfoCard").innerHTML = contactRows.map(r => `
+    <div class="row">
+      <div class="ic">${r.ic}</div>
+      <div class="txt"><h4>${esc(r.h)}</h4><p>${esc(r.v)}</p></div>
+    </div>`).join("") || `<p style="color:var(--ink-soft);font-size:0.85rem;">ยังไม่มีข้อมูลการติดต่อ</p>`;
+  const mapEmbed = document.getElementById("mapEmbed");
+  mapEmbed.innerHTML = c.mapUrl
+    ? `<iframe src="${escAttr(c.mapUrl)}" loading="lazy" referrerpolicy="no-referrer-when-downgrade" title="แผนที่"></iframe>`
+    : `<div style="background:var(--lavender);height:100%;min-height:280px;display:flex;align-items:center;justify-content:center;color:var(--ink-soft);font-size:0.85rem;">ยังไม่ได้ตั้งค่าแผนที่</div>`;
+
+  const footerList = document.getElementById("footerContactList");
+  footerList.innerHTML = [c.address, c.phone ? "โทร. "+c.phone : "", c.email].filter(Boolean).map(t=>`<li>${esc(t)}</li>`).join("");
 }
 
 function esc(str){
@@ -884,7 +1231,13 @@ const TABS = [
   { id:"why", label:"จุดเด่น" },
   { id:"staff", label:"ครู" },
   { id:"courses", label:"หลักสูตร" },
+  { id:"portfolio", label:"ผลงาน" },
+  { id:"life", label:"ชีวิตนักศึกษา" },
+  { id:"reviews", label:"รีวิว" },
   { id:"news", label:"ข่าวสาร" },
+  { id:"faq", label:"FAQ" },
+  { id:"apply", label:"สมัครเรียน" },
+  { id:"contact", label:"ติดต่อ" },
   { id:"docs", label:"เอกสาร" },
   { id:"settings", label:"ตั้งค่า" }
 ];
@@ -949,6 +1302,36 @@ function renderAdminBody(){
       <div class="field"><label>หัวข้อ</label><input data-bind="courseOutcome.title" value="${escAttr(data.courseOutcome.title)}"></div>
       <div class="field"><label>เนื้อหา</label><textarea data-bind="courseOutcome.body">${esc(data.courseOutcome.body)}</textarea></div>`;
   }
+  else if(adminActiveTab === "portfolio"){
+    body.innerHTML = `<h4>ผลงานนักศึกษา</h4>` + data.portfolio.map((p,i)=>`
+      <div class="entry-card">
+        <button class="entry-del" data-del="portfolio:${i}" title="ลบ">✕</button>
+        ${imgFieldHTML("รูปผลงาน", "portfolio."+i+".image", p.image, 900)}
+        <div class="field"><label>หมวดหมู่</label><input data-bind="portfolio.${i}.tag" value="${escAttr(p.tag)}"></div>
+        <div class="field"><label>ชื่อผลงาน</label><input data-bind="portfolio.${i}.title" value="${escAttr(p.title)}"></div>
+        <div class="field"><label>คำอธิบาย</label><textarea data-bind="portfolio.${i}.desc">${esc(p.desc)}</textarea></div>
+        <div class="field"><label>เจ้าของผลงาน</label><input data-bind="portfolio.${i}.owner" value="${escAttr(p.owner)}"></div>
+      </div>`).join("") + `<button class="add-entry-btn" data-add="portfolio">+ เพิ่มผลงาน</button>`;
+  }
+  else if(adminActiveTab === "life"){
+    body.innerHTML = `<h4>ภาพชีวิตนักศึกษา</h4>` + data.life.map((l,i)=>`
+      <div class="entry-card">
+        <button class="entry-del" data-del="life:${i}" title="ลบ">✕</button>
+        ${imgFieldHTML("รูปภาพ", "life."+i+".image", l.image, 800)}
+        <div class="field"><label>คำบรรยายภาพ</label><input data-bind="life.${i}.caption" value="${escAttr(l.caption)}"></div>
+      </div>`).join("") + `<button class="add-entry-btn" data-add="life">+ เพิ่มรูป</button>`;
+  }
+  else if(adminActiveTab === "reviews"){
+    body.innerHTML = `<h4>รีวิวจากรุ่นพี่</h4>` + data.reviews.map((r,i)=>`
+      <div class="entry-card">
+        <button class="entry-del" data-del="reviews:${i}" title="ลบ">✕</button>
+        ${imgFieldHTML("รูปประจำตัว", "reviews."+i+".photo", r.photo, 300)}
+        <div class="field"><label>ชื่อ</label><input data-bind="reviews.${i}.name" value="${escAttr(r.name)}"></div>
+        <div class="field"><label>ข้อมูลรุ่น/ปีที่จบ</label><input data-bind="reviews.${i}.meta" value="${escAttr(r.meta)}"></div>
+        <div class="field"><label>คำรีวิว</label><textarea data-bind="reviews.${i}.quote">${esc(r.quote)}</textarea></div>
+        <div class="field"><label>คะแนน (1-5)</label><input data-bind="reviews.${i}.rating" value="${escAttr(r.rating)}"></div>
+      </div>`).join("") + `<button class="add-entry-btn" data-add="reviews">+ เพิ่มรีวิว</button>`;
+  }
   else if(adminActiveTab === "news"){
     body.innerHTML = `<h4>ข่าวประชาสัมพันธ์ (รายการแรกจะขึ้นเป็นข่าวเด่น)</h4>` + data.news.map((n,i)=>`
       <div class="entry-card">
@@ -958,6 +1341,40 @@ function renderAdminBody(){
         <div class="field"><label>หัวข้อข่าว</label><textarea data-bind="news.${i}.title">${esc(n.title)}</textarea></div>
         <div class="field"><label>วันที่</label><input data-bind="news.${i}.date" value="${escAttr(n.date)}"></div>
       </div>`).join("") + `<button class="add-entry-btn" data-add="news">+ เพิ่มข่าว</button>`;
+  }
+  else if(adminActiveTab === "faq"){
+    body.innerHTML = `<h4>คำถามที่พบบ่อย</h4>` + data.faq.map((f,i)=>`
+      <div class="entry-card">
+        <button class="entry-del" data-del="faq:${i}" title="ลบ">✕</button>
+        <div class="field"><label>คำถาม</label><input data-bind="faq.${i}.q" value="${escAttr(f.q)}"></div>
+        <div class="field"><label>คำตอบ</label><textarea data-bind="faq.${i}.a">${esc(f.a)}</textarea></div>
+      </div>`).join("") + `<button class="add-entry-btn" data-add="faq">+ เพิ่มคำถาม</button>`;
+  }
+  else if(adminActiveTab === "apply"){
+    body.innerHTML = `
+      <h4>ข้อความแนะนำ</h4>
+      <div class="field"><label>คำโปรยหน้าสมัครเรียน</label><textarea data-bind="apply.intro">${esc(data.apply.intro)}</textarea></div>
+      <h4>ขั้นตอนการสมัคร</h4>` + (data.apply.steps||[]).map((s,i)=>`
+      <div class="entry-card">
+        <button class="entry-del" data-del="apply.steps:${i}" title="ลบ">✕</button>
+        <div class="field"><label>หัวข้อขั้นตอน</label><input data-bind="apply.steps.${i}.title" value="${escAttr(s.title)}"></div>
+        <div class="field"><label>รายละเอียด</label><textarea data-bind="apply.steps.${i}.desc">${esc(s.desc)}</textarea></div>
+      </div>`).join("") + `<button class="add-entry-btn" data-add="apply.steps">+ เพิ่มขั้นตอน</button>
+      <h4>กล่องข้อความปิดท้าย</h4>
+      <div class="field"><label>หัวข้อ</label><input data-bind="apply.panelTitle" value="${escAttr(data.apply.panelTitle)}"></div>
+      <div class="field"><label>เนื้อหา</label><textarea data-bind="apply.panelBody">${esc(data.apply.panelBody)}</textarea></div>
+      <div class="field"><label>ลิงก์ปุ่ม (ใบสมัคร/ฟอร์มออนไลน์)</label><input data-bind="apply.panelLink" value="${escAttr(data.apply.panelLink)}" placeholder="https://..."></div>`;
+  }
+  else if(adminActiveTab === "contact"){
+    const c = data.contact;
+    body.innerHTML = `
+      <h4>ข้อมูลติดต่อ</h4>
+      <div class="field"><label>ที่อยู่</label><textarea data-bind="contact.address">${esc(c.address)}</textarea></div>
+      <div class="field"><label>เบอร์โทร</label><input data-bind="contact.phone" value="${escAttr(c.phone)}"></div>
+      <div class="field"><label>อีเมล</label><input data-bind="contact.email" value="${escAttr(c.email)}"></div>
+      <div class="field"><label>LINE ID</label><input data-bind="contact.lineId" value="${escAttr(c.lineId)}"></div>
+      <div class="field"><label>Facebook</label><input data-bind="contact.facebook" value="${escAttr(c.facebook)}"></div>
+      <div class="field"><label>ลิงก์ฝัง Google Maps (embed URL)</label><input data-bind="contact.mapUrl" value="${escAttr(c.mapUrl)}" placeholder="https://www.google.com/maps/embed?..."></div>`;
   }
   else if(adminActiveTab === "docs"){
     body.innerHTML = `<h4>ไฟล์ตารางเรียน / เอกสาร</h4>` + data.docs.map((d,i)=>`
@@ -971,7 +1388,7 @@ function renderAdminBody(){
     body.innerHTML = `
       <h4>ฐานข้อมูล Google Sheet</h4>
       <div class="help-box">
-        เว็บนี้เก็บข้อมูลทั้งหมด (ครู, ข่าว, หลักสูตร, รูปภาพ ฯลฯ) ไว้จริงบน Google Sheet ที่เชื่อมไว้แล้ว ทุกครั้งที่กด "บันทึกการเปลี่ยนแปลง" ข้อมูลปัจจุบันจะถูกเขียนทับลงชีต "Data" และเก็บสำเนาไว้ในชีต "History" ด้วย เวลาใครก็ตามเปิดเว็บนี้ (ไม่ว่าจะเปิดจากเครื่องไหน) จะดึงข้อมูลล่าสุดจาก Sheet มาแสดงให้อัตโนมัติ<br><br>
+        เว็บนี้เก็บข้อมูลทั้งหมด (ครู, ข่าว, หลักสูตร, ผลงาน, รีวิว, FAQ, รูปภาพ ฯลฯ) ไว้จริงบน Google Sheet ที่เชื่อมไว้แล้ว ทุกครั้งที่กด "บันทึกการเปลี่ยนแปลง" ข้อมูลปัจจุบันจะถูกเขียนทับลงชีต "Data" และเก็บสำเนาไว้ในชีต "History" ด้วย เวลาใครก็ตามเปิดเว็บนี้ (ไม่ว่าจะเปิดจากเครื่องไหน) จะดึงข้อมูลล่าสุดจาก Sheet มาแสดงให้อัตโนมัติ<br><br>
         รูปภาพที่อัปโหลดจะถูกย่อขนาดและแปลงเป็นข้อความก่อนบันทึก หากอัปโหลดรูปจำนวนมากหรือรูปความละเอียดสูง อาจทำให้บันทึกช้าลงหรือไฟล์ข้อมูลมีขนาดใหญ่ขึ้น แนะนำให้ใช้รูปที่มีขนาดพอเหมาะ<br><br>
         ลิงก์ Web App ที่เชื่อมอยู่ตอนนี้ถูกฝังไว้ในโค้ดของเว็บแล้ว (ไม่ต้องมาวางในหน้านี้อีก) ถ้าต้องการเปลี่ยนไปใช้ Google Sheet ชุดใหม่ ต้องแก้ค่า <code>SHEET_API_URL</code> ในไฟล์ dbt-site.html โดยตรง แล้วอัปโหลดไฟล์ใหม่ทับของเดิม
       </div>
@@ -1003,26 +1420,40 @@ function renderAdminBody(){
   });
   body.querySelectorAll("[data-del]").forEach(el => {
     el.addEventListener("click", () => {
-      const [arrName, idx] = el.dataset.del.split(":");
-      data[arrName].splice(Number(idx), 1);
+      const [arrPath, idx] = el.dataset.del.split(":");
+      const arr = getByPath(arrPath);
+      arr.splice(Number(idx), 1);
       renderAdminBody();
     });
   });
   body.querySelectorAll("[data-add]").forEach(el => {
     el.addEventListener("click", () => {
-      const arrName = el.dataset.add;
+      const arrPath = el.dataset.add;
       const blanks = {
         why:{title:"หัวข้อใหม่",desc:"",image:""},
         staff:{name:"ชื่อครู",role:"ครูประจำสาขาวิชาเทคโนโลยีธุรกิจดิจิทัล",phone:"",line:"",photo:""},
         courses:{level:"",title:"",desc:"",bullets:"",image:""},
+        portfolio:{title:"ผลงานใหม่",tag:"",owner:"",desc:"",image:""},
+        life:{caption:"",image:""},
+        reviews:{name:"",meta:"",quote:"",rating:5,photo:""},
         news:{tag:"ประกาศ",title:"",date:"",image:""},
-        docs:{name:"เอกสารใหม่",url:""}
+        faq:{q:"คำถามใหม่",a:""},
+        docs:{name:"เอกสารใหม่",url:""},
+        "apply.steps":{title:"ขั้นตอนใหม่",desc:""}
       };
-      data[arrName].push(blanks[arrName]);
+      const arr = getByPath(arrPath);
+      arr.push(JSON.parse(JSON.stringify(blanks[arrPath])));
       renderAdminBody();
     });
   });
   wireImageUploads(body);
+}
+
+function getByPath(path){
+  const parts = path.split(".");
+  let obj = data;
+  parts.forEach(p => { obj = obj[/^\d+$/.test(p) ? Number(p) : p]; });
+  return obj;
 }
 
 function setByPath(path, value){
